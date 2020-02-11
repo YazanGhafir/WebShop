@@ -1,3 +1,7 @@
-com\ejwa\orm\model\dao\CarDAO.class
-com\ejwa\orm\model\entity\Car.class
+com\ejwa\orm\model\entity\Order.class
+com\ejwa\orm\model\dao\ProductDAO.class
+com\ejwa\orm\model\entity\Product.class
+com\ejwa\orm\model\entity\Customer.class
+com\ejwa\orm\model\entity\Category.class
+com\ejwa\orm\model\entity\Payment.class
 com\ejwa\orm\model\dao\AbstractDAO.class

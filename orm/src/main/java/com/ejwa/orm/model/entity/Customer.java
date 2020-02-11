@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -22,9 +23,10 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Customer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+
     
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

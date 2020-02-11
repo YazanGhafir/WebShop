@@ -15,27 +15,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class ProductDAOTest {
+public class OrderDAOTest {
 	@Deployment
 	public static WebArchive createDeployment() {
 		return ShrinkWrap.create(WebArchive.class)
-			.addClasses(ProductDAO.class, Product.class)
+			.addClasses(OrderDAO.class, Order.class)
 			.addAsResource("META-INF/persistence.xml")
 			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
 	@EJB
-	private	ProductDAO productDAO;
+	private	OrderDAO orderDAO;
 
 	@Before
 	public void init() {
-		productDAO.create(new Product("Adidas T-Shirt", 100.0));
-		productDAO.create(new Product("Nike shoes", 90.0));
-		productDAO.create(new Product("Tommy Hilfiger Jacket", 80.0));        
+            //orderDAO.create(new Order(""));
 	}
 
 	@Test
-	public void checkThatFindProductsMatchingNameMatchesCorrectly() {
+	public void checkThatFindOrdersMatchingNameMatchesCorrectly() {
 		Assert.assertTrue(true); /* Some better condition */
 	}
 }

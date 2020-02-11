@@ -8,15 +8,15 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class ProductDAO extends AbstractDAO<Product> {
+public class CategoryDAO extends AbstractDAO<Product> {
 	@Getter @PersistenceContext(unitName = "academy")
 	private EntityManager entityManager;
 
-	public ProductDAO() {
+	public CategoryDAO() {
 		super(Product.class);
 	}
 
-	public List<Product> findProductsMatchingName() {
+	public List<Product> findCategoriesMatchingName() {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 }
