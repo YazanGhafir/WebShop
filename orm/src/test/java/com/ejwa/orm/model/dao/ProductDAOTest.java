@@ -20,7 +20,7 @@ public class ProductDAOTest {
 	@Deployment
 	public static WebArchive createDeployment() {
 		return ShrinkWrap.create(WebArchive.class)
-			.addClasses(ProductDAO.class, Product.class)
+			.addClasses(ProductDAO.class, Product.class, Category.class)
 			.addAsResource("META-INF/persistence.xml")
 			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}

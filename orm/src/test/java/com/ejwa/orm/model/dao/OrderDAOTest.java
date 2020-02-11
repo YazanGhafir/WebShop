@@ -3,6 +3,7 @@ package com.ejwa.orm.model.dao;
 import com.ejwa.orm.model.entity.Category;
 import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.*;
+import java.util.Date;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -19,7 +20,7 @@ public class OrderDAOTest {
 	@Deployment
 	public static WebArchive createDeployment() {
 		return ShrinkWrap.create(WebArchive.class)
-			.addClasses(OrderDAO.class, Order.class)
+			.addClasses(OrderDAO.class, CustomerOrder.class)
 			.addAsResource("META-INF/persistence.xml")
 			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
@@ -29,7 +30,7 @@ public class OrderDAOTest {
 
 	@Before
 	public void init() {
-            //orderDAO.create(new Order(""));
+            orderDAO.create(new CustomerOrder("2019-02-02"));
 	}
 
 	@Test

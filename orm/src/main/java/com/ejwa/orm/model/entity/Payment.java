@@ -16,10 +16,10 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class Payment implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private @NonNull String paymentType;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long payment_id;
     
+    @NonNull private String paymentType;
+   
     
 }

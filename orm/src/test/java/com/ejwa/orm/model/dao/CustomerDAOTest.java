@@ -29,7 +29,7 @@ public class CustomerDAOTest {
 
 	@Before
 	public void init() {
-	    //customerDAO.create(new Customer("yazan.yasser.ghafir@gmail.com", "HELLO123", "Chalmersplatsen 4, 412 96 Göteborg", "Chalmersplatsen 4, 412 96 Göteborg", "Yazan", "Ghafir"));
+	    customerDAO.create(new Customer("yazan.yasser.ghafir@gmail.com", "HELLO123", "Chalmersplatsen 4, 412 96 Göteborg", "Chalmersplatsen 4, 412 96 Göteborg", "Yazan", "Ghafir"));
 	}
 
 	@Test

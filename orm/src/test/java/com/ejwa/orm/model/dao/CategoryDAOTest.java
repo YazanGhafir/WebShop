@@ -19,7 +19,7 @@ public class CategoryDAOTest {
 	@Deployment
 	public static WebArchive createDeployment() {
 		return ShrinkWrap.create(WebArchive.class)
-			.addClasses(CategoryDAO.class, Category.class)
+			.addClasses(CategoryDAO.class, Category.class, Product.class)
 			.addAsResource("META-INF/persistence.xml")
 			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
@@ -29,7 +29,12 @@ public class CategoryDAOTest {
 
 	@Before
 	public void init() {
-            //categoryDAO.create(new Category()); 
+            //Faker faker = new Faker();
+            categoryDAO.create(new Category("Shirts")); 
+            categoryDAO.create(new Category("Shoes")); 
+            categoryDAO.create(new Category("Shorts")); 
+            categoryDAO.create(new Category("Jackets")); 
+
 	}
 
 	@Test

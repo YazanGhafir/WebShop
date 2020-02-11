@@ -21,7 +21,7 @@ public class Customer implements Serializable {
 
     
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long cusomer_id;
     
     @NonNull private String email;
     @NonNull private String password;

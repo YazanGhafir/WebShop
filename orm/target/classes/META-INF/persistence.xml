@@ -4,6 +4,6 @@
     <class>com.ejwa.orm.model.entity.Category</class>
     <class>com.ejwa.orm.model.entity.Customer</class>
     <class>com.ejwa.orm.model.entity.Payment</class>
-    <class>com.ejwa.orm.model.entity.Order</class>
+    <class>com.ejwa.orm.model.entity.CustomerOrder</class>
   </persistence-unit>
 </persistence>

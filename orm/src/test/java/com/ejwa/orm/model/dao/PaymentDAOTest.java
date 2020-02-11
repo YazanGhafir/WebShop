@@ -29,8 +29,10 @@ public class PaymentDAOTest {
 
 	@Before
 	public void init() {
-		//paymentDAO.create(new Product("")); 
-	}
+		paymentDAO.create(new Payment("Visa")); 
+                 paymentDAO.create(new Payment("MasterCard")); 
+		paymentDAO.create(new Payment("Swish")); 
+       	}
 
 	@Test
 	public void checkThatFindPaymentsMatchingNameMatchesCorrectly() {
