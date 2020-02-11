@@ -1,1 +1,5 @@
+com\ejwa\orm\model\dao\CategoryDAOTest.class
+com\ejwa\orm\model\dao\CustomerDAOTest.class
+com\ejwa\orm\model\dao\OrderDAOTest.class
 com\ejwa\orm\model\dao\ProductDAOTest.class
+com\ejwa\orm\model\dao\PaymentDAOTest.class

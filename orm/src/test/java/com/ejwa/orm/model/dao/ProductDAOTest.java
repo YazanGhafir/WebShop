@@ -9,6 +9,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,12 +30,12 @@ public class ProductDAOTest {
 
 	@Before
 	public void init() {
-		productDAO.create(new Product("Adidas T-Shirt", 100.0));
-		productDAO.create(new Product("Nike shoes", 90.0));
-		productDAO.create(new Product("Tommy Hilfiger Jacket", 80.0));        
+		productDAO.create(new Product("Adidas T-Shirt", 10.0));
+		productDAO.create(new Product("Nike shoes", 20.0));
+		productDAO.create(new Product("Tommy Hilfiger Jacket", 30.0));        
 	}
 
-	@Test
+	@Test @After
 	public void checkThatFindProductsMatchingNameMatchesCorrectly() {
 		Assert.assertTrue(true); /* Some better condition */
 	}

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;
@@ -16,10 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-/**
- *
- * @author razan
- */
 @Entity
 @Data
 @RequiredArgsConstructor
@@ -28,16 +20,15 @@ public class Customer implements Serializable {
 
 
     
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Id @NonNull private String email;
+    @NonNull private String email;
     @NonNull private String password;
     @NonNull private String shippingAdress;
     @NonNull private String homeAdress;
     @NonNull private String lastName;
     @NonNull private String firstName;
     
-    @OneToOne
-    private Order order;
+    //@OneToOne private Order order;
 }

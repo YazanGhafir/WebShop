@@ -24,6 +24,5 @@ public class Category implements Serializable {
     private Long id;
     @NonNull private String name;  
     
-    @OneToMany
-    private List<Product> productList;
+    //@OneToMany private List<Product> productList;
 }

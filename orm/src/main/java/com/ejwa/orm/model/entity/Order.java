@@ -16,10 +16,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne
-    Payment payment;
-    
-    @OneToMany
-    private List<Product> productList;
+    //@OneToOne Payment payment;
+    //@OneToMany private List<Product> productList;
     
 }

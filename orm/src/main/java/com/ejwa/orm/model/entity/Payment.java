@@ -1,4 +1,3 @@
-
 package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;

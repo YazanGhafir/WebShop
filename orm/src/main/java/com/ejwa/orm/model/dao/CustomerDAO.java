@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Stateless
 public class CustomerDAO extends AbstractDAO<Product> {
-	@Getter @PersistenceContext(unitName = "academy")
+	@Getter @PersistenceContext(unitName = "webshopDB")
 	private EntityManager entityManager;
 
 	public CustomerDAO() {
