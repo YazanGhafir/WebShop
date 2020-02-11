@@ -1,0 +1,3 @@
+com\ejwa\orm\model\dao\CarDAO.class
+com\ejwa\orm\model\entity\Car.class
+com\ejwa\orm\model\dao\AbstractDAO.class
