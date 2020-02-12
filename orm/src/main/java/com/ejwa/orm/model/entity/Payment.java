@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -21,5 +23,6 @@ public class Payment implements Serializable {
     
     @NonNull private String paymentType;
    
-    
+    @JoinColumn(name="customerorder_id")
+    @OneToOne private CustomerOrder customerOrder;
 }

@@ -1,10 +1,10 @@
 com\ejwa\orm\model\dao\PaymentDAO.class
+com\ejwa\orm\model\dao\CustomerOrderDAO.class
 com\ejwa\orm\model\dao\CustomerDAO.class
 com\ejwa\orm\model\dao\ProductDAO.class
 com\ejwa\orm\model\entity\Product.class
 com\ejwa\orm\model\entity\Customer.class
 com\ejwa\orm\model\dao\CategoryDAO.class
-com\ejwa\orm\model\dao\OrderDAO.class
 com\ejwa\orm\model\entity\Category.class
 com\ejwa\orm\model\entity\Payment.class
 com\ejwa\orm\model\dao\AbstractDAO.class

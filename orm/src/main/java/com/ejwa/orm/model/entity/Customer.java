@@ -30,5 +30,5 @@ public class Customer implements Serializable {
     @NonNull private String lastName;
     @NonNull private String firstName;
     
-    //@OneToOne private Order order;
+    @OneToOne (mappedBy = "customer") private CustomerOrder customerOrder;
 }

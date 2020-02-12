@@ -9,11 +9,11 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class OrderDAO extends AbstractDAO<CustomerOrder> {
+public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
 	@Getter @PersistenceContext(unitName = "webshopDB")
 	private EntityManager entityManager;
 
-	public OrderDAO() {
+	public CustomerOrderDAO() {
 		super(CustomerOrder.class);
 	}
 

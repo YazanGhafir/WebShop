@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,11 @@ public class CustomerOrder implements Serializable {
     
     @NonNull private String date;
     
-    //@OneToOne Payment payment;
-    //@OneToMany private List<Product> productList;
+    @OneToOne (mappedBy = "customerOrder") private Payment payment; 
+    
+    @JoinColumn(name="customer_id")
+    @OneToOne private Customer customer;
+    
+    @OneToMany(mappedBy = "customerOrder") private List<Product> productList;
     
 }

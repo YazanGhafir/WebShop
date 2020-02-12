@@ -16,26 +16,28 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class PaymentDAOTest {
-	@Deployment
-	public static WebArchive createDeployment() {
-		return ShrinkWrap.create(WebArchive.class)
-			.addClasses(PaymentDAO.class, Payment.class)
-			.addAsResource("META-INF/persistence.xml")
-			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
 
-	@EJB
-	private	PaymentDAO paymentDAO;
+    @Deployment
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class)
+                .addClasses(PaymentDAO.class, Product.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addAsResource("META-INF/persistence.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
 
-	@Before
-	public void init() {
-		paymentDAO.create(new Payment("Visa")); 
-                 paymentDAO.create(new Payment("MasterCard")); 
-		paymentDAO.create(new Payment("Swish")); 
-       	}
+    @EJB
+    private PaymentDAO paymentDAO;
 
-	@Test
-	public void checkThatFindPaymentsMatchingNameMatchesCorrectly() {
-		Assert.assertTrue(true); /* Some better condition */
-	}
+    @Before
+    public void init() {
+        paymentDAO.create(new Payment("Visa"));
+        paymentDAO.create(new Payment("MasterCard"));
+        paymentDAO.create(new Payment("Swish"));
+    }
+
+    @Test
+    public void checkThatFindPaymentsMatchingNameMatchesCorrectly() {
+        Assert.assertTrue(true);
+        /* Some better condition */
+    }
 }
