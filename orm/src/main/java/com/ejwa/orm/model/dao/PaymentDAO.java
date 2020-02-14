@@ -19,9 +19,7 @@ public class PaymentDAO extends AbstractDAO<Payment> {
         super(Payment.class);
     }
 
-    public List<Payment> findPaymentsMatchingName() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+   
 
     public Payment findPaymentMatchingID(Long id) {
         QPayment_ payment = new QPayment_();

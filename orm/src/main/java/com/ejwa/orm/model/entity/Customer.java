@@ -19,7 +19,7 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cusomer_id;
+    private Long customer_id;
 
     @NonNull
     private String email;
@@ -30,12 +30,15 @@ public class Customer implements Serializable {
     @NonNull
     private String homeAdress;
     @NonNull
-    private String lastName;
-    @NonNull
     private String firstName;
+    @NonNull
+    private String lastName;
+
 
     @OneToOne(mappedBy = "customer")
     private CustomerOrder customerOrder;
 
- 
+    public Customer(String email, String password){
+        this.email = email; this.password = password;
+    }
 }

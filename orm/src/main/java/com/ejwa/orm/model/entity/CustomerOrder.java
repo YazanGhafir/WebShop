@@ -1,6 +1,7 @@
 package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;
+import java.security.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -29,7 +30,8 @@ public class CustomerOrder implements Serializable {
     private long customerorder_id;
 
     @NonNull
-    private String date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @OneToOne(mappedBy = "customerOrder")
     private Payment payment;
@@ -40,6 +42,5 @@ public class CustomerOrder implements Serializable {
 
     @OneToMany(mappedBy = "customerOrder")
     private List<Product> productList;
-
 
 }

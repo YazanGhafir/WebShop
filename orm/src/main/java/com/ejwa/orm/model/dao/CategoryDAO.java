@@ -1,7 +1,8 @@
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.Category;
-import com.ejwa.orm.model.entity.Product;
+import com.ejwa.orm.model.entity.QCategory_;
+import easycriteria.JPAQuery;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,7 +18,22 @@ public class CategoryDAO extends AbstractDAO<Category> {
 		super(Category.class);
 	}
 
-	public List<Category> findCategoriesMatchingName() {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+        
+        public Category findCategoryMatchingID(Long id) {
+        QCategory_ cat = new QCategory_();
+        Category p = new JPAQuery(getEntityManager()).select(Category.class)
+                .where(
+                        cat.category_id.eq(id)
+                ).getSingleResult();
+        return p;
+    }
+
+    public List<Category> findCategoriesMatchingCategoryName(String name) {
+        QCategory_ cat = new QCategory_();
+        List<Category> cat_List = new JPAQuery(getEntityManager()).select(Category.class)
+                .where(
+                        cat.name.eq(name)
+                ).getResultList();
+        return cat_List;
+    }
 }

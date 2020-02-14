@@ -12,6 +12,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +54,7 @@ public class PaymentDAOTest {
         paymentDAO.create(test_p3);
     }
     
+    @After
     public void roll_back_init(){
         paymentDAO.remove(test_p1);
         paymentDAO.remove(test_p2);
@@ -63,7 +65,6 @@ public class PaymentDAOTest {
     public void checkThatFindPaymentsMatchingIDMatchesCorrectly() {
         Payment p = paymentDAO.findPaymentMatchingID(test_id_1);
         Assert.assertEquals(p, test_p1);
-        roll_back_init();
     }
     
     @Test
@@ -71,6 +72,5 @@ public class PaymentDAOTest {
         List<Payment> p_list = paymentDAO.findPaymentsMatchingPaymentType("Swish");
         List<Payment> test_p_list = new ArrayList<Payment>(){{add(test_p3);}};
         Assert.assertEquals(p_list, test_p_list);
-        roll_back_init();
     }
 }

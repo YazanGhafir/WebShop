@@ -83,4 +83,6 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
+    
+    // ADD sorting and popularity
 }
