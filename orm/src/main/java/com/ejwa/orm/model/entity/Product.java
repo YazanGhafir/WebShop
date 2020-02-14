@@ -18,17 +18,23 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class Product implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long product_id;   
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long product_id;
+
+    @NonNull
+    private String name;
+    @NonNull
+    private Double price;
     
-    @NonNull private String name;
-    @NonNull private double price;
     private String discription;
 
-    @JoinColumn(name="category_id")
-    @ManyToOne private Category category;
-    
-    @JoinColumn(name="customerorder_id")
-    @ManyToOne private CustomerOrder customerOrder;
+    @JoinColumn(name = "category_id")
+    @ManyToOne
+    private Category category;
+
+    @JoinColumn(name = "customerorder_id")
+    @ManyToOne
+    private CustomerOrder customerOrder;
 
 }

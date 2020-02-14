@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,17 +23,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class CustomerOrder implements Serializable {
-    
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long customerorder_id;
-    
-    @NonNull private String date;
-    
-    @OneToOne (mappedBy = "customerOrder") private Payment payment; 
-    
-    @JoinColumn(name="customer_id")
-    @OneToOne private Customer customer;
-    
-    @OneToMany(mappedBy = "customerOrder") private List<Product> productList;
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long customerorder_id;
+
+    @NonNull
+    private String date;
+
+    @OneToOne(mappedBy = "customerOrder")
+    private Payment payment;
+
+    @JoinColumn(name = "customer_id")
+    @OneToOne
+    private Customer customer;
+
+    @OneToMany(mappedBy = "customerOrder")
+    private List<Product> productList;
+
+
 }

@@ -1,4 +1,8 @@
 package com.ejwa.orm.model.dao;
+
+import com.ejwa.orm.model.entity.Product;
+import com.ejwa.orm.model.entity.QProduct_;
+import easycriteria.JPAQuery;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -9,31 +13,34 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public abstract class AbstractDAO<T> {
-	private final Class<T> entityType;
-	protected abstract EntityManager getEntityManager();
 
-	public long count() {
-                final CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
-                final CriteriaQuery cq = builder.createQuery();
-                final Root<T> rt = cq.from(entityType);
+    private final Class<T> entityType;
 
-                cq.select(builder.count(rt));
+    protected abstract EntityManager getEntityManager();
 
-                final Query q = getEntityManager().createQuery(cq);
-                return ((Long) q.getSingleResult());
-        }
+    public long count() {
+        final CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        final CriteriaQuery cq = builder.createQuery();
+        final Root<T> rt = cq.from(entityType);
 
-	public void create(T entity) {
-                getEntityManager().persist(entity);
-        }
+        cq.select(builder.count(rt));
 
-        public List<T> findAll() {
-                final CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-                cq.select(cq.from(entityType));
-                return getEntityManager().createQuery(cq).getResultList();
-        }
+        final Query q = getEntityManager().createQuery(cq);
+        return ((Long) q.getSingleResult());
+    }
 
-        public void remove(T entity) {
-                getEntityManager().remove(getEntityManager().merge(entity));
-        }
+    public void create(T entity) {
+        getEntityManager().persist(entity);
+    }
+
+    public List<T> findAll() {
+        final CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityType));
+        return getEntityManager().createQuery(cq).getResultList();
+    }
+
+    public void remove(T entity) {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
+
 }

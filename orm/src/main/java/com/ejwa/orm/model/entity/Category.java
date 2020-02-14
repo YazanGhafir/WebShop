@@ -18,10 +18,14 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class Category implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long category_id;
-    
-    @NonNull private String name;  
-    
-    @OneToMany(mappedBy = "category") private List<Product> productList;
+
+    @NonNull
+    private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> productList;
+
 }

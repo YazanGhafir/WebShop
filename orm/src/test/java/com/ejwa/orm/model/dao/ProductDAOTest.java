@@ -1,12 +1,19 @@
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.*;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
+import javax.validation.constraints.AssertTrue;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +22,16 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ProductDAOTest {
 
+    private Long test_id_1;
+    private Long test_id_2;
+    
+    private Product test_p1 = new Product("Adidas T-Shirt", 5.0);
+    private Product test_p2 = new Product("Adidas T-Shirt", 20.0);
+    private Product test_p3 = new Product("Tommy Hilfiger Jacket", 20.0);
+    private Product test_p4 = new Product("Adidas T-Shirt111", 10.0);
+    private Product test_p5 = new Product("Adidas T-Shirt222", 40.0);
+    private Product test_p6 = new Product("Tommy Hilfiger Jacket333", 50.0);
+    
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
@@ -28,14 +45,90 @@ public class ProductDAOTest {
 
     @Before
     public void init() {
-        productDAO.create(new Product("Adidas T-Shirt", 10.0));
-        productDAO.create(new Product("Nike shoes", 20.0));
-        productDAO.create(new Product("Tommy Hilfiger Jacket", 30.0));
+        test_id_1 = new Random().nextLong();
+        test_id_2 = new Random().nextLong();
+
+        test_p1.setProduct_id(test_id_1);
+        test_p2.setProduct_id(test_id_2);
+
+        productDAO.create(test_p1);
+        productDAO.create(test_p2);
+        productDAO.create(test_p3);
+        productDAO.create(test_p4);
+        productDAO.create(test_p5);
+        productDAO.create(test_p6);
+    }
+    
+    public void roll_back_init(){
+        productDAO.remove(test_p1);
+        productDAO.remove(test_p2);
+        productDAO.remove(test_p3);
+        productDAO.remove(test_p4);
+        productDAO.remove(test_p5);
+        productDAO.remove(test_p6);
     }
 
     @Test
-    public void checkThatFindProductsMatchingNameMatchesCorrectly() {
-        Assert.assertTrue(true);
-        /* Some better condition */
+    public void checkThatFindProductMatchingIDMatchesCorrectly() {
+        Product p = productDAO.findProductMatchingID(test_id_1);
+        Assert.assertEquals(p, test_p1);
+        roll_back_init();
     }
+    
+    @Test
+    public void checkThatFindProductsMatchingNameMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsMatchingName("Adidas T-Shirt");
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p1); add(test_p2);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    
+    @Test
+    public void checkThatFindProductsMatchingPriceMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsMatchingPrice(20.0);
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p2); add(test_p3);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    @Test
+    public void checkThatFindProductsMatchingHigherPriceOrEqualMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsHigherPriceOrEqual(20.0);
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p2); add(test_p3);add(test_p5); add(test_p6);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    @Test
+    public void checkThatFindProductsMatchingHigherPriceMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsHigherPrice(20.0);
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p5); add(test_p6);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    @Test
+    public void checkThatFindProductsMatchingLowerPriceOrEqualMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsLowerPriceOrEqual(20.0);
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p2); add(test_p3);add(test_p1); add(test_p4);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    @Test
+    public void checkThatFindProductsMatchingLowerPriceMatchesCorrectly() {
+        List<Product> p_list = productDAO.findProductsLowerPrice(20.0);
+        List<Product> test_p_list = new ArrayList<Product>(){{add(test_p1); add(test_p4);}};
+        Assert.assertEquals(p_list, test_p_list);
+        roll_back_init();
+    }
+    
+    
+    /*
+    System.out.println("888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
+        System.out.println(Arrays.toString(p_list.toArray()));
+        System.out.println("888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
+        System.out.println(Arrays.toString(test_p_list.toArray()));
+*/
 }

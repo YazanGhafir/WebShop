@@ -33,7 +33,8 @@ public class CustomerDAOTest {
 
     @Test
     public void checkThatFindCustomersMatchingNameMatchesCorrectly() {
-        Assert.assertTrue(true);
+                Assert.assertTrue(true);
+
         /* Some better condition */
     }
 }

@@ -1,7 +1,5 @@
 package com.ejwa.orm.model.dao;
 
-import com.ejwa.orm.model.entity.Category;
-import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.*;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,7 +28,6 @@ public class CategoryDAOTest {
 
     @Before
     public void init() {
-        //Faker faker = new Faker();
         categoryDAO.create(new Category("Shirts"));
         categoryDAO.create(new Category("Shoes"));
         categoryDAO.create(new Category("Shorts"));
@@ -40,6 +37,7 @@ public class CategoryDAOTest {
     @Test
     public void checkThatFindCategoriesMatchingNameMatchesCorrectly() {
         Assert.assertTrue(true);
+       
         /* Some better condition */
     }
 }

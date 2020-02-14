@@ -1,4 +1,3 @@
-
 package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;
@@ -18,17 +17,25 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class Customer implements Serializable {
 
-
-    
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cusomer_id;
-    
-    @NonNull private String email;
-    @NonNull private String password;
-    @NonNull private String shippingAdress;
-    @NonNull private String homeAdress;
-    @NonNull private String lastName;
-    @NonNull private String firstName;
-    
-    @OneToOne (mappedBy = "customer") private CustomerOrder customerOrder;
+
+    @NonNull
+    private String email;
+    @NonNull
+    private String password;
+    @NonNull
+    private String shippingAdress;
+    @NonNull
+    private String homeAdress;
+    @NonNull
+    private String lastName;
+    @NonNull
+    private String firstName;
+
+    @OneToOne(mappedBy = "customer")
+    private CustomerOrder customerOrder;
+
+ 
 }

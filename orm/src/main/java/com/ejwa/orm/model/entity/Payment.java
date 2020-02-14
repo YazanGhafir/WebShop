@@ -25,4 +25,6 @@ public class Payment implements Serializable {
    
     @JoinColumn(name="customerorder_id")
     @OneToOne private CustomerOrder customerOrder;
+
+    
 }
