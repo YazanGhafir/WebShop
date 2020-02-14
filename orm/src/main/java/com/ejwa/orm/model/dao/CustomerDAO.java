@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
@@ -38,12 +39,16 @@ public class CustomerDAO extends AbstractDAO<Customer> {
     
     public boolean is_registered_Customer(String email, String password){
         QCustomer_ c_ = new QCustomer_();
+        try {
         Customer c = new JPAQuery(getEntityManager()).select(Customer.class)
                 .where(
                         c_.email.eq(email).and(
                         c_.password.eq(password))
                 ).getSingleResult();
-        return c != null;
+        } catch (NoResultException e){
+            return false;
+        }
+        return true;
     }
     
     public Customer authenticateCustomer(String email, String password){

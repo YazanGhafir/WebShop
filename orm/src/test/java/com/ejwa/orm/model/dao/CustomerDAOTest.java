@@ -67,20 +67,22 @@ public class CustomerDAOTest {
     @Test
     public void checkThatis_registered_CustomerCorrectly() {
         boolean toValidate1 = customerDAO.is_registered_Customer(test_email_2, test_password_2);
+        System.out.println(toValidate1);
         Assert.assertTrue(toValidate1);
         boolean toValidate2 = customerDAO.is_registered_Customer("55555555555555", "666666666666666");
+        System.out.println(toValidate2);
         Assert.assertFalse(toValidate2);
     }
    
     @Test
     public void checkThatRegister_customer_signup_email_passwordMatchesCorrectly() {
-        boolean toValidate = customerDAO.register_customer_signup(test_email_2, test_password_2);
+        boolean toValidate = customerDAO.register_customer_signup("new_test_email@email.com", "new_test_password");
         Assert.assertTrue(toValidate);
     }
     
     @Test
     public void checkThatRegister_customer_signup_email_AllCorrectly() {
-        boolean toValidate = customerDAO.register_customer_signup(test_email_2, test_password_2, test_homeAdress_2, test_shippingAdress_2, test_firstName_2, test_lastName_2);
+        boolean toValidate = customerDAO.register_customer_signup("new_test_email", "new_test_password", "new_test_homeAdress", "new_test_shippingAdress", "new_test_firstName", "new_test_lastName");
         Assert.assertTrue(toValidate);
     }
     
