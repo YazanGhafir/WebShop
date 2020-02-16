@@ -1,3 +1,5 @@
 1- is the relation between customerorder and product, many to many? 
 
 2- findCustomerOrdersBeforeOrEqualDate?? how to make easy criterea know that this is date property and how to get this to work
+
+3- code coverage? added plug-in, not working?
