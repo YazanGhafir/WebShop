@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -40,7 +42,9 @@ public class CustomerOrder implements Serializable {
     @OneToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "customerOrder")
-    private List<Product> productList;
-
+    @JoinTable(name = "customerOrder_product",
+    joinColumns = @JoinColumn(name = "customerOrder_id_"),
+    inverseJoinColumns = @JoinColumn(name = "product_id_"))
+    @ManyToMany private List<Product> productList;
+    
 }

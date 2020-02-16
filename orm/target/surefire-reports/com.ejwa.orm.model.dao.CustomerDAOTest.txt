@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ejwa.orm.model.dao.CustomerDAOTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.849 sec
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.996 sec

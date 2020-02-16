@@ -61,6 +61,21 @@ public class CustomerDAO extends AbstractDAO<Customer> {
         return c;
     }
     
+   public boolean remove_Customer(String email, String password){
+        QCustomer_ c_ = new QCustomer_();
+        try {
+        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)
+                .where(
+                        c_.email.eq(email).and(
+                        c_.password.eq(password))
+                ).getSingleResult();
+        remove(c);
+        } catch (NoResultException e){
+            return false;
+        }
+        return true;
+    }
+    
     public Customer findCustomerMatchingID(Long id) {
         QCustomer_ c_ = new QCustomer_();
         Customer c = new JPAQuery(getEntityManager()).select(Customer.class)

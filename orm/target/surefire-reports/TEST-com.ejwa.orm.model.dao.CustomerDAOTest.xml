@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="9" failures="0" name="com.ejwa.orm.model.dao.CustomerDAOTest" time="0.957" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="com.ejwa.orm.model.dao.CustomerDAOTest" time="0.853" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.6+8-LTS"/>
@@ -62,13 +62,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_passwordMatchesCorrectly" time="0.243"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_AllCorrectly" time="0.085"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingHomeAdressMatchesCorrectly" time="0.072"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatAuthenticateCustomerMatchesCorrectly" time="0.077"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingLastNameMatchesCorrectly" time="0.116"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFirstNameMatchesCorrectly" time="0.078"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFShippingAdressMatchesCorrectly" time="0.063"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingIDMatchesCorrectly" time="0.088"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatis_registered_CustomerCorrectly" time="0.135"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_passwordMatchesCorrectly" time="0.181"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_AllCorrectly" time="0.094"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingHomeAdressMatchesCorrectly" time="0.078"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatAuthenticateCustomerMatchesCorrectly" time="0.094"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingLastNameMatchesCorrectly" time="0.062"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFirstNameMatchesCorrectly" time="0.125"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFShippingAdressMatchesCorrectly" time="0.078"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingIDMatchesCorrectly" time="0.078"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatis_registered_CustomerCorrectly" time="0.063"/>
 </testsuite>

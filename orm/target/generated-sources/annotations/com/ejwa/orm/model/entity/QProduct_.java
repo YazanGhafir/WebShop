@@ -11,14 +11,13 @@ public class QProduct_ extends ObjectAttribute<Product>{
     public NumberPropertyAttribute<Product, java.lang.Double> price = new NumberPropertyAttribute<>("price", this, java.lang.Double.class);
     public StringPropertyAttribute<Product, java.lang.String> discription = new StringPropertyAttribute<>("discription", this, java.lang.String.class);
     public com.ejwa.orm.model.entity.QCategory_ category;
-    public com.ejwa.orm.model.entity.QCustomerOrder_ customerOrder;
+    public CollectionAttribute<Product, com.ejwa.orm.model.entity.CustomerOrder> customerOrders = new CollectionAttribute<>("customerOrders", this, com.ejwa.orm.model.entity.CustomerOrder.class);
     private static InstancesInits inits = InstancesInits.DIRECT2;
     public QProduct_(String attribute, EntityPathNode parent) {
         this(attribute, parent, inits);
     }
     public QProduct_(String attribute, EntityPathNode parent, InstancesInits inits) {
         super(attribute, parent, Product.class);
-        this.customerOrder = inits.isInitialized("customerOrder") ? new com.ejwa.orm.model.entity.QCustomerOrder_("customerOrder", this, inits.get("customerOrder")) : null;
         this.category = inits.isInitialized("category") ? new com.ejwa.orm.model.entity.QCategory_("category", this, inits.get("category")) : null;
     }
 }
