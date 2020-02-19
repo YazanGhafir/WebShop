@@ -3,6 +3,7 @@ package com.ejwa.orm.model.dao;
 import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.QCustomerOrder_;
 import easycriteria.JPAQuery;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,6 +21,7 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
     public CustomerOrderDAO() {
         super(CustomerOrder.class);
     }
+    
 
     public CustomerOrder findCustomerOrderMatchingID(Long id) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
@@ -30,7 +32,7 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
         return qo;
     }
 
-    public List<CustomerOrder> findCustomerOrdersMatchingDate(Date date) {
+    public List<CustomerOrder> findCustomerOrdersMatchingDate(LocalDateTime date) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
         List<CustomerOrder> q_List = new JPAQuery(getEntityManager()).select(CustomerOrder.class)
                 .where(
@@ -38,9 +40,8 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
                 ).getResultList();
         return q_List;
     }
-    
-    /* TODO ASK ABOUT
-    public List<CustomerOrder> findCustomerOrdersBeforeOrEqualDate(Date date) {
+   
+    public List<CustomerOrder> findCustomerOrdersBeforeOrEqualDate(LocalDateTime date) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
         List<CustomerOrder> q_List = new JPAQuery(getEntityManager()).select(CustomerOrder.class)
                 .where(
@@ -49,7 +50,7 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
         return q_List;
     }
     
-    public List<CustomerOrder> findCustomerOrdersAfterOrEqualDate(Date date) {
+    public List<CustomerOrder> findCustomerOrdersAfterOrEqualDate(LocalDateTime date) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
         List<CustomerOrder> q_List = new JPAQuery(getEntityManager()).select(CustomerOrder.class)
                 .where(
@@ -57,9 +58,4 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
                 ).getResultList();
         return q_List;
     }
-*/
-   
-   
-    
-    
 }

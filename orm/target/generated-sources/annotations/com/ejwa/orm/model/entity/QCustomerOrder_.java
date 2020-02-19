@@ -7,7 +7,7 @@ public class QCustomerOrder_ extends ObjectAttribute<CustomerOrder>{
         this(null, null);
     }
     public NumberPropertyAttribute<CustomerOrder, Long> customerorder_id = new NumberPropertyAttribute<>("customerorder_id", this, Long.class);
-    public PropertyAttribute<CustomerOrder, java.util.Date> date = new PropertyAttribute<>("date", this, java.util.Date.class);
+    public DatePropertyAttribute<CustomerOrder, java.time.LocalDateTime> date = new DatePropertyAttribute<>("date", this, java.time.LocalDateTime.class);
     public com.ejwa.orm.model.entity.QPayment_ payment;
     public com.ejwa.orm.model.entity.QCustomer_ customer;
     public CollectionAttribute<CustomerOrder, com.ejwa.orm.model.entity.Product> productList = new CollectionAttribute<>("productList", this, com.ejwa.orm.model.entity.Product.class);
