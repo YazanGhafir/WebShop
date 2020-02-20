@@ -7,16 +7,21 @@ import java.util.Random;
 import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
-@RunWith(Arquillian.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(Arquillian.class) 
 public class CategoryDAOTest {
 
     private Long test_id_1;
@@ -26,7 +31,9 @@ public class CategoryDAOTest {
     private Category test_cat1 = new Category("Tshirts");
     private Category test_cat2 = new Category("Shorts");
     private Category test_cat3 = new Category("Jackets");
-    
+
+    private Category RESTtest = new Category("REST_test_Jackets");
+
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
@@ -43,7 +50,7 @@ public class CategoryDAOTest {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
-        
+
         test_cat1.setCategory_id(test_id_1);
         test_cat2.setCategory_id(test_id_2);
         test_cat3.setCategory_id(test_id_3);
@@ -51,25 +58,35 @@ public class CategoryDAOTest {
         categoryDAO.create(test_cat1);
         categoryDAO.create(test_cat2);
         categoryDAO.create(test_cat3);
+
     }
 
     @After
-    public void roll_back_init(){
+    public void roll_back_init() {
         categoryDAO.remove(test_cat1);
         categoryDAO.remove(test_cat2);
         categoryDAO.remove(test_cat3);
-    }  
-     
+    }
+
     @Test
+    public void Z_just_for_REST_test() {
+        categoryDAO.create(RESTtest);
+    }
+
+    @Test 
     public void checkThatFindCategoryMatchingIDMatchesCorrectly() {
         Category cat = categoryDAO.findCategoryMatchingID(test_id_1);
         Assert.assertEquals(cat, test_cat1);
     }
-    
-    @Test
+
+    @Test 
     public void checkThatFindCategorysMatchingCategoryNameMatchesCorrectly() {
         List<Category> cat_list = categoryDAO.findCategoriesMatchingCategoryName("Shorts");
-        List<Category> test_cat_list = new ArrayList<Category>(){{add(test_cat2);}};
+        List<Category> test_cat_list = new ArrayList<Category>() {
+            {
+                add(test_cat2);
+            }
+        };
         Assert.assertEquals(cat_list, test_cat_list);
     }
 }

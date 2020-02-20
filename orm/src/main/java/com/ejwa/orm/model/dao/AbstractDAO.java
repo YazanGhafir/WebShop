@@ -28,6 +28,11 @@ public abstract class AbstractDAO<T> {
         final Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult());
     }
+    
+     public void edit(T entity) {
+        getEntityManager().merge(entity);
+    }
+
 
     public void create(T entity) {
         getEntityManager().persist(entity);

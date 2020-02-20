@@ -13,11 +13,15 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class PaymentDAOTest {
 
@@ -29,6 +33,7 @@ public class PaymentDAOTest {
     private Payment test_p2 = new Payment("MasterCard");
     private Payment test_p3 = new Payment("Swish");
 
+    private Payment RESTtest = new Payment("REST_test_Swish");
     
     @Deployment
     public static WebArchive createDeployment() {
@@ -52,6 +57,8 @@ public class PaymentDAOTest {
         paymentDAO.create(test_p1);
         paymentDAO.create(test_p2);
         paymentDAO.create(test_p3);
+        
+        
     }
     
     @After
@@ -59,6 +66,11 @@ public class PaymentDAOTest {
         paymentDAO.remove(test_p1);
         paymentDAO.remove(test_p2);
         paymentDAO.remove(test_p3);
+    }
+    
+    @Test
+    public void Z_just_for_REST_test() {
+        paymentDAO.create(RESTtest);
     }
     
     @Test

@@ -5,25 +5,25 @@ import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.*;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class CustomerOrderDAOTest {
 
@@ -37,6 +37,8 @@ public class CustomerOrderDAOTest {
     private CustomerOrder test_customerOrder1 = new CustomerOrder();
     private CustomerOrder test_customerOrder2 = new CustomerOrder();
     private CustomerOrder test_customerOrder3 = new CustomerOrder();
+
+    private CustomerOrder RESTtest = new CustomerOrder();
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -64,6 +66,7 @@ public class CustomerOrderDAOTest {
         customerOrderDAO.create(test_customerOrder1);
         customerOrderDAO.create(test_customerOrder2);
         customerOrderDAO.create(test_customerOrder3);
+        
     }
     
     @After
@@ -71,6 +74,11 @@ public class CustomerOrderDAOTest {
         customerOrderDAO.remove(test_customerOrder1);
         customerOrderDAO.remove(test_customerOrder2);
         customerOrderDAO.remove(test_customerOrder3);
+    }
+    
+    @Test
+    public void Z_just_for_REST_test() {
+        customerOrderDAO.create(RESTtest);
     }
 
     @Test

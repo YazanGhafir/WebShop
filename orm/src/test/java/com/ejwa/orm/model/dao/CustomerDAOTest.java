@@ -11,11 +11,15 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class CustomerDAOTest {
 
@@ -30,6 +34,8 @@ public class CustomerDAOTest {
     private Customer test_c1 = new Customer(test_email_1, test_password_1, test_shippingAdress_1, test_homeAdress_1, test_firstName_1, test_lastName_1);
     private Customer test_c2 = new Customer(test_email_2, test_password_2, test_shippingAdress_2, test_homeAdress_2, test_firstName_2, test_lastName_2);
     private Customer test_c3 = new Customer(test_email_3, test_password_3, test_shippingAdress_3, test_homeAdress_3, test_firstName_3, test_lastName_3);
+
+    private Customer RESTtest = new Customer("REST_test_email_@email.com", "REST_test_password", "REST_test_shippingAdress", "REST_test_homeAdress", "REST_test_firstName", "REST_test_lastName");
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -65,6 +71,11 @@ public class CustomerDAOTest {
     }
 
     @Test
+    public void Z_just_for_REST_test() {
+        customerDAO.create(RESTtest);
+    }
+
+    @Test 
     public void checkThatis_registered_CustomerCorrectly() {
         boolean toValidate1 = customerDAO.is_registered_Customer(test_email_2, test_password_2);
         System.out.println(toValidate1);
@@ -73,27 +84,31 @@ public class CustomerDAOTest {
         System.out.println(toValidate2);
         Assert.assertFalse(toValidate2);
     }
-   
+
     @Test
     public void checkThatRegister_customer_signup_email_passwordMatchesCorrectly() {
         boolean toValidate = customerDAO.register_customer_signup("new_test_email@email.com", "new_test_password");
         Assert.assertTrue(toValidate);
-        if (toValidate)customerDAO.remove_Customer("new_test_email@email.com", "new_test_password");
+        if (toValidate) {
+            customerDAO.remove_Customer("new_test_email@email.com", "new_test_password");
+        }
     }
-    
+
     @Test
     public void checkThatRegister_customer_signup_email_AllCorrectly() {
         boolean toValidate = customerDAO.register_customer_signup("new_test_email1@email.com", "new_test_password1", "new_test_homeAdress", "new_test_shippingAdress", "new_test_firstName", "new_test_lastName");
         Assert.assertTrue(toValidate);
-        if (toValidate)customerDAO.remove_Customer("new_test_email1@email.com", "new_test_password1");
+        if (toValidate) {
+            customerDAO.remove_Customer("new_test_email1@email.com", "new_test_password1");
+        }
     }
-    
+
     @Test
     public void checkThatAuthenticateCustomerMatchesCorrectly() {
         Customer c = customerDAO.authenticateCustomer(test_email_2, test_password_2);
         Assert.assertEquals(c, test_c2);
     }
-    
+
     @Test
     public void checkThatFindCustomerMatchingIDMatchesCorrectly() {
         Customer c = customerDAO.findCustomerMatchingID(test_id_1);
@@ -110,7 +125,7 @@ public class CustomerDAOTest {
         };
         Assert.assertEquals(c_list, test_c_list);
     }
-    
+
     @Test
     public void checkThatFindCustomerMatchingLastNameMatchesCorrectly() {
         List<Customer> c_list = customerDAO.findCustomerOrdersMatchingLastName(test_lastName_3);
@@ -121,7 +136,7 @@ public class CustomerDAOTest {
         };
         Assert.assertEquals(c_list, test_c_list);
     }
-    
+
     @Test
     public void checkThatFindCustomerMatchingHomeAdressMatchesCorrectly() {
         List<Customer> c_list = customerDAO.findCustomerOrdersMatchingHomeAdress(test_homeAdress_2);
@@ -132,7 +147,7 @@ public class CustomerDAOTest {
         };
         Assert.assertEquals(c_list, test_c_list);
     }
-    
+
     @Test
     public void checkThatFindCustomerMatchingFShippingAdressMatchesCorrectly() {
         List<Customer> c_list = customerDAO.findCustomerOrdersMatchingShippingAdress(test_shippingAdress_3);
