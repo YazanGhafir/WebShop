@@ -2,7 +2,6 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.*;
 import easycriteria.JPAQuery;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,14 +28,7 @@ public class CustomerDAO extends AbstractDAO<Customer> {
         return customer_to_register.equals(customer_to_validate_registration);
     }
     
-    public boolean register_customer_signup (String email, String password, String shippingAdress, String homeAdress, String firstName, String lastName){
-        Customer customer_to_register = new Customer(email, password, shippingAdress, homeAdress, firstName, lastName);
-        if(is_registered_Customer(email, password)) return false; //already registered customer
-        create(customer_to_register);
-        Customer customer_to_validate_registration = authenticateCustomer(email, password);
-        return customer_to_register.equals(customer_to_validate_registration);
-    }
-    
+
     public boolean is_registered_Customer(String email, String password){
         QCustomer_ c_ = new QCustomer_();
         try {

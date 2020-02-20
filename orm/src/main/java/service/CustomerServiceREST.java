@@ -60,13 +60,35 @@ public class CustomerServiceREST {
         return String.valueOf(customerDAO.count());
     }
 
-    /*
-    register_customer_signup
-    register_customer_signup
-    is_registered_Customer
-    authenticateCustomer        
-    remove_Customer        
-     */
+    @POST
+    @Path("{email}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean register_customer_signup(@PathParam("email") String email, @PathParam("password") String password) {
+        return customerDAO.register_customer_signup(email, password);
+    }
+    
+    
+    @GET
+    @Path("{email}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Customer authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
+        return customerDAO.authenticateCustomer(email, password);
+    }
+    
+    @GET
+    @Path("{email}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean is_registered_Customer(@PathParam("email") String email, @PathParam("password") String password) {
+        return customerDAO.is_registered_Customer(email, password);
+    }
+    
+    @DELETE
+    @Path("{email}/{password}")
+    public void remove_Customer(@PathParam("email") String email, @PathParam("password") String password) {
+        customerDAO.remove_Customer(email, password);
+    }
+      
+    
     @GET
     @Path("{email}")
     @Produces(MediaType.APPLICATION_JSON)

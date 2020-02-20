@@ -4,7 +4,6 @@ import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,7 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 
 @Path("product")
 public class ProductServiceREST {
@@ -59,5 +57,47 @@ public class ProductServiceREST {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(productDAO.count());
+    }
+
+    @GET
+    @Path("name")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsMatchingName(@PathParam("name") String name) {
+        return productDAO.findProductsMatchingName(name);
+    }
+
+    @GET
+    @Path("price")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsMatchingPrice(@PathParam("price") Double price) {
+        return productDAO.findProductsMatchingPrice(price);
+    }
+
+    @GET
+    @Path("price")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsHigherPriceOrEqual(@PathParam("price") Double price) {
+        return productDAO.findProductsHigherPriceOrEqual(price);
+    }
+
+    @GET
+    @Path("price")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsHigherPrice(@PathParam("price") Double price) {
+        return productDAO.findProductsHigherPrice(price);
+    }
+
+    @GET
+    @Path("price")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsLowerPriceOrEqual(@PathParam("price") Double price) {
+        return productDAO.findProductsLowerPriceOrEqual(price);
+    }
+
+    @GET
+    @Path("price")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> findProductsLowerPrice(@PathParam("price") Double price) {
+        return productDAO.findProductsLowerPrice(price);
     }
 }

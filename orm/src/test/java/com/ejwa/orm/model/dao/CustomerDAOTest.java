@@ -94,14 +94,6 @@ public class CustomerDAOTest {
         }
     }
 
-    @Test
-    public void checkThatRegister_customer_signup_email_AllCorrectly() {
-        boolean toValidate = customerDAO.register_customer_signup("new_test_email1@email.com", "new_test_password1", "new_test_homeAdress", "new_test_shippingAdress", "new_test_firstName", "new_test_lastName");
-        Assert.assertTrue(toValidate);
-        if (toValidate) {
-            customerDAO.remove_Customer("new_test_email1@email.com", "new_test_password1");
-        }
-    }
 
     @Test
     public void checkThatAuthenticateCustomerMatchesCorrectly() {

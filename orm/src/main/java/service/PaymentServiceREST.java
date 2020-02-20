@@ -4,7 +4,6 @@ import com.ejwa.orm.model.dao.PaymentDAO;
 import com.ejwa.orm.model.entity.Payment;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -58,5 +57,12 @@ public class PaymentServiceREST {
     @Produces(MediaType.TEXT_PLAIN)
     public String countREST() {
         return String.valueOf(paymentDAO.count());
+    }
+    
+    @GET
+    @Path("{paymentType}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Payment> find(@PathParam("paymentType") String paymentType) {
+        return paymentDAO.findPaymentsMatchingPaymentType(paymentType);
     }
 }
