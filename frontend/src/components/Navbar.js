@@ -8,17 +8,17 @@ import Button from 'react-bootstrap/Button';
 export default class navbar extends Component {
     render() {
         return (
-       
+
             <Navb bg="light">
                 <Link to='/'>
                     <img src={logo} alt="store" className="navbar-brand" />
                 </Link>
-                <Navb.Brand href="g">Brand link</Navb.Brand>
+                <Navb.Brand href='/'>Challando</Navb.Brand>
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
-                        <Link to="/" className="nav-link">
+                        <Link to='/' className="nav-link">
                             products
-                </Link>
+                        </Link>
                     </li>
                 </ul>
                 <Link to="/cart" className="ml-auto">
