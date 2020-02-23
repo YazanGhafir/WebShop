@@ -2,7 +2,9 @@ package service;
 
 import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.Product;
+import com.github.javafaker.Faker;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -49,6 +51,7 @@ public class ProductServiceREST {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findAll() {
+        productDAO.create(new Product(new Faker().commerce().productName().toString(), Double.valueOf(new Faker().commerce().price(0, 100))));
         return productDAO.findAll();
     }
 
@@ -60,42 +63,42 @@ public class ProductServiceREST {
     }
 
     @GET
-    @Path("name")
+    @Path("fina/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsMatchingName(@PathParam("name") String name) {
         return productDAO.findProductsMatchingName(name);
     }
 
     @GET
-    @Path("price")
+    @Path("fipr/{price}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsMatchingPrice(@PathParam("price") Double price) {
         return productDAO.findProductsMatchingPrice(price);
     }
 
     @GET
-    @Path("price")
+    @Path("fiprhieq/{price}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsHigherPriceOrEqual(@PathParam("price") Double price) {
         return productDAO.findProductsHigherPriceOrEqual(price);
     }
 
     @GET
-    @Path("price")
+    @Path("fiprhi/{price}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsHigherPrice(@PathParam("price") Double price) {
         return productDAO.findProductsHigherPrice(price);
     }
 
     @GET
-    @Path("price")
+    @Path("fiprloeq/{price}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsLowerPriceOrEqual(@PathParam("price") Double price) {
         return productDAO.findProductsLowerPriceOrEqual(price);
     }
 
     @GET
-    @Path("price")
+    @Path("fiprlo/{price}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findProductsLowerPrice(@PathParam("price") Double price) {
         return productDAO.findProductsLowerPrice(price);

@@ -5,7 +5,6 @@ import com.ejwa.orm.model.entity.CustomerOrder;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,10 +15,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 @Path("customerorder")
 public class CustomerOrderServiceREST {
- @EJB
+
+    @EJB
     private CustomerOrderDAO customerOrderDAO;
 
     @POST
@@ -51,6 +50,7 @@ public class CustomerOrderServiceREST {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<CustomerOrder> findAll() {
+        customerOrderDAO.create(new CustomerOrder(LocalDateTime.MAX));
         return customerOrderDAO.findAll();
     }
 
@@ -60,26 +60,29 @@ public class CustomerOrderServiceREST {
     public String countREST() {
         return String.valueOf(customerOrderDAO.count());
     }
-    
+
     @GET
-    @Path("{date}")
+    @Path("fidate/{date}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerOrder> findByDate(@PathParam("date") LocalDateTime date) {
-        return customerOrderDAO.findCustomerOrdersMatchingDate(date);
+    public List<CustomerOrder> findByDate(@PathParam("date") String date) {
+        LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));
+        return customerOrderDAO.findCustomerOrdersMatchingDate(t);
     }
-    
+
     @GET
-    @Path("{date}")
+    @Path("after/{date}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerOrder> findAfterDate(@PathParam("date") LocalDateTime date) {
-        return customerOrderDAO.findCustomerOrdersAfterOrEqualDate(date);
+    public List<CustomerOrder> findAfterDate(@PathParam("date") String date) {
+        LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));
+        return customerOrderDAO.findCustomerOrdersAfterOrEqualDate(t);
     }
-    
+
     @GET
-    @Path("{date}")
+    @Path("before/{date}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerOrder> findBeforeDate(@PathParam("date") LocalDateTime date) {
-        return customerOrderDAO.findCustomerOrdersBeforeOrEqualDate(date);
+    public List<CustomerOrder> findBeforeDate(@PathParam("date") String date) {
+         LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));
+        return customerOrderDAO.findCustomerOrdersBeforeOrEqualDate(t);
     }
-    
+
 }

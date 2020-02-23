@@ -20,7 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class) 
 public class CategoryDAOTest {
 
@@ -32,7 +32,7 @@ public class CategoryDAOTest {
     private Category test_cat2 = new Category("Shorts");
     private Category test_cat3 = new Category("Jackets");
 
-    private Category RESTtest = new Category("REST_test_Jackets");
+    //private Category RESTtest = new Category("REST_test_Jackets");
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -68,10 +68,10 @@ public class CategoryDAOTest {
         categoryDAO.remove(test_cat3);
     }
 
-    @Test
+    /*@Test
     public void Z_just_for_REST_test() {
         categoryDAO.create(RESTtest);
-    }
+    }*/
 
     @Test 
     public void checkThatFindCategoryMatchingIDMatchesCorrectly() {

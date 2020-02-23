@@ -33,7 +33,7 @@ public class ProductDAOTest {
     private Product test_p5 = new Product("Adidas T-Shirt222", 40.0);
     private Product test_p6 = new Product("Tommy Hilfiger Jacket333", 50.0);
 
-    private Product RESTtest = new Product("REST_test_Tommy Hilfiger Jacket333", 50.0);
+    //private Product RESTtest = new Product("REST_test_Tommy Hilfiger Jacket333", 50.0);
 
     @Deployment
     public static WebArchive createDeployment() {

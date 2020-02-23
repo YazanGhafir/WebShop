@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class CustomerOrderDAOTest {
 
@@ -76,10 +76,10 @@ public class CustomerOrderDAOTest {
         customerOrderDAO.remove(test_customerOrder3);
     }
     
-    @Test
+    /*@Test
     public void Z_just_for_REST_test() {
         customerOrderDAO.create(RESTtest);
-    }
+    }*/
 
     @Test
     public void checkThatFindOrdersMatchingIDMatchesCorrectly() {

@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class PaymentDAOTest {
 
@@ -33,7 +33,7 @@ public class PaymentDAOTest {
     private Payment test_p2 = new Payment("MasterCard");
     private Payment test_p3 = new Payment("Swish");
 
-    private Payment RESTtest = new Payment("REST_test_Swish");
+    //private Payment RESTtest = new Payment("REST_test_Swish");
     
     @Deployment
     public static WebArchive createDeployment() {
@@ -58,7 +58,6 @@ public class PaymentDAOTest {
         paymentDAO.create(test_p2);
         paymentDAO.create(test_p3);
         
-        
     }
     
     @After
@@ -68,10 +67,10 @@ public class PaymentDAOTest {
         paymentDAO.remove(test_p3);
     }
     
-    @Test
+    /*@Test
     public void Z_just_for_REST_test() {
         paymentDAO.create(RESTtest);
-    }
+    }*/
     
     @Test
     public void checkThatFindPaymentsMatchingIDMatchesCorrectly() {

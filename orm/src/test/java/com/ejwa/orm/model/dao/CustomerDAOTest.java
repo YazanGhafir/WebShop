@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
 public class CustomerDAOTest {
 
@@ -35,7 +35,7 @@ public class CustomerDAOTest {
     private Customer test_c2 = new Customer(test_email_2, test_password_2, test_shippingAdress_2, test_homeAdress_2, test_firstName_2, test_lastName_2);
     private Customer test_c3 = new Customer(test_email_3, test_password_3, test_shippingAdress_3, test_homeAdress_3, test_firstName_3, test_lastName_3);
 
-    private Customer RESTtest = new Customer("REST_test_email_@email.com", "REST_test_password", "REST_test_shippingAdress", "REST_test_homeAdress", "REST_test_firstName", "REST_test_lastName");
+    //private Customer RESTtest = new Customer("REST_test_email_@email.com", "REST_test_password", "REST_test_shippingAdress", "REST_test_homeAdress", "REST_test_firstName", "REST_test_lastName");
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -70,10 +70,10 @@ public class CustomerDAOTest {
         customerDAO.remove(test_c3);
     }
 
-    @Test
+    /*@Test
     public void Z_just_for_REST_test() {
         customerDAO.create(RESTtest);
-    }
+    }*/
 
     @Test 
     public void checkThatis_registered_CustomerCorrectly() {
