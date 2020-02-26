@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Product from "./Product"
 import CarouselPage from "./Carousel";
+import FiltersRow from "./FiltersRow";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
@@ -27,6 +28,9 @@ export default class ProductList extends Component {
                     <Row>
                         <CarouselPage></CarouselPage>
                     </Row>
+                   
+                        <FiltersRow></FiltersRow>
+                    
                     <Row>
                         {this.state.products.map((p, idx) => { return <Product name={p.name} key={idx} /> })}
                     </Row>

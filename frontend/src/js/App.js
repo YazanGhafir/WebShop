@@ -21,6 +21,7 @@ class App extends Component {
         <header className="App-header">
 
           <React.Fragment>
+            
             <Navbar />
 
             <Container>

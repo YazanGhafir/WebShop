@@ -8,7 +8,7 @@ export default class Product extends Component {
 
     render() {
         return (
-            <div className="col-md-4 mt-5">
+            <div className="col-md-4 mt-3">
                 <MDBCard cascade ecommerce wide>
                     <MDBCardImage
                         cascade
