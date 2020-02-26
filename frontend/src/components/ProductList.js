@@ -28,15 +28,11 @@ export default class ProductList extends Component {
                     <Row>
                         <CarouselPage></CarouselPage>
                     </Row>
-                   
                         <FiltersRow></FiltersRow>
-                    
                     <Row>
                         {this.state.products.map((p, idx) => { return <Product name={p.name} key={idx} /> })}
                     </Row>
                 </Container>
-
-
             </React.Fragment>
         );
     }
