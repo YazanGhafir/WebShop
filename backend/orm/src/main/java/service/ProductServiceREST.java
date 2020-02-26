@@ -4,7 +4,6 @@ import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.Product;
 import com.github.javafaker.Faker;
 import java.util.List;
-import java.util.Random;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

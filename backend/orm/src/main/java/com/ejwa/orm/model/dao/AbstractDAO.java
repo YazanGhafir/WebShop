@@ -1,8 +1,5 @@
 package com.ejwa.orm.model.dao;
 
-import com.ejwa.orm.model.entity.Product;
-import com.ejwa.orm.model.entity.QProduct_;
-import easycriteria.JPAQuery;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

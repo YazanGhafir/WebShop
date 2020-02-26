@@ -103,6 +103,11 @@
             <artifactId>easy-criteria</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.ebaysf.web</groupId>
+            <artifactId>cors-filter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
    
     </dependencies>
     

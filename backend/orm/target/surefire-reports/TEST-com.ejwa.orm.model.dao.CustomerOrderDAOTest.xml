@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.ejwa.orm.model.dao.CustomerOrderDAOTest" time="0.563" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.ejwa.orm.model.dao.CustomerOrderDAOTest" time="0.737" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.6+8-LTS"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.6\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\orm"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\backend\orm"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,10 +15,9 @@
     <property name="user.country" value="GB"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\orm"/>
+    <property name="user.dir" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\backend\orm"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="11.0.6+8-LTS"/>
-    <property name="netbeans.deploy" value="true"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="C:\Users\razan\AppData\Local\Temp\"/>
@@ -45,7 +44,7 @@
     <property name="java.class.path" value="C:\Program Files\NetBeans-11.2\netbeans\java\maven\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.2\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.2\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 install"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.6"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -63,9 +62,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="Z_just_for_REST_test" time="0.191"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersHappenedAfterOrEqualDateMatchesCorrectly" time="0.1"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersHappenedBeforeOrEqualDateMatchesCorrectly" time="0.119"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersMatchingDateMatchesCorrectly" time="0.085"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersMatchingIDMatchesCorrectly" time="0.068"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersMatchingIDMatchesCorrectly" time="0.385"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersMatchingDateMatchesCorrectly" time="0.123"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersHappenedAfterOrEqualDateMatchesCorrectly" time="0.138"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerOrderDAOTest" name="checkThatFindOrdersHappenedBeforeOrEqualDateMatchesCorrectly" time="0.091"/>
 </testsuite>

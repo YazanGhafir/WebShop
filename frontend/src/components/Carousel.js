@@ -3,13 +3,13 @@ import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDB
 
 const CarouselPage = () => {
   return (
-    <MDBContainer>
+    
       <MDBCarousel
       activeItem={1}
       length={3}
       showControls={true}
       showIndicators={true}
-      className="z-depth-1"
+      className="z-depth-1 mx-3"
     >
       <MDBCarouselInner>
         <MDBCarouselItem itemId="1">
@@ -56,7 +56,6 @@ const CarouselPage = () => {
         </MDBCarouselItem>
       </MDBCarouselInner>
     </MDBCarousel>
-    </MDBContainer>
   );
 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="9" failures="0" name="com.ejwa.orm.model.dao.CustomerDAOTest" time="1.171" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="com.ejwa.orm.model.dao.CustomerDAOTest" time="1.161" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.6+8-LTS"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.6\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\orm"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\backend\orm"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,10 +15,9 @@
     <property name="user.country" value="GB"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\orm"/>
+    <property name="user.dir" value="C:\Users\razan\Desktop\Web Applications DAT076\WebShop\backend\orm"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="java.runtime.version" value="11.0.6+8-LTS"/>
-    <property name="netbeans.deploy" value="true"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="C:\Users\razan\AppData\Local\Temp\"/>
@@ -45,7 +44,7 @@
     <property name="java.class.path" value="C:\Program Files\NetBeans-11.2\netbeans\java\maven\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.2\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.2\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 install"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.6"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -63,13 +62,12 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="Z_just_for_REST_test" time="0.215"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatAuthenticateCustomerMatchesCorrectly" time="0.126"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFShippingAdressMatchesCorrectly" time="0.202"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFirstNameMatchesCorrectly" time="0.143"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingHomeAdressMatchesCorrectly" time="0.11"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingIDMatchesCorrectly" time="0.074"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingLastNameMatchesCorrectly" time="0.13"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_passwordMatchesCorrectly" time="0.098"/>
-  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatis_registered_CustomerCorrectly" time="0.073"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatRegister_customer_signup_email_passwordMatchesCorrectly" time="0.308"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingHomeAdressMatchesCorrectly" time="0.108"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatAuthenticateCustomerMatchesCorrectly" time="0.087"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingLastNameMatchesCorrectly" time="0.096"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFirstNameMatchesCorrectly" time="0.09"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingFShippingAdressMatchesCorrectly" time="0.097"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatFindCustomerMatchingIDMatchesCorrectly" time="0.153"/>
+  <testcase classname="com.ejwa.orm.model.dao.CustomerDAOTest" name="checkThatis_registered_CustomerCorrectly" time="0.222"/>
 </testsuite>
