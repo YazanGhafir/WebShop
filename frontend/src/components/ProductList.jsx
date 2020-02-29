@@ -30,16 +30,20 @@ export default class ProductList extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <Container>
+            <React.Fragment> 
+
                     <Row>
                         <CarouselPage></CarouselPage>
                     </Row>
+
+                    <Row>
                         <FiltersRow></FiltersRow>
+                    </Row>
+                    
                     <Row>
                         {this.state.products.map((p, idx) => { return <Product name={p.name} img={p.img} key={idx} /> })}
                     </Row>
-                </Container>
+
             </React.Fragment>
         );
     }

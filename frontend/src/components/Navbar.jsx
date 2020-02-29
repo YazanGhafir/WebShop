@@ -10,14 +10,9 @@ export default class Navbar extends Component {
     render() {
         return (
             <div>
-                
-                        <Navbar1 />
-                    
-                        <Navbar2 />
-                   
-                        <Navbar3 />
-            
-
+                <Navbar1 />
+                <Navbar2 />
+                <Navbar3 />
             </div>
         )
     }

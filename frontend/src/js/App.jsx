@@ -19,31 +19,35 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-
-          <React.Fragment>
-            
-            <Navbar />
-
-            <Container>
-              <Row>
-                <Col md={4} lg={2}>
-                  <SideCategory />
-                </Col>
-                <Col md={8} lg={10}>
-                  <Switch>
-                    <Route exact path="/" component={ProductList} />
-                    <Route path="/details" component={Details} />
-                    <Route path="/cart" component={Cart} />
-                    <Route component={Default} />
-                  </Switch>
-                </Col>
-              </Row>
-            </Container>
-         
-            <Footer />
-          </React.Fragment>
-
         </header>
+        <React.Fragment>
+          
+          <Container fluid={true} style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Navbar />
+          </Container>
+
+          <Container fluid={true} style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Row>
+              <Col md={4} lg={2}>
+                <SideCategory />
+              </Col>
+              <Col md={8} lg={10}>
+                <Switch>
+                  <Route exact path="/" component={ProductList} />
+                  <Route path="/details" component={Details} />
+                  <Route path="/cart" component={Cart} />
+                  <Route component={Default} />
+                </Switch>
+              </Col>
+            </Row>
+          </Container>
+
+          <Container fluid={true} style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Footer />
+          </Container>
+
+        </React.Fragment>
+
       </div>
     );
   }

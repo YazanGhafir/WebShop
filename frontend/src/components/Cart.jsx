@@ -91,7 +91,7 @@ class eCommercePage extends Component {
     return (
       <MDBContainer>
         <MDBRow className="mx-5 my-5" center>
-          <MDBCard className="w-100">
+          <MDBCard className="w-100 mx-5 my-5">
             <MDBCardBody>
               <MDBTable className="product-table">
                 <MDBTableHead className="font-weight-bold" color="mdb-color lighten-5" columns={columns} />

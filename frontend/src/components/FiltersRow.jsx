@@ -1,60 +1,43 @@
 import React, { Component } from 'react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
 
 export default class FiltersRow extends Component {
     render() {
         return (
-            <div className="row mr-2 mt-3">
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Sortera">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Storlek">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Varumärke">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Färg">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Material">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-
-                <div className="col-md-2">
-                <DropdownButton id="dropdown-basic-button" title="Hållbarhet">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-                </div>
-                
-               
+            <div>
+                <ButtonGroup className="mb-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-2">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                        <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
+                    </DropdownButton>
+                </ButtonGroup>
             </div>
         )
     }

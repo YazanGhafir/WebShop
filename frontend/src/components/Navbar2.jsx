@@ -10,7 +10,6 @@ export default class Navbar2 extends Component {
         return (
 
             <Navb bg="light">
-
                 <ul className="navbar-nav align-items-left">
                     <li className="nav-item ml-auto ">
                         <Link to='/' className="nav-link">
@@ -44,6 +43,20 @@ export default class Navbar2 extends Component {
 
 
             /*
+
+
+            
+
+            <div className="d-flex justify-content-around">
+                <div className="p-2 col-example text-left">ALLA SVERIGES FAVORITMÄRKEN</div>
+                <div className="p-2 col-example text-left">FRI FRAKT OCH RETUR*</div>
+                <div className="p-2 col-example text-left">100 DAGARS ÖPPET KÖP</div>
+            </div>
+            
+
+
+
+            
             <nav className="navbar navbar-expand-sm bg-primary navbar-dark px-sm-5">
                 <Link to='/'>
                     <img src={logo} alt="store" className="navbar-brand" />
