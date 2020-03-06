@@ -1,0 +1,42 @@
+#shoppingCartBackground {
+    background-color:  #f2f2f2;
+    margin: 5px;
+}
+
+#shoppingCart{
+    background-color: #f2f2f2;
+}
+
+#cartImage{
+    width: 200px;
+    height: 180px;
+}
+
+
+.productText{
+    font-size: small;
+}
+
+.CartHeader{
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.cartContent{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    height: fit-content;
+}
+
+.checkoutButton{
+    align-content: center;
+    background-color: #ff6600;
+    text-decoration-color: #ffffff;
+}
+
+#productDescription{
+    width: 200px;
+}

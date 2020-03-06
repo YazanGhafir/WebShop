@@ -13,7 +13,7 @@ import SideCategory from '../components/SideCategories';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { CartProvider } from '../components/CartContext';
+import ShoppingCart from '../components/ShoppingCart';
 
 
 
@@ -37,7 +37,6 @@ class App extends Component {
             
             <Navbar />
 
-            <CartProvider>
             <Container>
               <Row>
                 <Col md={4} lg={2}>
@@ -47,13 +46,12 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={ProductList} />
                     <Route path="/details" component={Details} />
-                    <Route path="/cart" component={Cart} />
+                    <Route path="/cart" component={ShoppingCart} />
                     <Route component={Default} />
                   </Switch>
                 </Col>
               </Row>
             </Container>
-            </CartProvider>
          
             <Footer />
           </React.Fragment>

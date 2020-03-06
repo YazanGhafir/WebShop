@@ -5,31 +5,33 @@
  */
 package com.bean;
 
+import com.ejwa.orm.model.entity.Product;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import lombok.Data;
 
 /**
  *
  * @author madel
  */
+@Data
 @SessionScoped
-@Named
 public class CartBean implements Serializable {
 
-    private ArrayList<String> products;
+    private ArrayList<Product> products;
 
-    public void addProduct(String product){
+    public void addProduct(Product product){
         products.add(product);
     }
     
-    public boolean removeProduct(String product){
+    public boolean removeProduct(Product product){
         return products.remove(product);
     }
     
-    public ArrayList<String> getProducts(){
+    public ArrayList<Product> getProducts(){
         return products;
     }
 
@@ -39,7 +41,8 @@ public class CartBean implements Serializable {
     
     @PostConstruct
     public void init() {
-        this.products = new ArrayList<String>();
+        this.products = new ArrayList<Product>();
+        products.add(new Product("Adidas T-Shirt", 5.0));
     }
 }
 
