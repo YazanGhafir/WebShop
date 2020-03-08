@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from '../components/single_page_shared_components/Navbar';
-import Checkout from '../components/checkout_component/checkout';
-import ProductList from '../components/main_page_components/ProductList';
+import Navbar from '../components/single_page_shared/Navbar';
+import Checkout from '../components/checkout/checkout';
+import ProductList from '../components/main_page/ProductList';
 import Details from '../components/product_details_component/Details';
-import Login from '../components/login_component/Login';
-import Cart from '../components/cart_component/Cart';
-import Default from '../components/single_page_shared_components/Default';
-import Footer from '../components/single_page_shared_components/Footer';
+import Login from '../components/login/Login';
+import Cart from '../components/cart/Cart';
+import Default from '../components/single_page_shared/Default';
+import Footer from '../components/single_page_shared/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SideCategory from '../components/single_page_shared_components/SideCategories';
+import SideCategory from '../components/single_page_shared/SideCategories';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
