@@ -6,6 +6,7 @@ import ProductQuantity from './product-detail/product-quantity';
 import ProductBuyActions from './product-detail/product-buy-actions';
 import ProductSecondaryActions from './product-detail/product-secondary-actions';
 import ProductDetail from './product-detail/product-detail';
+import ProductImage from './product-detail/Product-Image';
 
 export default class Details extends Component {
 
@@ -48,6 +49,7 @@ export default class Details extends Component {
         <div className="row mx-5 my-5">
           <div className="col-xs-12 col-sm-6">
             <ProductName name={this.state.name} />
+            <ProductImage/>
           </div>
           <div className="col-xs-12 col-sm-6">
             <ProductPrice price={this.state.price} />

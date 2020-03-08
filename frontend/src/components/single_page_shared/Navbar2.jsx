@@ -36,7 +36,7 @@ export default class Navbar2 extends Component {
 
                     </Col>
 
-                    <Col  sm={{ span: 2, offset: 2 }}>
+                    <Col  sm={{ span: 3, offset: 2 }}>
                         <Link to='/'>
                             <img src={logo} alt="store" className="navbar-brand ml-5" />
                         </Link>
@@ -45,7 +45,7 @@ export default class Navbar2 extends Component {
                     </Col>
 
                     
-                    <Col sm={{ span: 1, offset: 4 }}>
+                    <Col sm={{ span: 2, offset: 2 }}>
                         <Link to="/cart">
                             <button>
                                 <i className="fas fa-cart-plus" />

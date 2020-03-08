@@ -6,13 +6,7 @@ export default class productsecondaryactions extends Component {
       <div className="product-secondary-actions">
         <div className="row no-gutter">
           <div className="col-xs-4">
-            <button className="btn btn-full">Add to Registry</button>
-          </div>
-          <div className="col-xs-4">
-            <button className="btn btn-full">Add to List</button>
-          </div>
-          <div className="col-xs-4">
-            <button className="btn btn-full">Share</button>
+            <button className="btn btn-full">Add to Cart</button>
           </div>
         </div>
       </div>
