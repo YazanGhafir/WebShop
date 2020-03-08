@@ -9,6 +9,7 @@ import Details from '../components/product_details_component/Details';
 import Login from '../components/login/Login';
 import Cart from '../components/cart/Cart';
 import Default from '../components/single_page_shared/Default';
+import Order_Succeed from '../components/single_page_shared/Order_Succeed';
 import Footer from '../components/single_page_shared/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SideCategory from '../components/single_page_shared/SideCategories';
@@ -40,6 +41,7 @@ class App extends Component {
                   <Route path="/cart" component={Cart} />
                   <Route path="/login" component={Login} />
                   <Route path="/checkout" component={Checkout} />
+                  <Route path="/order_succeed" component={Order_Succeed} />
                   <Route component={Default} />
                 </Switch>
               </Col>

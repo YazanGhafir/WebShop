@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container'
 
 export default class Navbar2 extends Component {
     render() {
@@ -19,18 +16,18 @@ export default class Navbar2 extends Component {
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
                                     KVINNA
-                            </Link>
+                                </Link>
                             </li>
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
                                     MAN
-                            </Link>
+                                </Link>
                             </li>
 
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
                                     BARN
-                            </Link>
+                                </Link>
                             </li>
                         </ul>
 

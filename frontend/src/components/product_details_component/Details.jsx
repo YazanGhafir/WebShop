@@ -56,8 +56,8 @@ export default class Details extends Component {
             <ProductOffers promotions={this.state.offers} />
             <ProductQuantity minQuantity={1} maxQuantity={10} />
             <ProductBuyActions availabilityCode={this.state.availabilityCode} />
-            <ProductSecondaryActions />
             <ProductDetail features={this.state.features} />
+            <ProductSecondaryActions/>
           </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { MDBCol, MDBRow, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBTabPane, MDBTabContent} from "mdbreact";
+import { MDBCol, MDBRow, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBTabPane, MDBTabContent } from "mdbreact";
+import { Link } from 'react-router-dom';
 
 export default class Forum extends Component {
     state = {
@@ -116,17 +117,16 @@ export default class Forum extends Component {
                     </MDBTabPane>
 
                     <MDBTabPane tabId="2">
-                        <div className="d-block my-3">
-                            <div className="mb-2">
+                        <div className="d-block my-3 ">
+                            <div className="mb-2 ml-4">
                                 <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap4" required />
                                 <label className="form-check-label" htmlFor="radioWithGap4">Credit card</label>
                             </div>
-                            <div className="mb-2">
-                                <input iname="group2" type="radio" className="form-check-input with-gap" id="radioWithGap5"
-                                    required />
+                            <div className="mb-2 ml-4">
+                                <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap5" required />
                                 <label className="form-check-label" htmlFor="radioWithGap5">Debit card</label>
                             </div>
-                            <div className="mb-2">
+                            <div className="mb-2 ml-4">
                                 <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap6" required />
                                 <label className="form-check-label" htmlFor="radioWithGap6">Paypal</label>
                             </div>
@@ -164,7 +164,11 @@ export default class Forum extends Component {
                                 </MDBCol>
                             </MDBRow>
                             <hr className="mb-4" />
-                            <MDBBtn color="primary" size="lg" block>Place order</MDBBtn>
+                            <Link to='/order_succeed'>
+                                <MDBBtn color="primary" size="lg" block>
+                                    Place order
+                                </MDBBtn>
+                            </Link>
                         </div>
                     </MDBTabPane>
                 </MDBTabContent>

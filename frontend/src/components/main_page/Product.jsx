@@ -24,7 +24,9 @@ export default class Product extends Component {
         return (
             <Col xs={12} sm={6} md={4} >
                 <MDBCard className="mt-5">
+                    <Link to='/Details'>
                     <MDBCardImage className="d-block w-100" src={this.props.img} height="300px" />
+                    </Link>
                     <MDBCardBody>
                         <MDBCardTitle>{this.props.name}</MDBCardTitle>
                         <MDBCardText>
