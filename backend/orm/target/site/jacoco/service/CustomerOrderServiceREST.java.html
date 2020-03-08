@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerOrderServiceREST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectorm-1.0</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">CustomerOrderServiceREST.java</span></div><h1>CustomerOrderServiceREST.java</h1><pre class="source lang-java linenums">package service;
+
+import com.ejwa.orm.model.dao.CustomerOrderDAO;
+import com.ejwa.orm.model.entity.CustomerOrder;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path(&quot;customerorder&quot;)
+<span class="nc" id="L19">public class CustomerOrderServiceREST {</span>
+
+    @EJB
+    private CustomerOrderDAO customerOrderDAO;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(CustomerOrder entity) {
+<span class="nc" id="L27">        customerOrderDAO.create(entity);</span>
+<span class="nc" id="L28">    }</span>
+
+    @PUT
+    @Path(&quot;{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void edit(@PathParam(&quot;id&quot;) Long id, CustomerOrder entity) {
+<span class="nc" id="L34">        customerOrderDAO.edit(entity);</span>
+<span class="nc" id="L35">    }</span>
+
+    @DELETE
+    @Path(&quot;{id}&quot;)
+    public void remove(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L40">        customerOrderDAO.remove(customerOrderDAO.findCustomerOrderMatchingID(id));</span>
+<span class="nc" id="L41">    }</span>
+
+    @GET
+    @Path(&quot;{id}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerOrder find(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L47">        return customerOrderDAO.findCustomerOrderMatchingID(id);</span>
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;CustomerOrder&gt; findAll() {
+<span class="nc" id="L53">        customerOrderDAO.create(new CustomerOrder(LocalDateTime.MAX));</span>
+<span class="nc" id="L54">        return customerOrderDAO.findAll();</span>
+    }
+
+    @GET
+    @Path(&quot;count&quot;)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String countREST() {
+<span class="nc" id="L61">        return String.valueOf(customerOrderDAO.count());</span>
+    }
+
+    @GET
+    @Path(&quot;fidate/{date}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;CustomerOrder&gt; findByDate(@PathParam(&quot;date&quot;) String date) {
+<span class="nc" id="L68">        LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));</span>
+<span class="nc" id="L69">        return customerOrderDAO.findCustomerOrdersMatchingDate(t);</span>
+    }
+
+    @GET
+    @Path(&quot;after/{date}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;CustomerOrder&gt; findAfterDate(@PathParam(&quot;date&quot;) String date) {
+<span class="nc" id="L76">        LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));</span>
+<span class="nc" id="L77">        return customerOrderDAO.findCustomerOrdersAfterOrEqualDate(t);</span>
+    }
+
+    @GET
+    @Path(&quot;before/{date}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;CustomerOrder&gt; findBeforeDate(@PathParam(&quot;date&quot;) String date) {
+<span class="nc" id="L84">         LocalDateTime t = LocalDateTime.parse(date.subSequence(0, date.length()));</span>
+<span class="nc" id="L85">        return customerOrderDAO.findCustomerOrdersBeforeOrEqualDate(t);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

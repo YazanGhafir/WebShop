@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import logo from '../imgs/logo.png';
+import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button';
 
@@ -37,6 +37,13 @@ export default class Navbar2 extends Component {
                     <button>
                         <i className="fas fa-cart-plus" />
                         my cart
+                    </button>
+
+                </Link>
+
+                <Link to="/login" className="ml-auto">
+                    <button>
+                        Log in
                     </button>
                 </Link>
             </Navb>

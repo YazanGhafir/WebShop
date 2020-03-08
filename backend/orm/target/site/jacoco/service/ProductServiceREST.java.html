@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductServiceREST.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectorm-1.0</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">ProductServiceREST.java</span></div><h1>ProductServiceREST.java</h1><pre class="source lang-java linenums">package service;
+
+import com.ejwa.orm.model.dao.ProductDAO;
+import com.ejwa.orm.model.entity.Product;
+import com.github.javafaker.Faker;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path(&quot;product&quot;)
+<span class="nc" id="L19">public class ProductServiceREST {</span>
+
+    @EJB
+    private ProductDAO productDAO;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(Product entity) {
+<span class="nc" id="L27">        productDAO.create(entity);</span>
+<span class="nc" id="L28">    }</span>
+
+    @PUT
+    @Path(&quot;{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void edit(@PathParam(&quot;id&quot;) Long id, Product entity) {
+<span class="nc" id="L34">        productDAO.edit(entity);</span>
+<span class="nc" id="L35">    }</span>
+
+    @DELETE
+    @Path(&quot;{id}&quot;)
+    public void remove(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L40">        productDAO.remove(productDAO.findProductMatchingID(id));</span>
+<span class="nc" id="L41">    }</span>
+
+    @GET
+    @Path(&quot;{id}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product find(@PathParam(&quot;id&quot;) Long id) {
+<span class="nc" id="L47">        return productDAO.findProductMatchingID(id);</span>
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findAll() {
+<span class="nc" id="L53">        productDAO.create(new Product(new Faker().commerce().productName().toString(), Double.valueOf(new Faker().commerce().price(0, 100))));</span>
+<span class="nc" id="L54">        return productDAO.findAll();</span>
+    }
+
+    @GET
+    @Path(&quot;count&quot;)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String countREST() {
+<span class="nc" id="L61">        return String.valueOf(productDAO.count());</span>
+    }
+
+    @GET
+    @Path(&quot;fina/{name}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsMatchingName(@PathParam(&quot;name&quot;) String name) {
+<span class="nc" id="L68">        return productDAO.findProductsMatchingName(name);</span>
+    }
+
+    @GET
+    @Path(&quot;fipr/{price}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsMatchingPrice(@PathParam(&quot;price&quot;) Double price) {
+<span class="nc" id="L75">        return productDAO.findProductsMatchingPrice(price);</span>
+    }
+
+    @GET
+    @Path(&quot;fiprhieq/{price}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsHigherPriceOrEqual(@PathParam(&quot;price&quot;) Double price) {
+<span class="nc" id="L82">        return productDAO.findProductsHigherPriceOrEqual(price);</span>
+    }
+
+    @GET
+    @Path(&quot;fiprhi/{price}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsHigherPrice(@PathParam(&quot;price&quot;) Double price) {
+<span class="nc" id="L89">        return productDAO.findProductsHigherPrice(price);</span>
+    }
+
+    @GET
+    @Path(&quot;fiprloeq/{price}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsLowerPriceOrEqual(@PathParam(&quot;price&quot;) Double price) {
+<span class="nc" id="L96">        return productDAO.findProductsLowerPriceOrEqual(price);</span>
+    }
+
+    @GET
+    @Path(&quot;fiprlo/{price}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Product&gt; findProductsLowerPrice(@PathParam(&quot;price&quot;) Double price) {
+<span class="nc" id="L103">        return productDAO.findProductsLowerPrice(price);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

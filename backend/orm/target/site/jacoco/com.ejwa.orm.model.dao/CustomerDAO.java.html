@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectorm-1.0</a> &gt; <a href="index.source.html" class="el_package">com.ejwa.orm.model.dao</a> &gt; <span class="el_source">CustomerDAO.java</span></div><h1>CustomerDAO.java</h1><pre class="source lang-java linenums">package com.ejwa.orm.model.dao;
+
+import com.ejwa.orm.model.entity.*;
+import easycriteria.JPAQuery;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import lombok.Getter;
+
+@Stateless
+public class CustomerDAO extends AbstractDAO&lt;Customer&gt; {
+
+<span class="fc" id="L15">    @Getter</span>
+    @PersistenceContext(unitName = &quot;webshopDB&quot;)
+    private EntityManager entityManager;
+
+    public CustomerDAO() {
+<span class="fc" id="L20">        super(Customer.class);</span>
+<span class="fc" id="L21">    }</span>
+
+    public boolean register_customer_signup (String email, String password){
+<span class="fc" id="L24">        Customer customer_to_register = new Customer(email, password);</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(is_registered_Customer(email, password)) return false; //already registered customer</span>
+<span class="fc" id="L26">        create(customer_to_register);</span>
+<span class="fc" id="L27">        Customer customer_to_validate_registration = authenticateCustomer(email, password);</span>
+<span class="fc" id="L28">        return customer_to_register.equals(customer_to_validate_registration);</span>
+    }
+    
+
+    public boolean is_registered_Customer(String email, String password){
+<span class="fc" id="L33">        QCustomer_ c_ = new QCustomer_();</span>
+        try {
+<span class="fc" id="L35">        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L36">                .where(</span>
+<span class="fc" id="L37">                        c_.email.eq(email).and(</span>
+<span class="fc" id="L38">                        c_.password.eq(password))</span>
+<span class="fc" id="L39">                ).getSingleResult();</span>
+<span class="fc" id="L40">        } catch (NoResultException e){</span>
+<span class="fc" id="L41">            return false;</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">        return true;</span>
+    }
+    
+    public Customer authenticateCustomer(String email, String password){
+<span class="fc" id="L47">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L48">        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L49">                .where(</span>
+<span class="fc" id="L50">                        c_.email.eq(email).and(</span>
+<span class="fc" id="L51">                        c_.password.eq(password))</span>
+<span class="fc" id="L52">                ).getSingleResult();</span>
+<span class="fc" id="L53">        return c;</span>
+    }
+    
+   public boolean remove_Customer(String email, String password){
+<span class="fc" id="L57">        QCustomer_ c_ = new QCustomer_();</span>
+        try {
+<span class="fc" id="L59">        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L60">                .where(</span>
+<span class="fc" id="L61">                        c_.email.eq(email).and(</span>
+<span class="fc" id="L62">                        c_.password.eq(password))</span>
+<span class="fc" id="L63">                ).getSingleResult();</span>
+<span class="fc" id="L64">        remove(c);</span>
+<span class="nc" id="L65">        } catch (NoResultException e){</span>
+<span class="nc" id="L66">            return false;</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">        return true;</span>
+    }
+    
+    public Customer findCustomerMatchingID(Long id) {
+<span class="fc" id="L72">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L73">        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L74">                .where(</span>
+<span class="fc" id="L75">                        c_.customer_id.eq(id)</span>
+<span class="fc" id="L76">                ).getSingleResult();</span>
+<span class="fc" id="L77">        return c;</span>
+    }
+    
+    public Customer findCustomerMatchingEmail(String email) {
+<span class="nc" id="L81">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="nc" id="L82">        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="nc" id="L83">                .where(</span>
+<span class="nc" id="L84">                        c_.email.eq(email)</span>
+<span class="nc" id="L85">                ).getSingleResult();</span>
+<span class="nc" id="L86">        return c;</span>
+    }
+        
+    public List&lt;Customer&gt; findCustomerOrdersMatchingShippingAdress(String shippingAdress) {
+<span class="fc" id="L90">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L91">        List&lt;Customer&gt; c_list = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L92">                .where(</span>
+<span class="fc" id="L93">                        c_.shippingAdress.eq(shippingAdress)</span>
+<span class="fc" id="L94">                ).getResultList();</span>
+<span class="fc" id="L95">        return c_list;</span>
+    }
+    
+    public List&lt;Customer&gt; findCustomerOrdersMatchingHomeAdress(String homeAdress) {
+<span class="fc" id="L99">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L100">        List&lt;Customer&gt; c_list = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L101">                .where(</span>
+<span class="fc" id="L102">                        c_.homeAdress.eq(homeAdress)</span>
+<span class="fc" id="L103">                ).getResultList();</span>
+<span class="fc" id="L104">        return c_list;</span>
+    }
+    
+    public List&lt;Customer&gt; findCustomerOrdersMatchingLastName(String lastName) {
+<span class="fc" id="L108">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L109">        List&lt;Customer&gt; c_list = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L110">                .where(</span>
+<span class="fc" id="L111">                        c_.lastName.eq(lastName)</span>
+<span class="fc" id="L112">                ).getResultList();</span>
+<span class="fc" id="L113">        return c_list;</span>
+    }
+    
+    public List&lt;Customer&gt; findCustomerOrdersMatchingFirstName(String firstName) {
+<span class="fc" id="L117">        QCustomer_ c_ = new QCustomer_();</span>
+<span class="fc" id="L118">        List&lt;Customer&gt; c_list = new JPAQuery(getEntityManager()).select(Customer.class)</span>
+<span class="fc" id="L119">                .where(</span>
+<span class="fc" id="L120">                        c_.firstName.eq(firstName)</span>
+<span class="fc" id="L121">                ).getResultList();</span>
+<span class="fc" id="L122">        return c_list;</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
