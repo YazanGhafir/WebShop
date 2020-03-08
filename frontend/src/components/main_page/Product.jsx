@@ -31,7 +31,7 @@ export default class Product extends Component {
                             Some quick example text to build on the card title and make
                             up the bulk of the card&apos;s content.
                         </MDBCardText>
-                        <MDBCardText className="fixed-right">
+                        <MDBCardText className="text-right text-primary">
                             86$
                         </MDBCardText>
                         <Link to='/Details' className="btn btn-primary">View</Link>

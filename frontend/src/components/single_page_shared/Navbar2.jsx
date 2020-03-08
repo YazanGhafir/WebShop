@@ -3,14 +3,75 @@ import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button';
-
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container'
 
 export default class Navbar2 extends Component {
     render() {
         return (
 
             <Navb bg="light">
-                <ul className="navbar-nav align-items-left">
+             
+                    <Col sm={2}>
+
+                        <ul className="navbar-nav align-items-left">
+                            <li className="nav-item ml-auto ">
+                                <Link to='/' className="nav-link">
+                                    KVINNA
+                            </Link>
+                            </li>
+                            <li className="nav-item ml-auto ">
+                                <Link to='/' className="nav-link">
+                                    MAN
+                            </Link>
+                            </li>
+
+                            <li className="nav-item ml-auto ">
+                                <Link to='/' className="nav-link">
+                                    BARN
+                            </Link>
+                            </li>
+                        </ul>
+
+                    </Col>
+
+                    <Col  sm={{ span: 2, offset: 2 }}>
+                        <Link to='/'>
+                            <img src={logo} alt="store" className="navbar-brand ml-5" />
+                        </Link>
+
+                        <Navb.Brand href='/' className="">Challando</Navb.Brand>
+                    </Col>
+
+                    
+                    <Col sm={{ span: 1, offset: 4 }}>
+                        <Link to="/cart">
+                            <button>
+                                <i className="fas fa-cart-plus" />
+                                my cart
+                            </button>
+                        </Link>
+                    </Col>
+
+                    <Col sm={1} >
+                        <Link to="/login" >
+                            <button>
+                                Log in
+                            </button>
+                        </Link>
+                    </Col>
+
+
+            
+            </Navb>
+
+
+            /*
+
+
+
+                            <ul className="navbar-nav align-items-left">
                     <li className="nav-item ml-auto ">
                         <Link to='/' className="nav-link">
                             KVINNA
@@ -28,28 +89,37 @@ export default class Navbar2 extends Component {
                             </Link>
                     </li>
                 </ul>
+
                 <Link to='/'>
                     <img src={logo} alt="store" className="navbar-brand ml-5" />
                 </Link>
+
                 <Navb.Brand href='/' className="">Challando</Navb.Brand>
 
-                <Link to="/cart" className="ml-auto">
-                    <button>
-                        <i className="fas fa-cart-plus" />
-                        my cart
-                    </button>
 
-                </Link>
+                <ul className="navbar-nav align-items-right">
+                    <li className="nav-item ml-auto ">
+                        <Link to="/cart">
+                            <button className="float-right">
+                                <i className="fas fa-cart-plus" />
+                                my cart
+                            </button>
+                        </Link>
+                    </li>
+                    <li className="nav-item ml-auto ">
+                        <Link to="/login" >
+                            <button>
+                                Log in
+                            </button>
+                        </Link>
+                    </li>
+                </ul>
 
-                <Link to="/login" className="ml-auto">
-                    <button>
-                        Log in
-                    </button>
-                </Link>
-            </Navb>
 
 
-            /*
+
+
+
 
 
             
