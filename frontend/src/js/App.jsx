@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/single_page_shared_components/Navbar';
+import Checkout from '../components/checkout_component/checkout';
 import ProductList from '../components/main_page_components/ProductList';
 import Details from '../components/product_details_component/Details';
 import Login from '../components/login_component/Login';
@@ -38,6 +39,7 @@ class App extends Component {
                   <Route path="/details" component={Details} />
                   <Route path="/cart" component={Cart} />
                   <Route path="/login" component={Login} />
+                  <Route path="/checkout" component={Checkout} />
                   <Route component={Default} />
                 </Switch>
               </Col>
