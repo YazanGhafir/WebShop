@@ -1,2 +1,2 @@
 # WebShop
-Webshop site programmed using JakartaEE &amp; JSF.
+Webshop site programmed using JakartaEE, React.js &amp; JSF.
