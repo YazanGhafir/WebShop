@@ -9,6 +9,7 @@ import '../../css/shared.css';
 
 export default class Product extends Component {
     constuctor() {
+       
     }
 
     addToCart(props) {
@@ -16,13 +17,17 @@ export default class Product extends Component {
     }
 
     toProductDetails(pid) {
-        fetch("http://localhost:8080/orm/webshop/s/v/" + pid)
-        .catch(console.log);
+    
+        fetch(('http://localhost:8080/orm/webshop/s/v/' + pid), {
+            method: 'post'
+           }).catch(console.log);
     }
 
-
+ 
     render() {
+        console.log(this.props.product_id)
         return (
+            
             <Col xs={12} sm={6} md={4} >
                 <MDBCard className="mt-5">
                     <Link to='/Details'>
@@ -37,7 +42,7 @@ export default class Product extends Component {
                         <MDBCardText className="text-right text-primary">
                             {this.props.price}
                         </MDBCardText>
-                        <Link to='/Details' className="btn btn-primary" onClick={this.toProductDetails(this.props.id)}>View</Link>
+                        <Link to='/Details' className="btn btn-primary" onClick={ () => {this.toProductDetails(this.props.product_id)}}>View</Link>
                     </MDBCardBody>
                 </MDBCard>
             </Col>
