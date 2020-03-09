@@ -60,13 +60,70 @@ class eCommercePage extends Component {
         field: 'button'
       }
     ]
+    
   }
+
+  /**
+   * 
+  constructor(props) {
+    super(props);
+    this.state = { products: [
+        { 'name': 'product4', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', price : '86$' },
+        { 'name': 'product5', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg' , price : '86$'},
+        { 'name': 'product6', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg' , price : '86$'},
+        { 'name': 'product1', 'img': 'https://images.pexels.com/photos/637076/pexels-photo-637076.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260' , price : '86$'},
+        { 'name': 'product2', 'img': 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' , price : '86$'}
+    ],
+    columns: [
+      {
+        label: '',
+        field: 'img',
+      },
+      {
+        label: <strong>Product</strong>,
+        field: 'product'
+      },
+      {
+        label: <strong>Color</strong>,
+        field: 'color'
+      },
+      {
+        label: <strong>Price</strong>,
+        field: 'price'
+      },
+      {
+        label: <strong>QTY</strong>,
+        field: 'qty'
+      },
+      {
+        label: <strong>Amount</strong>,
+        field: 'amount'
+      },
+      {
+        label: '',
+        field: 'button'
+      }
+    ]
+  };
+}
+
+componentDidMount() {
+    fetch("http://localhost:8080/orm/webshop/product")
+        .then(res => res.json())
+        .then((data) => {
+            this.setState({ products: data })
+        }).catch(console.log);
+}
+
+   */
+
 
   render() {
 
     const rows = [];
     const { columns, data } = this.state;
 
+    
     data.map(row => {
       return rows.push(
         {

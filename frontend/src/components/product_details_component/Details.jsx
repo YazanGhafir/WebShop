@@ -10,56 +10,50 @@ import ProductImage from './product-detail/Product-Image';
 
 export default class Details extends Component {
 
-
-
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      img: '',
-      price: '',
-      offers: [],
+      product:
+        { 'name': 'productDefault', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', price: '86$' },
       availabilityCode: '',
       features: []
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:8080/orm/webshop/s/v")
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({ product: data })
+      }).catch(console.log);
+
+  }
+
 
   componentWillMount() {
-
     var data = require('./data.json');
-
     let product = data.CatalogEntryView[0];
-
-    this.setState({
-      name: this.props.name,
-      img: this.props.img,
-      price: product.Offers[0].OfferPrice[0].formattedPriceValue,
-      offers: product.Promotions,
-      availabilityCode: product.purchasingChannelCode,
-      features: product.ItemDescription[0].features
-    })
-
+    this.state.availabilityCode = product.purchasingChannelCode;
+    this.state.features = product.ItemDescription[0].features;
   }
 
 
   render() {
 
     return (
-        <div className="row mx-5 my-5">
-          <div className="col-xs-12 col-sm-6">
-            <ProductName name={this.state.name} />
-            <ProductImage/>
-          </div>
-          <div className="col-xs-12 col-sm-6">
-            <ProductPrice price={this.state.price} />
-            <ProductOffers promotions={this.state.offers} />
-            <ProductQuantity minQuantity={1} maxQuantity={10} />
-            <ProductBuyActions availabilityCode={this.state.availabilityCode} />
-            <ProductDetail features={this.state.features} />
-            <ProductSecondaryActions/>
-          </div>
+      <div className="row mx-5 my-5">
+        <div className="col-xs-12 col-sm-6">
+          <ProductName name={this.state.product.name} />
+          <ProductImage img={this.state.product.img} />
         </div>
+        <div className="col-xs-12 col-sm-6">
+          <ProductPrice price={this.state.product.price} />
+          <ProductQuantity minQuantity={1} maxQuantity={10} />
+          <ProductBuyActions availabilityCode={this.state.availabilityCode} />
+          <ProductDetail features={this.state.features} />
+          <ProductSecondaryActions />
+        </div>
+      </div>
     )
   }
 }

@@ -15,8 +15,9 @@ export default class Product extends Component {
 
     }
 
-    toProductDetails() {
-
+    toProductDetails(pid) {
+        fetch("http://localhost:8080/orm/webshop/s/v/" + pid)
+        .catch(console.log);
     }
 
 
@@ -25,7 +26,7 @@ export default class Product extends Component {
             <Col xs={12} sm={6} md={4} >
                 <MDBCard className="mt-5">
                     <Link to='/Details'>
-                    <MDBCardImage className="d-block w-100" src={this.props.img} height="300px" />
+                    <MDBCardImage className="d-block w-100" src={this.props.img} height="300px" /> 
                     </Link>
                     <MDBCardBody>
                         <MDBCardTitle>{this.props.name}</MDBCardTitle>
@@ -34,9 +35,9 @@ export default class Product extends Component {
                             up the bulk of the card&apos;s content.
                         </MDBCardText>
                         <MDBCardText className="text-right text-primary">
-                            86$
+                            {this.props.price}
                         </MDBCardText>
-                        <Link to='/Details' className="btn btn-primary">View</Link>
+                        <Link to='/Details' className="btn btn-primary" onClick={this.toProductDetails(this.props.id)}>View</Link>
                     </MDBCardBody>
                 </MDBCard>
             </Col>
