@@ -36,10 +36,7 @@ public class CustomerServiceREST {
 
     @Inject
     private SecurityContext securityContext;
-
-    /*Just for test*/
-    @Inject
-    private SessionBeanTest sb;
+  
 
     @Context
     private HttpServletRequest httpServletRequest;
@@ -159,12 +156,5 @@ public class CustomerServiceREST {
         return customerDAO.findCustomerOrdersMatchingFirstName(firstname);
     }
 
-    // TESTING sessionbean
-    @POST
-    @Path("sessionbean_test/{text}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public String s_testREST(@PathParam("text") String text) {
-        return sb.tested();
-    }
 
 }

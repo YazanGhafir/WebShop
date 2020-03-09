@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { MDBRow, MDBCard, MDBCardBody, MDBTooltip, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBBtn, MDBContainer } from "mdbreact";
+import { Link } from 'react-router-dom';
 
 class eCommercePage extends Component {
   state = {
     data: [
       {
-        src: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg",
+        src: "https://images.pexels.com/photos/267326/pexels-photo-267326.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         title: "iPhone",
         subTitle: "Apple",
         color: "White",
@@ -97,6 +98,11 @@ class eCommercePage extends Component {
                 <MDBTableHead className="font-weight-bold" color="mdb-color lighten-5" columns={columns} />
                 <MDBTableBody rows={rows} />
               </MDBTable>
+              <Link to='/checkout'>
+                  <MDBBtn color="primary" size="lg" block>
+                      To Checkout
+                  </MDBBtn>
+              </Link>
             </MDBCardBody>
           </MDBCard>
         </MDBRow>
