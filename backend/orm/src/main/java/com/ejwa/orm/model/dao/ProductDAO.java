@@ -4,6 +4,7 @@ import com.ejwa.orm.model.entity.Product;
 import com.ejwa.orm.model.entity.QProduct_;
 import easycriteria.JPAQuery;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +21,6 @@ public class ProductDAO extends AbstractDAO<Product> {
         super(Product.class);
     }
 
-
     public Product findProductMatchingID(Long id) {
         QProduct_ product = new QProduct_();
         Product p = new JPAQuery(getEntityManager()).select(Product.class)
@@ -29,7 +29,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getSingleResult();
         return p;
     }
-    
+
     public List<Product> findProductsMatchingName(String name) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -38,7 +38,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
     public List<Product> findProductsMatchingPrice(Double price) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -47,7 +47,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
     public List<Product> findProductsHigherPriceOrEqual(Double price) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -56,7 +56,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
     public List<Product> findProductsHigherPrice(Double price) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -65,7 +65,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
     public List<Product> findProductsLowerPriceOrEqual(Double price) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -74,7 +74,7 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
     public List<Product> findProductsLowerPrice(Double price) {
         QProduct_ product = new QProduct_();
         List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class)
@@ -83,6 +83,14 @@ public class ProductDAO extends AbstractDAO<Product> {
                 ).getResultList();
         return p_List;
     }
-    
+
+    public void removeAllProduct() {
+        QProduct_ product = new QProduct_();
+        List<Product> p_List = new JPAQuery(getEntityManager()).select(Product.class).getResultList();
+        for (Product p : p_List) {
+            remove(p);
+        }
+    }
+
     // ADD sorting and popularity
 }

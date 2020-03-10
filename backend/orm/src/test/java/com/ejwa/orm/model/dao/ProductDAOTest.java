@@ -26,12 +26,12 @@ public class ProductDAOTest {
     private Long test_id_1;
     private Long test_id_2;
 
-    private Product test_p1 = new Product("Adidas T-Shirt", 5.0);
-    private Product test_p2 = new Product("Adidas T-Shirt", 20.0);
-    private Product test_p3 = new Product("Tommy Hilfiger Jacket", 20.0);
-    private Product test_p4 = new Product("Adidas T-Shirt111", 10.0);
-    private Product test_p5 = new Product("Adidas T-Shirt222", 40.0);
-    private Product test_p6 = new Product("Tommy Hilfiger Jacket333", 50.0);
+    private Product test_p1 = new Product("Adidas T-Shirt", 5.0, "img");
+    private Product test_p2 = new Product("Adidas T-Shirt", 20.0, "img");
+    private Product test_p3 = new Product("Tommy Hilfiger Jacket", 20.0, "img");
+    private Product test_p4 = new Product("Adidas T-Shirt111", 10.0, "img");
+    private Product test_p5 = new Product("Adidas T-Shirt222", 40.0, "img");
+    private Product test_p6 = new Product("Tommy Hilfiger Jacket333", 50.0, "img");
 
     //private Product RESTtest = new Product("REST_test_Tommy Hilfiger Jacket333", 50.0);
 
@@ -60,7 +60,6 @@ public class ProductDAOTest {
         productDAO.create(test_p4);
         productDAO.create(test_p5);
         productDAO.create(test_p6);
-
     }
 
     @After

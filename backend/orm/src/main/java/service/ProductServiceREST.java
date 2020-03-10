@@ -1,10 +1,11 @@
 package service;
 
 import com.ejwa.orm.model.dao.ProductDAO;
+import com.ejwa.orm.model.dao.ProductInitBean;
 import com.ejwa.orm.model.entity.Product;
-import com.github.javafaker.Faker;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,9 +19,12 @@ import javax.ws.rs.core.MediaType;
 @Path("product")
 public class ProductServiceREST {
 
+    @Inject
+    ProductInitBean pib;
+     
     @EJB
     private ProductDAO productDAO;
-
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void create(Product entity) {
@@ -50,7 +54,7 @@ public class ProductServiceREST {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> findAll() {
-        productDAO.create(new Product(new Faker().commerce().productName().toString(), Double.valueOf(new Faker().commerce().price(0, 100))));
+        //productDAO.create(new Product(new Faker().commerce().productName().toString(), Double.valueOf(new Faker().commerce().price(0, 100))));
         return productDAO.findAll();
     }
 

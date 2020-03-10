@@ -32,5 +32,8 @@
     <filter-mapping>
         <filter-name>CORS Filter</filter-name>
         <url-pattern>/webshop/*</url-pattern>
+        <url-pattern>/webshop/s/*</url-pattern>
+        <url-pattern>/webshop/s/v/*</url-pattern>
+
     </filter-mapping>
 </web-app>

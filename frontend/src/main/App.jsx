@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import '../css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from '../components/Navbar';
-import ProductList from '../components/ProductList';
+import Navbar from '../components/single_page_shared/Navbar';
+import Checkout from '../components/checkout/checkout';
+import ProductList from '../components/main_page/ProductList';
 import Details from '../components/product_details_component/Details';
-import Cart from '../components/Cart';
-import Default from '../components/Default';
-import Footer from '../components/Footer';
+import Login from '../components/login/Login';
+import Cart from '../components/cart/Cart';
+import Default from '../components/single_page_shared/Default';
+import Order_Succeed from '../components/single_page_shared/Order_Succeed';
+import Footer from '../components/single_page_shared/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SideCategory from '../components/SideCategories';
+import SideCategory from '../components/single_page_shared/SideCategories';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -35,7 +38,10 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={ProductList} />
                   <Route path="/details" component={Details} />
-                  <Route path="/cart" component={ShoppingCart} />
+                  <Route path="/cart" component={Cart} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/checkout" component={Checkout} />
+                  <Route path="/order_succeed" component={Order_Succeed} />
                   <Route component={Default} />
                 </Switch>
               </Col>
@@ -54,3 +60,9 @@ class App extends Component {
 }
 
 export default App;
+
+
+/**
+ *                   <Route path="/cart" component={Cart} />
+
+ */
