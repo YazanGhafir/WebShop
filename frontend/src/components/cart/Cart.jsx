@@ -8,7 +8,7 @@ class eCommercePage extends Component {
     data: [
       {
         src:
-          "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/7.jpg",
+          "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         title: "iPhone",
         subTitle: "Apple",
         color: "White",
@@ -66,7 +66,8 @@ class eCommercePage extends Component {
     ]
   };
 
-  constructor(props) {
+/**
+ *   constructor(props) {
     super(props);
     this.state = {
       data: [
@@ -142,7 +143,6 @@ class eCommercePage extends Component {
   }
 
   removeFromCart() {
-    /**add Pid after you fixed cart component*/
     fetch("http://localhost:8080/orm/webshop/sc/", {
       method: "delete",
       headers: { "Content-Type": "application/json" },
@@ -150,6 +150,7 @@ class eCommercePage extends Component {
     });
   }
 
+ */
   render() {
     const rows = [];
     const { columns, data } = this.state;
@@ -166,7 +167,7 @@ class eCommercePage extends Component {
           </p>
         ],
         color: row.color,
-        price: `$${row.price}`,
+        price: `${row.price}`,
         qty: (
           <MDBInput
             type="number"
