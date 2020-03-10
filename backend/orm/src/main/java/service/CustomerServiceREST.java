@@ -3,7 +3,6 @@ package service;
 import com.ejwa.orm.model.dao.CustomerDAO;
 import com.ejwa.orm.model.entity.Customer;
 import com.github.javafaker.Faker;
-import com.github.javafaker.service.FakerIDN;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -21,7 +20,7 @@ public class CustomerServiceREST {
 
     @EJB
     private CustomerDAO customerDAO;
-
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void create(Customer entity) {
@@ -53,11 +52,11 @@ public class CustomerServiceREST {
     public List<Customer> findAll() {
         Faker faker = new Faker();
         customerDAO.create(new Customer(faker.internet().emailAddress(),
-                                        faker.internet().password(),
-                                        faker.address().streetAddress(),
-                                        faker.address().streetAddress(),
-                                        faker.name().firstName(),
-                                        faker.name().lastName()));
+                faker.internet().password(),
+                faker.address().streetAddress(),
+                faker.address().streetAddress(),
+                faker.name().firstName(),
+                faker.name().lastName()));
         return customerDAO.findAll();
     }
 

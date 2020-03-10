@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bean;
+package com.ejwa.orm.model.bean;
 
 import com.ejwa.orm.model.entity.Product;
 import java.io.Serializable;
@@ -19,6 +19,7 @@ import lombok.Data;
  */
 @Data
 @SessionScoped
+@Named
 public class CartBean implements Serializable {
 
     private ArrayList<Product> products;
