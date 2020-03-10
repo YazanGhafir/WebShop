@@ -50,7 +50,6 @@ export default class ShoppingCart extends Component {
                     <div class="row" >
                         <div class="col-7 cartContent">
                             <h3 class="CartHeader">Shopping Cart ({this.state.data.length} products)</h3>
-
                             {this.state.data.map((product, id) => {
                                 return <ShoppingCartProduct img={product.src} title={product.title} subTitle={product.subTitle} price={product.price} size={product.size} color={product.color}></ShoppingCartProduct>
                             })}
