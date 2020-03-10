@@ -70,9 +70,4 @@ public class SessionService {
         sb.deleteFromShoppingCart(id);
     }
     
-    @GET
-    @Path("o")
-    public String createOrder() {
-        return sb.createOrder();
-    }
 }
