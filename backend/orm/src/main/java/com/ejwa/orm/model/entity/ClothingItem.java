@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.ejwa.orm.model.entity;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -22,8 +24,6 @@ import lombok.RequiredArgsConstructor;
  *
  * @author madel
  */
-
-
 @Data
 @Entity
 @RequiredArgsConstructor
@@ -34,21 +34,23 @@ public class ClothingItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long product_id;
     @NonNull
-    private Long groupId;
-    @NonNull
-    private String name;
+    private String label;
     @NonNull
     private Double price;
     @NonNull
-    private String size;
-    
     private String description;
-    
+    @NonNull
     private String image;
-    
+    @NonNull
     private String colour;
     
-    @JoinColumn(name = "group_id")
+    @OneToMany(mappedBy = "clothingItem")
+    private List<SizeQuantity> sizeList;
+    
+    @JoinColumn(name = "category_id")
     @ManyToOne
-    private ProductGroup group;
+    private Category category;
+    
+    @ManyToMany(mappedBy = "clothesList") 
+    private List<CustomerOrder> customerOrders;
 }

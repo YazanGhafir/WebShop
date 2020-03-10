@@ -2,6 +2,7 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.Category;
 import com.ejwa.orm.model.entity.Customer;
+import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.*;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -43,7 +44,7 @@ public class CustomerOrderDAOTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(CustomerOrderDAO.class, Product.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(CustomerOrderDAO.class, Product.class, ClothingItem.class, SizeQuantity.class, ClothingItemDAO.class, SizeQuantityDAO.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

@@ -39,5 +39,5 @@ public class Product implements Serializable {
     private Category category;
 
     @ManyToMany(mappedBy = "productList") 
-    private List<CustomerOrder> customerOrders;
+    private List<Product> customerOrders;
 }
