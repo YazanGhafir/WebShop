@@ -14,7 +14,7 @@ export default class Details extends Component {
     super(props);
     this.state = {
       product:
-        { 'name': 'productDefault', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', price: '86$' },
+       { 'product_id' : '1', 'name': 'product4', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', 'price' : '86$' },
       availabilityCode: '',
       features: []
     };
@@ -51,7 +51,7 @@ export default class Details extends Component {
           <ProductQuantity minQuantity={1} maxQuantity={10} />
           <ProductBuyActions availabilityCode={this.state.availabilityCode} />
           <ProductDetail features={this.state.features} />
-          <ProductSecondaryActions />
+          <ProductSecondaryActions Pid={this.state.product.product_id} />
         </div>
       </div>
     )

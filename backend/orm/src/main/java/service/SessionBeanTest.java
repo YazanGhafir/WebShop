@@ -1,8 +1,12 @@
 package service;
 
+import com.ejwa.orm.model.dao.CustomerOrderDAO;
 import com.ejwa.orm.model.dao.ProductDAO;
+import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.Product;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,6 +23,9 @@ public class SessionBeanTest implements Serializable {
 
     @EJB
     private ProductDAO productDAO;
+    
+    @EJB
+    private CustomerOrderDAO customerOrderDAO;
 
     @Getter
     Product viewedProduct;
@@ -52,5 +59,13 @@ public class SessionBeanTest implements Serializable {
     
     public void deleteFromShoppingCart(Long pID) {
         shoppingCart.remove(productDAO.findProductMatchingID(pID));
+    }
+
+    public String createOrder() {
+        LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);;
+        CustomerOrder order = new CustomerOrder(test_date);
+        //TODO: add product from the shopping cart to the order
+        customerOrderDAO.create(order);
+        return "Order Created";
     }
 }
