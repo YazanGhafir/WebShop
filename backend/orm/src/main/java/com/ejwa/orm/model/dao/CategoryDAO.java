@@ -1,7 +1,9 @@
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.Category;
+import com.ejwa.orm.model.entity.Product;
 import com.ejwa.orm.model.entity.QCategory_;
+import com.ejwa.orm.model.entity.QProduct_;
 import easycriteria.JPAQuery;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -35,5 +37,13 @@ public class CategoryDAO extends AbstractDAO<Category> {
                         cat.name.eq(name)
                 ).getResultList();
         return cat_List;
+    }
+    
+     public void removeAllProduct() {
+        QCategory_ cat = new QCategory_();
+        List<Category> cat_List = new JPAQuery(getEntityManager()).select(Category.class).getResultList();
+        for (Category c : cat_List) {
+            remove(c);
+        }
     }
 }

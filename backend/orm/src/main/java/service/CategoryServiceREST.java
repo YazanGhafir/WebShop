@@ -50,7 +50,7 @@ public class CategoryServiceREST {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Category> findAll() {
-        categoryDAO.create(new Category(new Faker().commerce().material()));
+        //categoryDAO.create(new Category(new Faker().commerce().material()));
         return categoryDAO.findAll();
     }
 

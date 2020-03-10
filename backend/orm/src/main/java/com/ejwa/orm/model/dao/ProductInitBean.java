@@ -5,6 +5,7 @@
  */
 package com.ejwa.orm.model.dao;
 
+import com.ejwa.orm.model.entity.Category;
 import com.ejwa.orm.model.entity.Product;
 import com.github.javafaker.Faker;
 import javax.annotation.PostConstruct;
@@ -23,6 +24,8 @@ public class ProductInitBean {
     @EJB
     private ProductDAO pdao;
     
+
+    
     @PostConstruct
     private void init() {
         pdao.removeAllProduct();
@@ -34,5 +37,7 @@ public class ProductInitBean {
                          "https://images.pexels.com/photos/2673"+i+"/pexels-photo-2673"+i+".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                  )
             );
+        
+         
     }
 }

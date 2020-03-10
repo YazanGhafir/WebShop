@@ -18,9 +18,6 @@ import javax.ws.rs.core.MediaType;
 
 @Path("product")
 public class ProductServiceREST {
-
-    @Inject
-    ProductInitBean pib;
      
     @EJB
     private ProductDAO productDAO;
