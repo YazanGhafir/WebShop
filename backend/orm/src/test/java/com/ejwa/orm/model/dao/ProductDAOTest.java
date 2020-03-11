@@ -38,7 +38,7 @@ public class ProductDAOTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(ProductDAO.class, Product.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(ProductDAO.class, Product.class, ClothingItem.class, SizeQuantity.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -46,7 +46,7 @@ public class ProductDAOTest {
     @EJB
     private ProductDAO productDAO;
 
-    //@Before
+    @Before
     public void init() {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
@@ -62,7 +62,7 @@ public class ProductDAOTest {
         productDAO.create(test_p6);
     }
 
-   // @After
+    @After
     public void roll_back_init() {
         productDAO.remove(test_p1);
         productDAO.remove(test_p2);
@@ -77,7 +77,7 @@ public class ProductDAOTest {
         productDAO.create(RESTtest);
     }
 */
-   // @Test @InSequence(0)
+    @Test @InSequence(0)
     public void checkThatFindProductMatchingIDMatchesCorrectly() {
         Product p = productDAO.findProductMatchingID(test_id_1);
         Assert.assertEquals(p, test_p1);

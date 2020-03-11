@@ -38,6 +38,6 @@ public class Product implements Serializable {
     @ManyToOne
     private Category category;
 
-    @ManyToMany(mappedBy = "productList") 
+    @ManyToMany
     private List<Product> customerOrders;
 }
