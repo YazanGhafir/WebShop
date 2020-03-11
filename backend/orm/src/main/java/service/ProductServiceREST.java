@@ -6,6 +6,8 @@ import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,7 +42,7 @@ public class ProductServiceREST {
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") @NotNull Long id) {
         productDAO.remove(productDAO.findProductMatchingID(id));
     }
 
