@@ -6,7 +6,6 @@ import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

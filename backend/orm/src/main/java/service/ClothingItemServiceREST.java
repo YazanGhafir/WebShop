@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("clothingItem")
 public class ClothingItemServiceREST {
-    /*
+    
     @EJB
     private ClothingItemDAO clothingItemDAO;
     
@@ -42,28 +42,27 @@ public class ClothingItemServiceREST {
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id") Long id, Product entity) {
+    public void edit(@PathParam("id") Long id, ClothingItem entity) {
         clothingItemDAO.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") @NotNull Long id) {
-        clothingItemDAO.remove(productDAO.findProductMatchingID(id));
+        clothingItemDAO.remove(clothingItemDAO.findClothingItemMatchingID(id));
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Product find(@PathParam("id") Long id) {
-        return clothingItemDAO.findProductMatchingID(id);
+    public ClothingItem find(@PathParam("id") Long id) {
+        return clothingItemDAO.findClothingItemMatchingID(id);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> findAll() {
-        //productDAO.create(new Product(new Faker().commerce().productName().toString(), Double.valueOf(new Faker().commerce().price(0, 100))));
-        return clothingItemDAO.findAll();
+    public List<ClothingItem> findAll() {
+         return clothingItemDAO.findAll();
     }
 
     @GET
@@ -72,5 +71,47 @@ public class ClothingItemServiceREST {
     public String countREST() {
         return String.valueOf(clothingItemDAO.count());
     }
-    */
+    
+    
+    @GET
+    @Path("{label}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ClothingItem> findByLabel(@PathParam("label") String label){
+        return clothingItemDAO.findClothingItemsMatchingLabel(label);
+    }
+    
+    
+    @GET
+    @Path("{searchTerm}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ClothingItem> search(@PathParam("searchTerm") String searchTerm){
+        return clothingItemDAO.findProductsBySearchLabel(searchTerm);
+    }
+    
+    
+    @GET
+    @Path("max")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String findMaxPrice(){
+        return String.valueOf(clothingItemDAO.findMaxProductPrice());
+    }
+    
+    @GET
+    @Path("min")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String findMinPrice(){
+        return String.valueOf(clothingItemDAO.findMinProductPrice());
+    }
+//findProductsWithFilters
+
+    @GET
+    @Path("{sizes}/{colours}/{minPrice}/{maxPrice}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ClothingItem> findWithFilters(@PathParam("sizes") List<String> sizes,
+            @PathParam("colours") List<String> colours, @PathParam("minPrice") double minPrice,
+            @PathParam("maxPrice") double maxPrice){
+        clothingItemDAO.findProductsWithFilters(sizes, colours, minPrice, maxPrice);
+        
+    }
+    
 }

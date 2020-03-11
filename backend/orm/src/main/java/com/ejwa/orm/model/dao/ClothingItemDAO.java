@@ -31,18 +31,9 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     @Getter
     @PersistenceContext(unitName = "webshopDB")
     private EntityManager entityManager;
-    
-   
-    @EJB
-    private SizeQuantityDAO sizeDao;
 
     public ClothingItemDAO() {
         super(ClothingItem.class);
-    }
-
-    public void removeSizes(ClothingItem entity){
-        entity.getSizeList().forEach(size -> sizeDao.remove(size));
-        
     }
     
     public ClothingItem findClothingItemMatchingID(Long id) {
@@ -63,19 +54,18 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return ci_list;
     }
     
-    public List<ClothingItem> findProductsBySearchLabel(String searchText, int ofset, int rowCount) {
+    public List<ClothingItem> findProductsBySearchLabel(String searchText) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
                 .where(
                         clothingItem.description.like("%" + searchText + "%")
                                 .or(clothingItem.label.like("%" + searchText + "%"))
                 )
-                .limit(ofset, rowCount)
                 .getResultList();
         return ci_list;
     }
     
-     public List<ClothingItem> findProductsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice, int ofset, int rowCount) {
+     public List<ClothingItem> findProductsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice) {
          QClothingItem_ clothingItem = new QClothingItem_();
          QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
          
@@ -86,9 +76,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
                 ).join(clothingItem, JoinType.INNER, sizeQuantity)
                 .where(sizeQuantity.size.in(size))
                 .getResultList();
- 
-        
-        
         return ci_list;
     }
 
