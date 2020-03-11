@@ -51,6 +51,6 @@ public class ClothingItem implements Serializable {
     @ManyToOne
     private Category category;
     
-    @ManyToMany
+    @ManyToMany(mappedBy = "clothesList")
     private List<CustomerOrder> customerOrders;
 }
