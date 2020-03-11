@@ -7,15 +7,20 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.QClothingItem_;
+import com.ejwa.orm.model.entity.QSizeQuantity_;
+import com.ejwa.orm.model.entity.SizeQuantity;
 import easycriteria.EasyCriteriaQuery;
 import easycriteria.JPAQuery;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import lombok.Getter;
 
@@ -29,11 +34,20 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
     @Getter
     @PersistenceContext(unitName = "webshopDB")
     private EntityManager entityManager;
+    
+   
+    @EJB
+    private SizeQuantityDAO sizeDao;
 
     public ClothingItemDAO() {
         super(ClothingItem.class);
     }
 
+    public void removeSizes(ClothingItem entity){
+        entity.getSizeList().forEach(size -> sizeDao.remove(size));
+        
+    }
+    
     public ClothingItem findClothingItemMatchingID(Long id) {
         QClothingItem_ clothingItem = new QClothingItem_();
         ClothingItem ci = new JPAQuery(getEntityManager()).select(ClothingItem.class)
@@ -43,7 +57,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
         return ci;
     }
 
-    public List<ClothingItem> findClothingItemsMatchingName(String name) {
+    public List<ClothingItem> findClothingItemsMatchingLabel(String name) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                 .where(
@@ -63,13 +77,38 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
                 .getResultList();
         return ci_list;
     }
+    
+     public List<ClothingItem> findProductsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice, int ofset, int rowCount) {
+         QClothingItem_ clothingItem = new QClothingItem_();
+         QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
+         
+        /* List<SizeQuantity> sq_list = new JPAQuery(entityManager).select(SizeQuantity.class)
+                 .where(
+                         sizeQuantity.size.eq(size)
+                 )
+                 .getResultList();
+         */
+         
+        List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
+                .where(
+                        clothingItem.colour.in(colour)
+                                .and(clothingItem.price.between(minPrice, maxPrice))
+                ).join(clothingItem, JoinType.INNER, sizeQuantity)
+                .where(sizeQuantity.size.in(size))
+                .getResultList();
+ 
+        
+        
+        return ci_list;
+    }
 
-
+/*
     public List<ClothingItem> findProductsWithFilters(String size, String colour, double minPrice, double maxPrice, int ofset, int rowCount) {
         QClothingItem_ clothingItem = new QClothingItem_();
         EasyCriteriaQuery query = new JPAQuery(entityManager).select(ClothingItem.class);
 
         if (!size.equals(null)) {
+            //hämta which clothingItems with size
             //TODO implement filter out sizes (get all sizeQuantities for that size, then filter out the results?
         }
         if(!colour.equals(null)){
@@ -83,7 +122,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
                 .getResultList();
         return cil;
     }
-
+*/
     public void removeAllProduct() {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class).getResultList();
