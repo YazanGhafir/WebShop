@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class CategoryDAO extends AbstractDAO<Category> {
+public class CategoryDAO extends AbstractDAO<Category, Long> {
 	@Getter @PersistenceContext(unitName = "webshopDB")
 	private EntityManager entityManager;
 

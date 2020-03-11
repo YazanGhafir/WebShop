@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
+public class CustomerOrderDAO extends AbstractDAO<CustomerOrder, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")

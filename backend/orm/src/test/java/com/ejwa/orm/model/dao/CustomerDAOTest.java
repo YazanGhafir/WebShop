@@ -11,13 +11,10 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
@@ -36,11 +33,10 @@ public class CustomerDAOTest {
     private Customer test_c3 = new Customer(test_email_3, test_password_3, test_shippingAdress_3, test_homeAdress_3, test_firstName_3, test_lastName_3);
 
     //private Customer RESTtest = new Customer("REST_test_email_@email.com", "REST_test_password", "REST_test_shippingAdress", "REST_test_homeAdress", "REST_test_firstName", "REST_test_lastName");
-
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(CustomerDAO.class, Product.class, Category.class, ClothingItem.class, SizeQuantity.class,Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(CustomerDAO.class, Product.class, Category.class, ClothingItem.class, SizeQuantity.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -65,17 +61,16 @@ public class CustomerDAOTest {
 
     @After
     public void roll_back_init() {
-        customerDAO.remove(test_c1);
-        customerDAO.remove(test_c2);
-        customerDAO.remove(test_c3);
+        customerDAO.remove(customerDAO.find(test_c1.getCustomer_id()));
+        customerDAO.remove(customerDAO.find(test_c2.getCustomer_id()));
+        customerDAO.remove(customerDAO.find(test_c3.getCustomer_id()));
     }
 
     /*@Test
     public void Z_just_for_REST_test() {
         customerDAO.create(RESTtest);
     }*/
-
-    @Test 
+    @Test
     public void checkThatis_registered_CustomerCorrectly() {
         boolean toValidate1 = customerDAO.is_registered_Customer(test_email_2, test_password_2);
         System.out.println(toValidate1);
@@ -93,7 +88,6 @@ public class CustomerDAOTest {
             customerDAO.remove_Customer("new_test_email@email.com", "new_test_password");
         }
     }
-
 
     @Test
     public void checkThatAuthenticateCustomerMatchesCorrectly() {

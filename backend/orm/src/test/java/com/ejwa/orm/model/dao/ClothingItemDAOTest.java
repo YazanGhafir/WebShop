@@ -38,6 +38,8 @@ public class ClothingItemDAOTest {
     private ClothingItem item3 = new ClothingItem("Adidas Pants", 390.90, "This is a tshirt", "img", "White");
 
     private SizeQuantity sizeItem1 = new SizeQuantity("L", 5, item1);
+    private SizeQuantity sizeItem2 = new SizeQuantity("S", 4, item1);
+    private SizeQuantity sizeItem3 = new SizeQuantity("M", 6, item1);
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -68,23 +70,20 @@ public class ClothingItemDAOTest {
         clothingItemDAO.create(item3);
 
         sizeItem1.setClothingItem(item1);
+        sizeItem1.setClothingItem(item2);
+        sizeItem1.setClothingItem(item3);
 
         sizeQuantityDAO.create(sizeItem1);
+        sizeQuantityDAO.create(sizeItem2);
+        sizeQuantityDAO.create(sizeItem3);
 
     }
 
     @After
     public void cleanUp() {
-        //clothingItemDAO.removeSizes(item1);
-        //clothingItemDAO.removeSizes(item2);
-        //clothingItemDAO.removeSizes(item3);
-
-        sizeQuantityDAO.remove(sizeItem1);
-
-        clothingItemDAO.remove(item1);
-        clothingItemDAO.remove(item2);
-        clothingItemDAO.remove(item3);
-
+        clothingItemDAO.remove(clothingItemDAO.find(item1.getProduct_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item2.getProduct_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item3.getProduct_id()));
     }
 
     @Test

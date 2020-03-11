@@ -8,8 +8,6 @@ package com.ejwa.orm.model.dao;
 import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.QClothingItem_;
 import com.ejwa.orm.model.entity.QSizeQuantity_;
-import com.ejwa.orm.model.entity.SizeQuantity;
-import easycriteria.EasyCriteriaQuery;
 import easycriteria.JPAQuery;
 import java.util.List;
 import javax.ejb.EJB;
@@ -19,7 +17,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import lombok.Getter;
@@ -29,7 +26,7 @@ import lombok.Getter;
  * @author madel
  */
 @Stateless
-public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
+public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")
@@ -82,13 +79,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
          QClothingItem_ clothingItem = new QClothingItem_();
          QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
          
-        /* List<SizeQuantity> sq_list = new JPAQuery(entityManager).select(SizeQuantity.class)
-                 .where(
-                         sizeQuantity.size.eq(size)
-                 )
-                 .getResultList();
-         */
-         
         List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
                 .where(
                         clothingItem.colour.in(colour)
@@ -102,27 +92,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem> {
         return ci_list;
     }
 
-/*
-    public List<ClothingItem> findProductsWithFilters(String size, String colour, double minPrice, double maxPrice, int ofset, int rowCount) {
-        QClothingItem_ clothingItem = new QClothingItem_();
-        EasyCriteriaQuery query = new JPAQuery(entityManager).select(ClothingItem.class);
-
-        if (!size.equals(null)) {
-            //hämta which clothingItems with size
-            //TODO implement filter out sizes (get all sizeQuantities for that size, then filter out the results?
-        }
-        if(!colour.equals(null)){
-            query.addWhereCondition(clothingItem.colour.eq(colour));
-        }
-        
-        query.addWhereCondition(clothingItem.price.between(minPrice, maxPrice));
-
-        List<ClothingItem> cil = query
-                .limit(ofset, rowCount)
-                .getResultList();
-        return cil;
-    }
-*/
     public void removeAllProduct() {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class).getResultList();

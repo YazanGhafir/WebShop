@@ -7,6 +7,7 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.QSizeQuantity_;
 import com.ejwa.orm.model.entity.SizeQuantity;
+import com.ejwa.orm.model.entity.SizeQuantityId;
 import easycriteria.JPAQuery;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import lombok.Getter;
  * @author madel
  */
 @Stateless
-public class SizeQuantityDAO extends AbstractDAO<SizeQuantity> {
+public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, SizeQuantityId> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")
