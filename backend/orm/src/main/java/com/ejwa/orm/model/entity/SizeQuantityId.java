@@ -33,6 +33,15 @@ public class SizeQuantityId {
         return hash;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+
+    public Long getClothingItem() {
+        return clothingItem;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

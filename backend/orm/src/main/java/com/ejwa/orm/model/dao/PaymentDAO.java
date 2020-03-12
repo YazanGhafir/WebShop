@@ -19,7 +19,10 @@ public class PaymentDAO extends AbstractDAO<Payment, Long> {
         super(Payment.class);
     }
 
-   
+    public void remove(Payment entity) {
+        Payment entityToRemove = entityManager.find(Payment.class, entity.getPayment_id());
+        entityManager.remove(entityToRemove);
+    }
 
     public Payment findPaymentMatchingID(Long id) {
         QPayment_ payment = new QPayment_();

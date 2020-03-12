@@ -87,6 +87,11 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         }
     }
 
+    public void remove(ClothingItem entity){
+        ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getProduct_id());
+        entityManager.remove(entityToRemove);
+    }
+    
     public double findMaxProductPrice() {
         
         QClothingItem_ clothingItem = new QClothingItem_();

@@ -19,6 +19,11 @@ public class CustomerDAO extends AbstractDAO<Customer, Long> {
     public CustomerDAO() {
         super(Customer.class);
     }
+    
+     public void remove(Customer entity) {
+        Customer entityToRemove = entityManager.find(Customer.class, entity.getCustomer_id());
+        entityManager.remove(entityToRemove);
+    }
 
     public boolean register_customer_signup (String email, String password){
         Customer customer_to_register = new Customer(email, password);

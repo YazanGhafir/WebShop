@@ -69,6 +69,9 @@ public class ClothingItemDAOTest {
         clothingItemDAO.create(item2);
         clothingItemDAO.create(item3);
 
+        sizeQuantityDAO.create(sizeItem1);
+        sizeQuantityDAO.create(sizeItem2);
+        sizeQuantityDAO.create(sizeItem3);
         sizeItem1.setClothingItem(item1);
         sizeItem1.setClothingItem(item2);
         sizeItem1.setClothingItem(item3);
@@ -81,6 +84,10 @@ public class ClothingItemDAOTest {
 
     @After
     public void cleanUp() {
+        
+        sizeQuantityDAO.remove(sizeItem1);
+        sizeQuantityDAO.remove(sizeItem2);
+        sizeQuantityDAO.remove(sizeItem3);
         clothingItemDAO.remove(clothingItemDAO.find(item1.getProduct_id()));
         clothingItemDAO.remove(clothingItemDAO.find(item2.getProduct_id()));
         clothingItemDAO.remove(clothingItemDAO.find(item3.getProduct_id()));
@@ -95,7 +102,7 @@ public class ClothingItemDAOTest {
 
     @Test
     @InSequence(1)
-    public void checkThatFindProductsMatchingNameMatchesCorrectly() {
+    public void checkThatFindlothingItemsMatchingNameMatchesCorrectly() {
         List<ClothingItem> p_list = clothingItemDAO.findClothingItemsMatchingLabel("Adidas T-Shirt");
         List<ClothingItem> test_p_list = new ArrayList<ClothingItem>() {
             {
@@ -108,16 +115,16 @@ public class ClothingItemDAOTest {
     }
 
     @Test
-    public void checkThatFindProductBySearchLabelFindsCorrect() {
+    public void checkThatFindClothingItemsBySearchLabelFindsCorrect() {
         String searchLabel = "dress";
-        List<ClothingItem> p = clothingItemDAO.findProductsBySearchLabel(searchLabel, 0, 0);
+        List<ClothingItem> p = clothingItemDAO.findProductsBySearchLabel(searchLabel);
         p.forEach(clothingItem -> {
             Assert.assertTrue(clothingItem.getDescription().contains(searchLabel) || clothingItem.getLabel().contains(searchLabel));
         });
     }
 
     @Test
-    public void checkThatFilterProductsFiltersCorrectly() {
+    public void checkThatFilterClothingItemsFiltersCorrectly() {
         double minPrice = 400.00;
         double maxPrice = 500.00;
         List<String> colour = new ArrayList();
@@ -135,7 +142,7 @@ public class ClothingItemDAOTest {
     }
 
     @Test
-    public void checkThatfindMaxProductPricefindsMax() {
+    public void checkThatfindMaxClothingItemPricefindsMax() {
         double expectedMaxPrice = 490.90;
         double p = clothingItemDAO.findMaxProductPrice();
 
@@ -143,7 +150,7 @@ public class ClothingItemDAOTest {
     }
 
     @Test
-    public void checkThatfindMinProductPricefindsMin() {
+    public void checkThatfindMinClothingItemPricefindsMin() {
         double expectedMinPrice = 390.90;
         double p = clothingItemDAO.findMinProductPrice();
 

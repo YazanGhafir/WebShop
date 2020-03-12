@@ -62,9 +62,12 @@ public class CategoryDAOTest {
 
     @After
     public void roll_back_init() {
-        categoryDAO.remove(categoryDAO.find(test_cat1.getCategory_id()));
-        categoryDAO.remove(categoryDAO.find(test_cat2.getCategory_id()));
-        categoryDAO.remove(categoryDAO.find(test_cat3.getCategory_id()));
+        categoryDAO.remove(test_cat1);
+        categoryDAO.remove(test_cat2);
+        categoryDAO.remove(test_cat3);
+
+        //categoryDAO.remove(categoryDAO.find(test_cat2.getCategory_id()));
+        //categoryDAO.remove(categoryDAO.find(test_cat3.getCategory_id()));
     }
 
     /*@Test

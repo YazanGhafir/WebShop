@@ -110,8 +110,7 @@ public class ClothingItemServiceREST {
     public List<ClothingItem> findWithFilters(@PathParam("sizes") List<String> sizes,
             @PathParam("colours") List<String> colours, @PathParam("minPrice") double minPrice,
             @PathParam("maxPrice") double maxPrice){
-        clothingItemDAO.findProductsWithFilters(sizes, colours, minPrice, maxPrice);
-        
+        return clothingItemDAO.findProductsWithFilters(sizes, colours, minPrice, maxPrice);
     }
     
 }
