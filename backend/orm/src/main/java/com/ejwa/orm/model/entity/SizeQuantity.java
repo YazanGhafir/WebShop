@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  *
@@ -22,19 +23,20 @@ import lombok.NonNull;
  */
 @Data
 @Entity
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class SizeQuantity implements Serializable {
 
-    @Id
+    @Id @NonNull
     private String size;
     
     @NonNull
     private Integer quantity;
     
-    @JoinColumn(name = "product_id")
-    @ManyToOne
     @Id
+    @NonNull
+    @JoinColumn(name = "clothingItem_id")
+    @ManyToOne
     private ClothingItem clothingItem;
 
 }

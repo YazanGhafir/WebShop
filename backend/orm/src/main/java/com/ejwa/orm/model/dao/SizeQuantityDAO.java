@@ -30,11 +30,15 @@ public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, Long> {
         super(SizeQuantity.class);
     }
     
+    /*
     public void remove(SizeQuantity entity) {
         Long id = entity.getClothingItem().getClothingItem_id();
-        SizeQuantity entityToRemove = entityManager.find(SizeQuantity.class, id );
+        System.out.println("ENTITY TO REMOVE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% is : " + entityToRemove);
+        SizeQuantity entityToRemove = entityManager.find(SizeQuantity.class, id);
+        System.out.println("ENTITY TO REMOVE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% is : " + entityToRemove);
         entityManager.remove(entityToRemove);
     }
+*/
 
     public List<SizeQuantity> findSizeQuantityForId(Long id) {
         QSizeQuantity_ sq = new QSizeQuantity_();

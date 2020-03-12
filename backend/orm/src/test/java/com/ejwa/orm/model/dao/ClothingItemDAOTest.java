@@ -38,8 +38,8 @@ public class ClothingItemDAOTest {
     private ClothingItem item3 = new ClothingItem("Adidas Pants", 390.90, "This is a tshirt", "img", "White");
 
     private SizeQuantity sizeItem1 = new SizeQuantity("L", 5, item1);
-    private SizeQuantity sizeItem2 = new SizeQuantity("S", 4, item1);
-    private SizeQuantity sizeItem3 = new SizeQuantity("M", 6, item1);
+    private SizeQuantity sizeItem2 = new SizeQuantity("S", 4, item2);
+    private SizeQuantity sizeItem3 = new SizeQuantity("M", 6, item3);
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -83,19 +83,22 @@ public class ClothingItemDAOTest {
 
     @After
     public void cleanUp() {
-        
+        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE___BEFORE");
         sizeQuantityDAO.remove(sizeItem1);
+        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE___AFTER");
         sizeQuantityDAO.remove(sizeItem2);
         sizeQuantityDAO.remove(sizeItem3);
-        clothingItemDAO.remove(clothingItemDAO.find(item1.getClothingItem_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item2.getClothingItem_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item3.getClothingItem_id()));
+        clothingItemDAO.remove(item1);
+        clothingItemDAO.remove(item2);
+        clothingItemDAO.remove(item3);
     }
 
     @Test
     @InSequence(0)
     public void checkThatFindClothingItemMatchingIDMatchesCorrectly() {
         ClothingItem p = clothingItemDAO.findClothingItemMatchingID(test_id_1);
+        cleanUp();
+        
         Assert.assertEquals(p, item1);
     }
 
@@ -109,20 +112,23 @@ public class ClothingItemDAOTest {
                 add(item2);
             }
         };
-
+        cleanUp();
         Assert.assertEquals(test_p_list, p_list);
     }
 
     @Test
+    @InSequence(2)
     public void checkThatFindClothingItemsBySearchLabelFindsCorrect() {
         String searchLabel = "dress";
         List<ClothingItem> p = clothingItemDAO.findProductsBySearchLabel(searchLabel);
         p.forEach(clothingItem -> {
             Assert.assertTrue(clothingItem.getDescription().contains(searchLabel) || clothingItem.getLabel().contains(searchLabel));
         });
+        cleanUp();
     }
 
     @Test
+    @InSequence(3)
     public void checkThatFilterClothingItemsFiltersCorrectly() {
         double minPrice = 400.00;
         double maxPrice = 500.00;
@@ -130,7 +136,7 @@ public class ClothingItemDAOTest {
         colour.add("Black");
         List<String> sizeL = new ArrayList();
         sizeL.add("L");
-
+        cleanUp();
         /*
         List<ClothingItem> cil = clothingItemDAO.findProductsWithFilters(sizeL, colour, minPrice, maxPrice, 10, 10);
         cil.forEach(ci -> {
@@ -141,22 +147,20 @@ public class ClothingItemDAOTest {
     }
 
     @Test
+    @InSequence(4)
     public void checkThatfindMaxClothingItemPricefindsMax() {
         double expectedMaxPrice = 490.90;
-        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
-        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
-        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
-        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
         double p = clothingItemDAO.findMaxProductPrice();
-        
+        cleanUp();
         Assert.assertEquals(expectedMaxPrice, p, 1);
     }
 
     @Test
+    @InSequence(5)
     public void checkThatfindMinClothingItemPricefindsMin() {
         double expectedMinPrice = 390.90;
         double p = clothingItemDAO.findMinProductPrice();
-
+        cleanUp();
         Assert.assertEquals(expectedMinPrice, p, 1);
     }
 
