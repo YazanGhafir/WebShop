@@ -24,8 +24,6 @@ import lombok.NonNull;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(SizeQuantityId.class)
-
 public class SizeQuantity implements Serializable {
 
     @Id

@@ -41,9 +41,9 @@ public class CustomerOrder implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "product_id_"))
     @ManyToMany private List<Product> productList;
     
-     @JoinTable(name = "customerOrder_clothingItem",
+    @JoinTable(name = "customerOrder_clothingItem",
     joinColumns = @JoinColumn(name = "customerOrder_id_"),
-    inverseJoinColumns = @JoinColumn(name = "product_id_"))
+    inverseJoinColumns = @JoinColumn(name = "clothingItem_id_"))
     @ManyToMany private List<ClothingItem> clothesList;
     
 }

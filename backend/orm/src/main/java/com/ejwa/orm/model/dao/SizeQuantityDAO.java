@@ -7,7 +7,6 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.QSizeQuantity_;
 import com.ejwa.orm.model.entity.SizeQuantity;
-import com.ejwa.orm.model.entity.SizeQuantityId;
 import easycriteria.JPAQuery;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import lombok.Getter;
  * @author madel
  */
 @Stateless
-public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, SizeQuantityId> {
+public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")
@@ -32,7 +31,7 @@ public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, SizeQuantityId> {
     }
     
     public void remove(SizeQuantity entity) {
-        SizeQuantityId id = new SizeQuantityId(entity.getSize(),entity.getClothingItem().getProduct_id());
+        Long id = entity.getClothingItem().getClothingItem_id();
         SizeQuantity entityToRemove = entityManager.find(SizeQuantity.class, id );
         entityManager.remove(entityToRemove);
     }
@@ -40,7 +39,7 @@ public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, SizeQuantityId> {
     public List<SizeQuantity> findSizeQuantityForId(Long id) {
         QSizeQuantity_ sq = new QSizeQuantity_();
         List<SizeQuantity> sl = new JPAQuery(getEntityManager()).select(SizeQuantity.class)
-                .where(sq.clothingItem.product_id.eq(id))
+                .where(sq.clothingItem.clothingItem_id.eq(id))
                 .getResultList();
         return sl;
     } 

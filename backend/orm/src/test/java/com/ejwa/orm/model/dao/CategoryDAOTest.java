@@ -48,15 +48,15 @@ public class CategoryDAOTest {
     public void init() {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
-        test_id_2 = new Random().nextLong();
-
-        categoryDAO.create(test_cat1);
-        categoryDAO.create(test_cat2);
-        categoryDAO.create(test_cat3);
+        test_id_3 = new Random().nextLong();
 
         test_cat1.setCategory_id(test_id_1);
         test_cat2.setCategory_id(test_id_2);
         test_cat3.setCategory_id(test_id_3);
+        
+        categoryDAO.create(test_cat1);
+        categoryDAO.create(test_cat2);
+        categoryDAO.create(test_cat3);
 
     }
 

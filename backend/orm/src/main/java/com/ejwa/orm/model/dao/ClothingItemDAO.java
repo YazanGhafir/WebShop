@@ -40,7 +40,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         QClothingItem_ clothingItem = new QClothingItem_();
         ClothingItem ci = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                 .where(
-                        clothingItem.product_id.eq(id)
+                        clothingItem.clothingItem_id.eq(id)
                 ).getSingleResult();
         return ci;
     }
@@ -88,7 +88,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     }
 
     public void remove(ClothingItem entity){
-        ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getProduct_id());
+        ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getClothingItem_id());
         entityManager.remove(entityToRemove);
     }
     

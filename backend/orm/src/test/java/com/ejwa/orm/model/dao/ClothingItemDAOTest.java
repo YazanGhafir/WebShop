@@ -61,10 +61,14 @@ public class ClothingItemDAOTest {
         test_id_2 = new Random().nextLong();
         test_id_3 = new Random().nextLong();
 
-        item1.setProduct_id(test_id_1);
-        item2.setProduct_id(test_id_2);
-        item3.setProduct_id(test_id_3);
+        item1.setClothingItem_id(test_id_1);
+        item2.setClothingItem_id(test_id_2);
+        item3.setClothingItem_id(test_id_3);
 
+        sizeItem1.setClothingItem(item1);
+        sizeItem2.setClothingItem(item2);
+        sizeItem3.setClothingItem(item3);
+        
         clothingItemDAO.create(item1);
         clothingItemDAO.create(item2);
         clothingItemDAO.create(item3);
@@ -72,13 +76,8 @@ public class ClothingItemDAOTest {
         sizeQuantityDAO.create(sizeItem1);
         sizeQuantityDAO.create(sizeItem2);
         sizeQuantityDAO.create(sizeItem3);
-        sizeItem1.setClothingItem(item1);
-        sizeItem1.setClothingItem(item2);
-        sizeItem1.setClothingItem(item3);
 
-        sizeQuantityDAO.create(sizeItem1);
-        sizeQuantityDAO.create(sizeItem2);
-        sizeQuantityDAO.create(sizeItem3);
+ 
 
     }
 
@@ -88,9 +87,9 @@ public class ClothingItemDAOTest {
         sizeQuantityDAO.remove(sizeItem1);
         sizeQuantityDAO.remove(sizeItem2);
         sizeQuantityDAO.remove(sizeItem3);
-        clothingItemDAO.remove(clothingItemDAO.find(item1.getProduct_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item2.getProduct_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item3.getProduct_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item1.getClothingItem_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item2.getClothingItem_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item3.getClothingItem_id()));
     }
 
     @Test
@@ -144,8 +143,12 @@ public class ClothingItemDAOTest {
     @Test
     public void checkThatfindMaxClothingItemPricefindsMax() {
         double expectedMaxPrice = 490.90;
+        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
+        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
+        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
+        System.out.println("MAX %%%%%%%%%%%%%%%%%%%%%%%%%%///////////////////////////////////////////////////// is: " +  clothingItemDAO.findMaxProductPrice());
         double p = clothingItemDAO.findMaxProductPrice();
-
+        
         Assert.assertEquals(expectedMaxPrice, p, 1);
     }
 

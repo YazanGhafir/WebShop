@@ -33,7 +33,7 @@ public class ClothingItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long product_id;
+    private Long clothingItem_id;
     @NonNull
     private String label;
     @NonNull
@@ -52,6 +52,6 @@ public class ClothingItem implements Serializable {
     @ManyToOne
     private Category category;
     
-    @ManyToMany(mappedBy = "clothesList")
+    @ManyToMany
     private List<CustomerOrder> customerOrders;
 }
