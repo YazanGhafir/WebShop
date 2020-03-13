@@ -1,4 +1,6 @@
-
+#shoppingCart{
+    margin-top: 20px;
+}
 
 #cartImage{
     width: 100px;
@@ -6,18 +8,17 @@
 }
 
 
-.productText{
+#productText{
     font-size: small;
     margin-bottom: 0;
-
 }
 
-.CartHeader{
+#CartHeader{
     padding: 10px;
     background-color: #ffffff;
 }
 
-.cartContent{
+#cartContent{
     margin-left: 20px;
     background-color: #ffffff;
     padding: 20px;
@@ -26,7 +27,7 @@
     top: 0;
 }
 
-.checkoutButton{
+.cartButton{
     align-content: center;
     background-color: #ff8533;
     color: #ffffff;
@@ -37,4 +38,13 @@
     width: 400px;
     height: 150px;
     margin: 10px;
+}
+
+.cartTextAlign{
+    margin-left:auto; margin-right:0;
+}
+
+#cartSummary{
+    background-color: #ffffff;
+    padding: 0px 20px 0px 20px;
 }

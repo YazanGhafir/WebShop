@@ -45,24 +45,31 @@ export default class ShoppingCart extends Component {
         })
 
         return (
-            <div id="shoppingCartBackground">
+            <div>
                 <div class="container" id="shoppingCart">
                     <div class="row" >
-                        <div class="col-7 cartContent">
-                            <h3 class="CartHeader">Shopping Cart ({this.state.data.length} products)</h3>
+                        <div class="col-7" id="cartContent">
+                            <h3 id="CartHeader">Shopping Cart ({this.state.data.length} products)</h3>
                             {this.state.data.map((product, id) => {
                                 return <ShoppingCartProduct img={product.src} title={product.title} subTitle={product.subTitle} price={product.price} size={product.size} color={product.color}></ShoppingCartProduct>
                             })}
                         </div>
-                        <div class="col-4 cartContent">
+                        <div class="col-4" id="cartContent">
                             <h3>Total</h3>
-                            <p>Subtotal </p>
-                            <p class="text-right">{sumPrice} kr</p>
-                            <button class="checkoutButton btn">Proceed to checkout</button>
+                            <div class="row" id="cartSummary">
+                                <p>Subtotal </p>
+                                <p class="cartTextAlign text-right">{sumPrice} kr</p>
+                            </div>
+                            <div class="row" id="cartSummary">
+                                <p>Frakt</p>
+                                <p class="cartTextAlign text-right">Free</p>
+                            </div>
+                            <button class="cartButton btn">Proceed to checkout</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         )
     }
 }
