@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class ProductDAO extends AbstractDAO<Product> {
+public class ProductDAO extends AbstractDAO<Product, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")

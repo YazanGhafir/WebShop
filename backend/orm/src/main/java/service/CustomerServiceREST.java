@@ -4,7 +4,6 @@ import com.ejwa.orm.model.dao.CustomerDAO;
 import com.ejwa.orm.model.entity.Customer;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.service.FakerIDN;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;

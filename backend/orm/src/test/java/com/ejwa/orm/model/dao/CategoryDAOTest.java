@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@RunWith(Arquillian.class) 
+@RunWith(Arquillian.class)
 public class CategoryDAOTest {
 
     private Long test_id_1;
@@ -33,11 +33,10 @@ public class CategoryDAOTest {
     private Category test_cat3 = new Category("Jackets");
 
     //private Category RESTtest = new Category("REST_test_Jackets");
-
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(CategoryDAO.class, Product.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(CategoryDAO.class, Product.class, SizeQuantity.class, SizeQuantityId.class, Category.class, Customer.class, ClothingItem.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -49,12 +48,12 @@ public class CategoryDAOTest {
     public void init() {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
-        test_id_2 = new Random().nextLong();
+        test_id_3 = new Random().nextLong();
 
         test_cat1.setCategory_id(test_id_1);
         test_cat2.setCategory_id(test_id_2);
         test_cat3.setCategory_id(test_id_3);
-
+        
         categoryDAO.create(test_cat1);
         categoryDAO.create(test_cat2);
         categoryDAO.create(test_cat3);
@@ -66,20 +65,22 @@ public class CategoryDAOTest {
         categoryDAO.remove(test_cat1);
         categoryDAO.remove(test_cat2);
         categoryDAO.remove(test_cat3);
+
+        //categoryDAO.remove(categoryDAO.find(test_cat2.getCategory_id()));
+        //categoryDAO.remove(categoryDAO.find(test_cat3.getCategory_id()));
     }
 
     /*@Test
     public void Z_just_for_REST_test() {
         categoryDAO.create(RESTtest);
     }*/
-
-    @Test 
+    @Test
     public void checkThatFindCategoryMatchingIDMatchesCorrectly() {
         Category cat = categoryDAO.findCategoryMatchingID(test_id_1);
         Assert.assertEquals(cat, test_cat1);
     }
 
-    @Test 
+    @Test
     public void checkThatFindCategorysMatchingCategoryNameMatchesCorrectly() {
         List<Category> cat_list = categoryDAO.findCategoriesMatchingCategoryName("Shorts");
         List<Category> test_cat_list = new ArrayList<Category>() {

@@ -1,0 +1,40 @@
+
+
+#cartImage{
+    width: 100px;
+    height: 80px;
+}
+
+
+.productText{
+    font-size: small;
+    margin-bottom: 0;
+
+}
+
+.CartHeader{
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.cartContent{
+    margin-left: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 0;
+}
+
+.checkoutButton{
+    align-content: center;
+    background-color: #ff8533;
+    color: #ffffff;
+    display: inline-block;
+}
+
+#productDescription{
+    width: 400px;
+    height: 150px;
+    margin: 10px;
+}

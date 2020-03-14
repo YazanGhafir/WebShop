@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class CustomerDAO extends AbstractDAO<Customer> {
+public class CustomerDAO extends AbstractDAO<Customer, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")
@@ -18,6 +18,11 @@ public class CustomerDAO extends AbstractDAO<Customer> {
 
     public CustomerDAO() {
         super(Customer.class);
+    }
+    
+     public void remove(Customer entity) {
+        Customer entityToRemove = entityManager.find(Customer.class, entity.getCustomer_id());
+        entityManager.remove(entityToRemove);
     }
 
     public boolean register_customer_signup (String email, String password){

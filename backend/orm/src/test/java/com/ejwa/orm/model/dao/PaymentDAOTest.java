@@ -13,13 +13,10 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Arquillian.class)
@@ -34,11 +31,10 @@ public class PaymentDAOTest {
     private Payment test_p3 = new Payment("Swish");
 
     //private Payment RESTtest = new Payment("REST_test_Swish");
-    
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(PaymentDAO.class, Product.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(PaymentDAO.class, Product.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class ,Category.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -53,35 +49,38 @@ public class PaymentDAOTest {
 
         test_p1.setPayment_id(test_id_1);
         test_p2.setPayment_id(test_id_2);
-        
+
         paymentDAO.create(test_p1);
         paymentDAO.create(test_p2);
         paymentDAO.create(test_p3);
-        
+
     }
-    
+
     @After
-    public void roll_back_init(){
-        paymentDAO.remove(test_p1);
-        paymentDAO.remove(test_p2);
-        paymentDAO.remove(test_p3);
+    public void roll_back_init() {
+        paymentDAO.remove(paymentDAO.find(test_p1.getPayment_id()));
+        paymentDAO.remove(paymentDAO.find(test_p2.getPayment_id()));
+        paymentDAO.remove(paymentDAO.find(test_p3.getPayment_id()));
     }
-    
+
     /*@Test
     public void Z_just_for_REST_test() {
         paymentDAO.create(RESTtest);
     }*/
-    
     @Test
     public void checkThatFindPaymentsMatchingIDMatchesCorrectly() {
         Payment p = paymentDAO.findPaymentMatchingID(test_id_1);
         Assert.assertEquals(p, test_p1);
     }
-    
+
     @Test
     public void checkThatFindPaymentsMatchingPaymentTypeMatchesCorrectly() {
         List<Payment> p_list = paymentDAO.findPaymentsMatchingPaymentType("Swish");
-        List<Payment> test_p_list = new ArrayList<Payment>(){{add(test_p3);}};
+        List<Payment> test_p_list = new ArrayList<Payment>() {
+            {
+                add(test_p3);
+            }
+        };
         Assert.assertEquals(p_list, test_p_list);
     }
 }

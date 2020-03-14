@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 import lombok.Getter;
 
 @Stateless
-public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
+public class CustomerOrderDAO extends AbstractDAO<CustomerOrder, Long> {
 
     @Getter
     @PersistenceContext(unitName = "webshopDB")
@@ -22,6 +22,10 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder> {
         super(CustomerOrder.class);
     }
     
+     public void remove(CustomerOrder entity) {
+        CustomerOrder entityToRemove = entityManager.find(CustomerOrder.class, entity.getCustomerorder_id());
+        entityManager.remove(entityToRemove);
+    }
 
     public CustomerOrder findCustomerOrderMatchingID(Long id) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();

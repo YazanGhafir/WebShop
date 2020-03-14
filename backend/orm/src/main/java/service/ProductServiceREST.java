@@ -1,11 +1,10 @@
 package service;
 
 import com.ejwa.orm.model.dao.ProductDAO;
-import com.ejwa.orm.model.dao.ProductInitBean;
 import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("product")
 public class ProductServiceREST {
-     
+       
     @EJB
     private ProductDAO productDAO;
     
@@ -37,7 +36,7 @@ public class ProductServiceREST {
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") @NotNull Long id) {
         productDAO.remove(productDAO.findProductMatchingID(id));
     }
 
