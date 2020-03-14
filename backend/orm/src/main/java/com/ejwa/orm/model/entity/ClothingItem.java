@@ -45,7 +45,6 @@ public class ClothingItem implements Serializable {
     @NonNull
     private String colour;
     
-    //@OneToMany(mappedBy = "clothingItem", cascade=CascadeType.REMOVE)
     @OneToMany(mappedBy = "clothingItem")
     private List<SizeQuantity> sizeList;
     

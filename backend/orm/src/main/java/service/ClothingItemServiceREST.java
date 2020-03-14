@@ -74,7 +74,7 @@ public class ClothingItemServiceREST {
     
     
     @GET
-    @Path("{label}")
+    @Path("label/{label}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClothingItem> findByLabel(@PathParam("label") String label){
         return clothingItemDAO.findClothingItemsMatchingLabel(label);
@@ -82,7 +82,7 @@ public class ClothingItemServiceREST {
     
     
     @GET
-    @Path("{searchTerm}")
+    @Path("search/{searchTerm}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClothingItem> search(@PathParam("searchTerm") String searchTerm){
         return clothingItemDAO.findProductsBySearchLabel(searchTerm);

@@ -5,6 +5,7 @@
  */
 package com.ejwa.orm.model.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -19,10 +20,9 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SizeQuantityId {
+public class SizeQuantityId implements Serializable{
     
     private String size;
-    
     private Long clothingItem;
         
 }

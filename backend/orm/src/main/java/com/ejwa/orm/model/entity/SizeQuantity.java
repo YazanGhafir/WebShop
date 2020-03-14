@@ -23,18 +23,18 @@ import lombok.RequiredArgsConstructor;
  */
 @Data
 @Entity
-@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@IdClass(SizeQuantityId.class)
 public class SizeQuantity implements Serializable {
 
-    @Id @NonNull
+    @Id 
     private String size;
     
-    @NonNull
+    
     private Integer quantity;
     
     @Id
-    @NonNull
     @JoinColumn(name = "clothingItem_id")
     @ManyToOne
     private ClothingItem clothingItem;
