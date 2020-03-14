@@ -1,11 +1,9 @@
 package service;
 
 import com.ejwa.orm.model.dao.ProductDAO;
-import com.ejwa.orm.model.dao.ProductInitBean;
 import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,10 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("product")
 public class ProductServiceREST {
-
-    @Inject
-    ProductInitBean pib;
-     
+       
     @EJB
     private ProductDAO productDAO;
     

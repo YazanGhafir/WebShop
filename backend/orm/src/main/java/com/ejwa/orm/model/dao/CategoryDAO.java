@@ -20,10 +20,12 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
         super(Category.class);
     }
 
+    /*
     public void remove(Category entity) {
         Category entityToRemove = entityManager.find(Category.class, entity.getCategory_id());
         entityManager.remove(entityToRemove);
     }
+    */
 
     public Category findCategoryMatchingID(Long id) {
         QCategory_ cat = new QCategory_();
@@ -41,5 +43,13 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
                         cat.name.eq(name)
                 ).getResultList();
         return cat_List;
+    }
+    
+     public void removeAllCategories() {
+        QCategory_ cat = new QCategory_();
+        List<Category> cat_List = new JPAQuery(getEntityManager()).select(Category.class).getResultList();
+        for (Category c : cat_List) {
+            remove(c);
+        }
     }
 }

@@ -5,23 +5,28 @@
  */
 package com.ejwa.orm.model.dao;
 
+import com.ejwa.orm.model.entity.Category;
 import com.ejwa.orm.model.entity.Product;
 import com.github.javafaker.Faker;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Named
-@ApplicationScoped
+@Startup
+@Singleton
 public class ProductInitBean {
     
     @EJB
     private ProductDAO pdao;
+    
+    @EJB
+    private CategoryDAO cdao;
+
     
     @PostConstruct
     private void init() {
@@ -34,5 +39,10 @@ public class ProductInitBean {
                          "https://images.pexels.com/photos/2673"+i+"/pexels-photo-2673"+i+".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                  )
             );
+        
+        cdao.removeAllCategories();
+        for(int i = 0; i < 10; i++)
+            cdao.create(new Category(new Faker().commerce().material()));
+        
     }
 }

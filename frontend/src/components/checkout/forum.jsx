@@ -7,6 +7,7 @@ export default class Forum extends Component {
         activePill: "1",
     }
 
+    
     togglePills = tab => {
         if (this.state.activePill !== tab) {
             this.setState({
@@ -19,6 +20,12 @@ export default class Forum extends Component {
         this.setState({
             activePill: (+this.state.activePill + 1).toString()
         });
+    }
+
+    placeOrder() {
+        fetch("http://localhost:8080/orm/webshop/o")
+        .then(console.log)
+        .catch(console.log);
     }
 
     render() {
@@ -165,7 +172,7 @@ export default class Forum extends Component {
                             </MDBRow>
                             <hr className="mb-4" />
                             <Link to='/order_succeed'>
-                                <MDBBtn color="primary" size="lg" block>
+                                <MDBBtn color="primary" size="lg" block onClick = {() => { this.placeOrder() }}>
                                     Place order
                                 </MDBBtn>
                             </Link>
