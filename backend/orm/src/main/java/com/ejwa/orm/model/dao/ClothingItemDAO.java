@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.ClothingItem;
@@ -87,10 +82,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         }
     }
 
-    public void remove(ClothingItem entity){
-        ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getClothingItem_id());
-        entityManager.remove(entityToRemove);
-    }
     
     public double findMaxProductPrice() {
         
