@@ -83,9 +83,7 @@ public class ClothingItemDAOTest {
 
     @After
     public void cleanUp() {
-        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE___BEFORE");
         sizeQuantityDAO.remove(sizeItem1);
-        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE___AFTER");
         sizeQuantityDAO.remove(sizeItem2);
         sizeQuantityDAO.remove(sizeItem3);
         clothingItemDAO.remove(item1);

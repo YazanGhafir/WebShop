@@ -16,6 +16,7 @@ import SideCategory from '../components/single_page_shared/SideCategories';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Contact from '../components/contact_us/Contact';
 
 class App extends Component {
   render() {
@@ -31,10 +32,10 @@ class App extends Component {
 
           <Container fluid={true} style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
-              <Col md={4} lg={2}>
+              <Col xs={0} md={2}>
                 <SideCategory />
               </Col>
-              <Col md={8} lg={10}>
+              <Col xs={12} md={10}>
                 <Switch>
                   <Route exact path="/" component={ProductList} />
                   <Route path="/details" component={Details} />
@@ -42,6 +43,7 @@ class App extends Component {
                   <Route path="/login" component={Login} />
                   <Route path="/checkout" component={Checkout} />
                   <Route path="/order_succeed" component={Order_Succeed} />
+                  <Route path="/Contact_us" component={Contact} />
                   <Route component={Default} />
                 </Switch>
               </Col>

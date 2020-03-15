@@ -41,8 +41,9 @@ public class ProductInitBean {
             );
         
         cdao.removeAllCategories();
-        for(int i = 0; i < 10; i++)
-            cdao.create(new Category(new Faker().commerce().material()));
+        String[] categories = new String[] { "Nytt", "Skor", "Sport", "Accessoarer", "Beauty", "Designers", "Märken", "Outlet"};
+        for(int i = 0; i < categories.length; i++)
+            cdao.create(new Category(categories[i]));
         
     }
 }
