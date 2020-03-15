@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col';
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { MDBAnimation } from "mdbreact";
-import { MDBBtn, MDBBtnGroup, MDBIcon } from "mdbreact";
+import {MDBBtnGroup, MDBIcon } from "mdbreact";
 import Button from 'react-bootstrap/Button';
 
 export default class Navbar2 extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { MDBJumbotron, MDBBtn, MDBContainer, MDBRow, MDBCol,  MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
-import Contact_Form from './Contact_Form'
+import { MDBJumbotron, MDBContainer, MDBRow, MDBCol,  MDBCardImage, MDBCardBody} from "mdbreact";
+import ContactForm from './ContactForm'
 
 export default class Contact extends Component {
     render() {
@@ -15,7 +15,7 @@ export default class Contact extends Component {
                                     src="https://mdbootstrap.com/img/Photos/Slides/img%20(134).jpg"
                                 />
                                 <MDBCardBody>
-                                    <Contact_Form></Contact_Form>
+                                    <ContactForm></ContactForm>
                                 </MDBCardBody>
                             </MDBJumbotron>
                         </MDBCol>

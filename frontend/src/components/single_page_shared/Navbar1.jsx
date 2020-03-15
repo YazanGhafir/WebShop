@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Navb from 'react-bootstrap/Navbar'
-import { Link } from 'react-router-dom';
 
 
 
