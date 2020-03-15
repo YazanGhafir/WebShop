@@ -2,7 +2,9 @@ package service;
 
 
 import com.ejwa.orm.model.bean.CartBean;
+import com.ejwa.orm.model.dao.ClothingItemDAO;
 import com.ejwa.orm.model.dao.ProductDAO;
+import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
@@ -12,7 +14,6 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -20,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 public class CartServiceREST {
 
     @EJB
-    private ProductDAO productDAO;
+    private ClothingItemDAO clothingItemDAO;
 
     @Inject
     private CartBean cartBean;
@@ -35,19 +36,19 @@ public class CartServiceREST {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Product> getCart() {
+    public List<ClothingItem> getCart() {
         return cartBean.getProducts();
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addProductToCart(Product product) {
+    public void addProductToCart(ClothingItem product) {
         cartBean.addProduct(product);
     }
 
     @DELETE
     //@Consumes(MediaType.APPLICATION_JSON)
-    public void removeProductFromCart(Product product) {
+    public void removeProductFromCart(ClothingItem product) {
         cartBean.removeProduct(product);
     }
 
