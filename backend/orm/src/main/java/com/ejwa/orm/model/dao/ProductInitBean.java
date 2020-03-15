@@ -8,6 +8,10 @@ package com.ejwa.orm.model.dao;
 import com.ejwa.orm.model.entity.Category;
 import com.ejwa.orm.model.entity.Product;
 import com.github.javafaker.Faker;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -35,7 +39,7 @@ public class ProductInitBean {
             pdao.create(
                  new Product(
                          new Faker().commerce().productName().toString(),
-                         Double.valueOf(new Faker().commerce().price(0, 100)),
+                          Double.valueOf(new DecimalFormat("#.00").format((10 + 90 * new Random().nextDouble()))),
                          "https://images.pexels.com/photos/2673"+i+"/pexels-photo-2673"+i+".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                  )
             );
@@ -45,5 +49,7 @@ public class ProductInitBean {
         for(int i = 0; i < categories.length; i++)
             cdao.create(new Category(categories[i]));
         
+        
+      
     }
 }

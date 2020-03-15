@@ -17,6 +17,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Contact from '../components/contact_us/Contact';
+import MessageSent from '../components/single_page_shared/MessageSent';
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
                   <Route path="/checkout" component={Checkout} />
                   <Route path="/order_succeed" component={Order_Succeed} />
                   <Route path="/Contact_us" component={Contact} />
+                  <Route path="/MessageSent" component={MessageSent} />
                   <Route component={Default} />
                 </Switch>
               </Col>

@@ -47,7 +47,7 @@ const CarouselPage = () => {
             <MDBView>
               <img
                 className="d-block w-100"
-                src="https://images.pexels.com/photos/2351858/pexels-photo-2351858.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260  "
+                src="https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                 alt="Third slide"
                 height="500px"
               />

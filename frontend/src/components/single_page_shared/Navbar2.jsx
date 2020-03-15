@@ -48,13 +48,16 @@ export default class Navbar2 extends Component {
                     </Col>
 
 
-                    <Col sm={{ span: 3, offset: 3 }}>
+                    <Col sm={{ span: 3, offset: 2 }}>
                             <MDBBtnGroup className="mr-2">
                                 <Link to="/cart">
                                 <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>{' '}   
                                 </Link>
                                 <Link to="/login" >
                                     <Button variant="outline-dark"><MDBIcon far icon="user" /></Button>{' '}
+                                </Link>
+                                <Link to="/Contact_us" >
+                                    <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>{' '}
                                 </Link>
                             </MDBBtnGroup>
                     </Col>
