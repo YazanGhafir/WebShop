@@ -32,10 +32,10 @@ class App extends Component {
 
           <Container fluid={true} style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Row>
-              <Col xs={0} md={2}>
+              <Col sm={0} lg={2}>
                 <SideCategory />
               </Col>
-              <Col xs={12} md={10}>
+              <Col sm={12} lg={10}>
                 <Switch>
                   <Route exact path="/" component={ProductList} />
                   <Route path="/details" component={Details} />

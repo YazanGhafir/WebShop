@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBCard, MDBCardBody } from "mdbreact";
 import Summary from './summary';
-import Forum from './forum';
+import CheckoutForum from './checkout_forum';
 
 class eCommercePage extends Component {
-  
+ 
 
   render() {
 
@@ -15,7 +15,7 @@ class eCommercePage extends Component {
             <MDBCardBody>
               <MDBRow>
                 <MDBCol lg="8" className="mb-4">
-                  <Forum></Forum>
+                  <CheckoutForum></CheckoutForum>
                 </MDBCol>
                 <MDBCol lg="4" className="mb-4">
                   <Summary></Summary>

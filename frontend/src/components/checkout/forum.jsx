@@ -34,7 +34,7 @@ export default class Forum extends Component {
 
         return (
             <div>
-                <MDBNav pills color="primary" className="nav-justified">
+                <MDBNav pills color="primary" className="nav-justified mb-5">
                     <MDBNavItem>
                         <MDBNavLink to="#" className={activePill === "1" ? "active" : ""} onClick={() => this.togglePills("1")}>
                             <strong>1. Billing</strong>
@@ -46,6 +46,7 @@ export default class Forum extends Component {
                         </MDBNavLink>
                     </MDBNavItem>
                 </MDBNav>
+
                 <MDBTabContent className="pt-4" activeItem={activePill}>
                     <MDBTabPane tabId="1">
                         <form>
