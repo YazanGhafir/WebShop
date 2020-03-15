@@ -36,11 +36,13 @@ class FormsPage extends React.Component {
             document.getElementById('materialFormRegistercity').checkValidity() &&
             document.getElementById('materialFormRegisterstate').checkValidity() &&
             document.getElementById('materialFormRegisterZip').checkValidity() &&
-            this.state.radio == 1 || this.state.radio == 2 || this.state.radio == 3 &&
+            (this.state.radio === 1 || this.state.radio === 2 || this.state.radio === 3) &&
             document.getElementById('cc-name').checkValidity() &&
             document.getElementById('cc-number').checkValidity() &&
             document.getElementById('cc-exp').checkValidity() &&
-            document.getElementById('cc-cvv').checkValidity() 
+            document.getElementById('cc-cvv').checkValidity() &&
+            document.getElementById('agreement').checkValidity() 
+            
         ) {
             this.placeOrder();
             JSON.stringify(this.state);
@@ -63,18 +65,12 @@ class FormsPage extends React.Component {
 
         return (
             <div>
-                <MDBNav pills color="primary" className="nav-justified">
+                <MDBNav pills color="primary" className="nav-justified ">
                     <MDBNavItem>
-                        <MDBNavLink to="#" className={activePill === "1" ? "active" : ""} onClick={() => this.togglePills("1")}>
-                            <strong>1. Billing</strong>
-                        </MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                        <MDBNavLink to="#" className={activePill === "2" ? "active" : ""} onClick={() => this.togglePills("2")}>
-                            <strong>2. Payment</strong>
-                        </MDBNavLink>
+                            <h4><strong>Billing and Payment</strong></h4>
                     </MDBNavItem>
                 </MDBNav>
+                <hr className="mb-4" />
 
                 <MDBTabContent className="pt-4" activeItem={activePill}>
                     <form
@@ -205,7 +201,7 @@ class FormsPage extends React.Component {
                         </div>
                         <MDBRow>
                             <MDBCol md="6" className="mb-3">
-                                <label htmlFor="cc-name123">Name on card</label>
+                                <label htmlFor="cc-name">Name on card</label>
                                 <input type="text" className="form-control" id="cc-name" required />
                                 <small className="text-muted">Full name as displayed on card</small>
                                 <div className="invalid-feedback">
@@ -213,7 +209,7 @@ class FormsPage extends React.Component {
                           </div>
                             </MDBCol>
                             <MDBCol md="6" className="mb-3">
-                                <label htmlFor="cc-number123">Credit card number</label>
+                                <label htmlFor="cc-number">Credit card number</label>
                                 <input type="text" className="form-control" id="cc-number" required />
                                 <div className="invalid-feedback">
                                     Credit card number is required
@@ -222,14 +218,14 @@ class FormsPage extends React.Component {
                         </MDBRow>
                         <MDBRow>
                             <MDBCol md="3" className="mb-3">
-                                <label htmlFor="cc-name123">Expiration</label>
+                                <label htmlFor="cc-exp">Expiration</label>
                                 <input type="text" className="form-control" id="cc-exp" required />
                                 <div className="invalid-feedback">
                                     Expiration date is required
                           </div>
                             </MDBCol>
                             <MDBCol md="3" className="mb-3">
-                                <label htmlFor="cc-cvv123">CVV</label>
+                                <label htmlFor="cc-cvv">CVV</label>
                                 <input type="text" className="form-control" id="cc-cvv" required />
                                 <div className="invalid-feedback">
                                     Security code is required
@@ -247,19 +243,22 @@ class FormsPage extends React.Component {
                                 className='custom-control-input'
                                 type='checkbox'
                                 value=''
-                                id='invalidCheck'
+                                id='agreement'
                                 required
                             />
-                            <label className='custom-control-label' htmlFor='invalidCheck' >
+                            <label className='custom-control-label' htmlFor='agreement' >
                                 Agree to terms and conditions
                             </label>
-                            <div className='invalid-feedback'>
+                            <div className='invalid-feedback' >
                                 You must agree before submitting.</div>
                             </div>
                     </MDBCol>
-                        <MDBBtn color="primary" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
-                            Place order
-                        </MDBBtn>
+
+
+                    <MDBBtn color="primary" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
+                        Place order
+                    </MDBBtn>
+
                 </form>
 
                 </MDBTabContent>
