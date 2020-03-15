@@ -2,14 +2,9 @@ package service;
 
 
 import com.ejwa.orm.model.bean.CartBean;
-import com.ejwa.orm.model.dao.ClothingItemDAO;
-import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.ClothingItem;
-import com.ejwa.orm.model.entity.Product;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,36 +15,44 @@ import javax.ws.rs.core.MediaType;
 @Path("cart")
 public class CartServiceREST {
 
-    @EJB
-    private ClothingItemDAO clothingItemDAO;
-
     @Inject
     private CartBean cartBean;
-
-    @GET
-    @Path("message")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getMessage() {
-        return cartBean.getMessage();
-    }
     
-   
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClothingItem> getCart() {
-        return cartBean.getProducts();
+        return cartBean.getItems();
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addProductToCart(ClothingItem product) {
-        cartBean.addProduct(product);
+    @Path("{id}")
+    public void addProductToCart(Long id) {
+        cartBean.addItem(id);
     }
 
     @DELETE
-    //@Consumes(MediaType.APPLICATION_JSON)
-    public void removeProductFromCart(ClothingItem product) {
-        cartBean.removeProduct(product);
+    @Path("{id}")
+    public void removeProductFromCart(Long id) {
+        cartBean.removeItem(id);
     }
+    
+    @GET
+    @Path("order")
+    public String createOrder() {
+        return cartBean.createOrder();
+    }
+    
+    @DELETE
+    @Path("customer")
+    public void removeCustomerInfo() {
+        cartBean.removeCustomerInfoAfterLogout();
+    }
+    
+    @GET
+    @Path("customer")
+    public String getCustomerInfo() {
+        return cartBean.getCustomerInfo();
+    }
+    
 
 }
