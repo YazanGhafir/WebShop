@@ -28,13 +28,16 @@ public class Product implements Serializable {
     private String name;
     @NonNull
     private Double price;
-    
+    @NonNull
+    private String img;
+
     private String discription;
+    
 
     @JoinColumn(name = "category_id")
     @ManyToOne
     private Category category;
 
-    @ManyToMany(mappedBy = "productList") 
-    private List<CustomerOrder> customerOrders;
+    @ManyToMany
+    private List<Product> customerOrders;
 }

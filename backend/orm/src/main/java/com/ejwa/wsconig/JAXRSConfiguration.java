@@ -6,4 +6,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("webshop")
 public class JAXRSConfiguration extends Application {
 	/* Intentionally left blank */
+   
+    
+
 }

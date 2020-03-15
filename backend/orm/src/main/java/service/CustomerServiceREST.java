@@ -2,10 +2,20 @@ package service;
 
 import com.ejwa.orm.model.dao.CustomerDAO;
 import com.ejwa.orm.model.entity.Customer;
+
 import com.github.javafaker.Faker;
-import com.github.javafaker.service.FakerIDN;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.security.enterprise.AuthenticationStatus;
+import javax.security.enterprise.SecurityContext;
+import javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters;
+import javax.security.enterprise.credential.Credential;
+import javax.security.enterprise.credential.Password;
+import javax.security.enterprise.credential.UsernamePasswordCredential;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Path("customer")
@@ -21,6 +32,16 @@ public class CustomerServiceREST {
 
     @EJB
     private CustomerDAO customerDAO;
+
+    @Inject
+    private SecurityContext securityContext;
+  
+
+    @Context
+    private HttpServletRequest httpServletRequest;
+
+    @Context
+    private HttpServletResponse httpServletResponse;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,11 +74,11 @@ public class CustomerServiceREST {
     public List<Customer> findAll() {
         Faker faker = new Faker();
         customerDAO.create(new Customer(faker.internet().emailAddress(),
-                                        faker.internet().password(),
-                                        faker.address().streetAddress(),
-                                        faker.address().streetAddress(),
-                                        faker.name().firstName(),
-                                        faker.name().lastName()));
+                faker.internet().password(),
+                faker.address().streetAddress(),
+                faker.address().streetAddress(),
+                faker.name().firstName(),
+                faker.name().lastName()));
         return customerDAO.findAll();
     }
 
@@ -75,11 +96,15 @@ public class CustomerServiceREST {
         return customerDAO.register_customer_signup(email, password);
     }
 
+    // @RolesAllowed("hhh")
     @GET
     @Path("auth/{email}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Customer authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
-        return customerDAO.authenticateCustomer(email, password);
+    public AuthenticationStatus authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
+        UsernamePasswordCredential credential = new UsernamePasswordCredential(email, new Password(password));
+        AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse,AuthenticationParameters.withParams().credential(credential));
+        return as;
+        //return customerDAO.authenticateCustomer(email, password);
     }
 
     @GET
@@ -129,5 +154,6 @@ public class CustomerServiceREST {
     public List<Customer> findByFirstName(@PathParam("firstname") String firstname) {
         return customerDAO.findCustomerOrdersMatchingFirstName(firstname);
     }
+
 
 }
