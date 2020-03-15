@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.persistence.NoResultException;
+import org.graalvm.compiler.debug.Assertions;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -70,10 +72,12 @@ public class CategoryDAOTest {
         //categoryDAO.remove(categoryDAO.find(test_cat3.getCategory_id()));
     }
 
-    /*@Test
-    public void Z_just_for_REST_test() {
-        categoryDAO.create(RESTtest);
-    }*/
+    @Test
+    public void checkRemoveAllCategories(){
+        categoryDAO.removeAllCategories();
+        Assert.assertEquals(new ArrayList(), categoryDAO.findAll());
+        
+    }
     @Test
     public void checkThatFindCategoryMatchingIDMatchesCorrectly() {
         Category cat = categoryDAO.findCategoryMatchingID(test_id_1);

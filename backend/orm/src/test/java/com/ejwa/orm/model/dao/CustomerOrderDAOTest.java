@@ -77,10 +77,7 @@ public class CustomerOrderDAOTest {
         customerOrderDAO.remove(customerOrderDAO.find(test_customerOrder3.getCustomerorder_id()));
     }
 
-    /*@Test
-    public void Z_just_for_REST_test() {
-        customerOrderDAO.create(RESTtest);
-    }*/
+    
     @Test
     public void checkThatFindOrdersMatchingIDMatchesCorrectly() {
         CustomerOrder co = customerOrderDAO.findCustomerOrderMatchingID(test_id_1);
