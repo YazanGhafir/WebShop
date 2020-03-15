@@ -37,7 +37,7 @@ export default class Navbar2 extends Component {
 
                     </Col>
 
-                    <Col  sm={{ span: 3, offset: 2 }}>
+                    <Col  sm={{ span: 3, offset: 3 }}>
                         <MDBAnimation type=" tada" duration="5s" delay="0s">
                             <Link to='/'>
                                 <img src={logo} alt="store" className="navbar-brand ml-5" />
