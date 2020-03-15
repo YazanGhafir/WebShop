@@ -21,11 +21,7 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder, Long> {
         super(CustomerOrder.class);
     }
     
-     public void remove(CustomerOrder entity) {
-        CustomerOrder entityToRemove = entityManager.find(CustomerOrder.class, entity.getCustomerorder_id());
-        entityManager.remove(entityToRemove);
-    }
-
+   
     public CustomerOrder findCustomerOrderMatchingID(Long id) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
         CustomerOrder qo = new JPAQuery(getEntityManager()).select(CustomerOrder.class)

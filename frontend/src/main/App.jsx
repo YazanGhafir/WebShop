@@ -6,7 +6,7 @@ import Navbar from '../components/single_page_shared/Navbar';
 import Checkout from '../components/checkout/checkout';
 import ProductList from '../components/main_page/ProductList';
 import Details from '../components/product_details_component/Details';
-import Login from '../components/login/Login';
+import LoginContainer from '../components/login/LoginContainer';
 import Cart from '../components/cart/Cart';
 import ShoppingCart from '../components/cart/ShoppingCart';
 import Default from '../components/single_page_shared/Default';
@@ -18,6 +18,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Contact from '../components/contact_us/Contact';
+import MessageSent from '../components/single_page_shared/MessageSent';
 
 class App extends Component {
   render() {
@@ -45,6 +46,7 @@ class App extends Component {
                   <Route path="/checkout" component={Checkout} />
                   <Route path="/order_succeed" component={Order_Succeed} />
                   <Route path="/Contact_us" component={Contact} />
+                  <Route path="/MessageSent" component={MessageSent} />
                   <Route component={Default} />
                 </Switch>
               </Col>
