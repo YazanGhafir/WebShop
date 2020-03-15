@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import '../../css/shared.css';
 
-
 //"https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/10.jpg"
 
 export default class Product extends Component {
@@ -31,6 +30,7 @@ export default class Product extends Component {
         return (
 
             <Col xs={12} sm={6} md={4} >
+                
                 <MDBCard className="mt-5">
                     <Link to='/Details'>
                         <MDBCardImage className="d-block w-100" src={this.props.img} height="300px" />
@@ -44,9 +44,13 @@ export default class Product extends Component {
                         <MDBCardText className="text-right text-primary">
                             {this.props.price}
                         </MDBCardText>
-                        <Link to='/Details' className="btn btn-primary" onClick={() => { this.toProductDetails(this.props.product_id) }}>View</Link>
+                        
+                        <Link to='/Details' className="btn btn-primary" onClick={() => { this.toProductDetails(this.props.product_id) }}>                       
+                            View
+                        </Link>
                     </MDBCardBody>
                 </MDBCard>
+          
             </Col>
         )
     }

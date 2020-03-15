@@ -9,31 +9,31 @@ export default class FiltersRow extends Component {
         return (
             <div>
                 <ButtonGroup>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-2">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-2" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3">
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-3" variant="light">
                         <Dropdown.Item eventKey="1">Dropdown link</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Dropdown link</Dropdown.Item>
                     </DropdownButton>

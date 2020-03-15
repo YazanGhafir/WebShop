@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { MDBAnimation } from "mdbreact";
+import { MDBBtn, MDBBtnGroup, MDBIcon } from "mdbreact";
+import Button from 'react-bootstrap/Button';
 
 export default class Navbar2 extends Component {
     render() {
@@ -34,33 +38,27 @@ export default class Navbar2 extends Component {
                     </Col>
 
                     <Col  sm={{ span: 3, offset: 2 }}>
-                        <Link to='/'>
-                            <img src={logo} alt="store" className="navbar-brand ml-5" />
-                        </Link>
-
-                        <Navb.Brand href='/' className="">Challando</Navb.Brand>
-                    </Col>
-
-                    
-                    <Col sm={{ span: 2, offset: 2 }}>
-                        <Link to="/cart">
-                            <button>
-                                <i className="fas fa-cart-plus" />
-                                my cart
-                            </button>
-                        </Link>
-                    </Col>
-
-                    <Col sm={1} >
-                        <Link to="/login" >
-                            <button>
-                                Log in
-                            </button>
-                        </Link>
+                        <MDBAnimation type=" tada" duration="5s" delay="0s">
+                            <Link to='/'>
+                                <img src={logo} alt="store" className="navbar-brand ml-5" />
+                            </Link>
+                            <Navb.Brand href='/' >Challando</Navb.Brand>
+                        </MDBAnimation>
+                        
                     </Col>
 
 
-            
+                    <Col sm={{ span: 3, offset: 3 }}>
+                            <MDBBtnGroup className="mr-2">
+                                <Link to="/cart">
+                                <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>{' '}   
+                                </Link>
+                                <Link to="/login" >
+                                    <Button variant="outline-dark"><MDBIcon far icon="user" /></Button>{' '}
+                                </Link>
+                            </MDBBtnGroup>
+                    </Col>
+
             </Navb>
 
 

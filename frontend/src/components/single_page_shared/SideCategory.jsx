@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { MDBBtn } from "mdbreact";
-
+import Button from 'react-bootstrap/Button';
 
 export default class SideCategory extends React.Component {
 	render() {
 		return (
-			<MDBBtn rounded outline color="info">{this.props.name}</MDBBtn>
+			<Button variant="light">{this.props.name}</Button> 
 		);
 	}
 }
