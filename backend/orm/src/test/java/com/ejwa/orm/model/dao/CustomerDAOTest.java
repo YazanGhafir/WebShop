@@ -66,10 +66,11 @@ public class CustomerDAOTest {
         customerDAO.remove(customerDAO.find(test_c3.getCustomer_id()));
     }
 
-    /*@Test
-    public void Z_just_for_REST_test() {
-        customerDAO.create(RESTtest);
-    }*/
+    
+    @Test
+    public void checkFindCustomerMatchingEmail(){
+        Assert.assertEquals(test_c1, customerDAO.findCustomerMatchingEmail(test_email_1));
+    }
     @Test
     public void checkThatis_registered_CustomerCorrectly() {
         boolean toValidate1 = customerDAO.is_registered_Customer(test_email_2, test_password_2);
