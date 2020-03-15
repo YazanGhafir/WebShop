@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import '../css/ShoppingCart.css';
-import ShoppingCartProduct from "./ShoppingCartProduct"
+import '../../css/ShoppingCart.css';
+import ShoppingCartProduct from "./ShoppingCartProduct";
+
+import { Link } from "react-router-dom";
 
 export default class ShoppingCart extends Component {
     state = {
@@ -64,7 +66,9 @@ export default class ShoppingCart extends Component {
                                 <p>Frakt</p>
                                 <p class="cartTextAlign text-right">Free</p>
                             </div>
-                            <button class="cartButton btn">Proceed to checkout</button>
+                            <Link to="/checkout">
+                                <button class="cartButton btn">Proceed to checkout</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

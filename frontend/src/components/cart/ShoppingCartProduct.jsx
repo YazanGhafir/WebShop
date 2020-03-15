@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-
+import '../../css/ShoppingCart.css';
 
 
 export default class ShoppingCartProduct extends Component {
-
-
-
     render() {
         return (
             <div class="container">
