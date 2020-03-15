@@ -26,13 +26,13 @@ public class CartServiceREST {
     
     @POST
     @Path("{id}")
-    public void addProductToCart(Long id) {
+    public void addClothingItemToCart(Long id) {
         cartBean.addItem(id);
     }
 
     @DELETE
     @Path("{id}")
-    public void removeProductFromCart(Long id) {
+    public void removeClothingItemFromCart(Long id) {
         cartBean.removeItem(id);
     }
     

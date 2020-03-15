@@ -9,7 +9,6 @@ import com.ejwa.orm.model.dao.ClothingItemDAO;
 import com.ejwa.orm.model.dao.CustomerOrderDAO;
 import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.CustomerOrder;
-import com.ejwa.orm.model.entity.Product;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.Month;

@@ -44,7 +44,7 @@ public class ClothingItemDAOTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(ClothingItemDAO.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class, Category.class, Customer.class, CustomerOrder.class, Payment.class, Product.class)
+                .addClasses(ClothingItemDAO.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -118,7 +118,7 @@ public class ClothingItemDAOTest {
     @InSequence(2)
     public void checkThatFindClothingItemsBySearchLabelFindsCorrect() {
         String searchLabel = "dress";
-        List<ClothingItem> p = clothingItemDAO.findProductsBySearchLabel(searchLabel);
+        List<ClothingItem> p = clothingItemDAO.findClothingItemsBySearchLabel(searchLabel);
         p.forEach(clothingItem -> {
             Assert.assertTrue(clothingItem.getDescription().contains(searchLabel) || clothingItem.getLabel().contains(searchLabel));
         });
@@ -148,7 +148,7 @@ public class ClothingItemDAOTest {
     @InSequence(4)
     public void checkThatfindMaxClothingItemPricefindsMax() {
         double expectedMaxPrice = 490.90;
-        double p = clothingItemDAO.findMaxProductPrice();
+        double p = clothingItemDAO.findMaxClothingItemPrice();
         cleanUp();
         Assert.assertEquals(expectedMaxPrice, p, 1);
     }
@@ -157,7 +157,7 @@ public class ClothingItemDAOTest {
     @InSequence(5)
     public void checkThatfindMinClothingItemPricefindsMin() {
         double expectedMinPrice = 390.90;
-        double p = clothingItemDAO.findMinProductPrice();
+        double p = clothingItemDAO.findMinClothingItemPrice();
         cleanUp();
         Assert.assertEquals(expectedMinPrice, p, 1);
     }

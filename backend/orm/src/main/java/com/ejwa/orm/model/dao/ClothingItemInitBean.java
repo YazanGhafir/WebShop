@@ -6,8 +6,9 @@
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.Category;
-import com.ejwa.orm.model.entity.Product;
+import com.ejwa.orm.model.entity.ClothingItem;
 import com.github.javafaker.Faker;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -19,31 +20,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Startup
 @Singleton
-public class ProductInitBean {
+public class ClothingItemInitBean {
     
     @EJB
-    private ProductDAO pdao;
+    private ClothingItemDAO clothingItemDao;
     
     @EJB
-    private CategoryDAO cdao;
+    private CategoryDAO categoryDao;
 
     
     @PostConstruct
     private void init() {
-        pdao.removeAllProduct();
+        clothingItemDao.removeAllClothingItems();
         for(int i = 20; i < 70; i++)
-            pdao.create(
-                 new Product(
-                         new Faker().commerce().productName().toString(),
-                         Double.valueOf(new Faker().commerce().price(0, 100)),
-                         "https://images.pexels.com/photos/2673"+i+"/pexels-photo-2673"+i+".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            clothingItemDao.create(
+                 new ClothingItem(
+                         new Faker().commerce().productName(),
+                         (10 + 90 * new Random().nextDouble()),
+                         new Faker().commerce().material(),
+                         "https://images.pexels.com/photos/2673"+i+"/pexels-photo-2673"+i+".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                         new Faker().commerce().color()
                  )
             );
         
-        cdao.removeAllCategories();
+        categoryDao.removeAllCategories();
         String[] categories = new String[] { "Nytt", "Skor", "Sport", "Accessoarer", "Beauty", "Designers", "Märken", "Outlet"};
         for(int i = 0; i < categories.length; i++)
-            cdao.create(new Category(categories[i]));
+            categoryDao.create(new Category(categories[i]));
         
     }
 }

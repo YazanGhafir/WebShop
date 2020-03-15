@@ -20,13 +20,6 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
         super(Category.class);
     }
 
-    /*
-    public void remove(Category entity) {
-        Category entityToRemove = entityManager.find(Category.class, entity.getCategory_id());
-        entityManager.remove(entityToRemove);
-    }
-    */
-
     public Category findCategoryMatchingID(Long id) {
         QCategory_ cat = new QCategory_();
         Category p = new JPAQuery(getEntityManager()).select(Category.class)

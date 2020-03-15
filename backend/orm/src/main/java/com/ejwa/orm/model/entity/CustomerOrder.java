@@ -35,11 +35,6 @@ public class CustomerOrder implements Serializable {
     @JoinColumn(name = "customer_id")
     @OneToOne
     private Customer customer;
-
-    @JoinTable(name = "customerOrder_product",
-    joinColumns = @JoinColumn(name = "customerOrder_id_"),
-    inverseJoinColumns = @JoinColumn(name = "product_id_"))
-    @ManyToMany private List<Product> productList;
     
     @JoinTable(name = "customerOrder_clothingItem",
     joinColumns = @JoinColumn(name = "customerOrder_id_"),

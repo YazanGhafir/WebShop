@@ -36,7 +36,7 @@ public class CustomerDAOTest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(CustomerDAO.class, Product.class, Category.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, Customer.class, CustomerOrder.class, Payment.class)
+                .addClasses(CustomerDAO.class, Category.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

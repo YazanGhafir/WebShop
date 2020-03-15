@@ -1,5 +1,6 @@
 package service;
 
+/*
 import com.ejwa.orm.model.dao.CustomerOrderDAO;
 import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.CustomerOrder;
@@ -69,3 +70,4 @@ public class SessionBeanTest implements Serializable {
         return "Order Created";
     }
 }
+*/
