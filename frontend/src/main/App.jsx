@@ -18,6 +18,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Contact from '../components/contact_us/Contact';
 import MessageSent from '../components/single_page_shared/MessageSent';
+import MinaSidorWithHistoy from '../components/mina_sidor/OrdersHistory';
 
 class App extends Component {
   render() {
@@ -46,6 +47,8 @@ class App extends Component {
                   <Route path="/order_succeed" component={Order_Succeed} />
                   <Route path="/Contact_us" component={Contact} />
                   <Route path="/MessageSent" component={MessageSent} />
+                  <Route path="/MinaSidor" component={MinaSidorWithHistoy} />
+
                   <Route component={Default} />
                 </Switch>
               </Col>
