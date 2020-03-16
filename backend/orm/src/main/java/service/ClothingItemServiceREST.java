@@ -85,7 +85,7 @@ public class ClothingItemServiceREST {
     @Path("search/{searchTerm}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClothingItem> search(@PathParam("searchTerm") String searchTerm){
-        return clothingItemDAO.findProductsBySearchLabel(searchTerm);
+        return clothingItemDAO.findClothingItemsBySearchLabel(searchTerm);
     }
     
     
@@ -110,7 +110,7 @@ public class ClothingItemServiceREST {
     public List<ClothingItem> findWithFilters(@PathParam("sizes") List<String> sizes,
             @PathParam("colours") List<String> colours, @PathParam("minPrice") double minPrice,
             @PathParam("maxPrice") double maxPrice){
-        return clothingItemDAO.findProductsWithFilters(sizes, colours, minPrice, maxPrice);
+        return clothingItemDAO.findClothingItemsWithFilters(sizes, colours, minPrice, maxPrice);
     }
     
 }

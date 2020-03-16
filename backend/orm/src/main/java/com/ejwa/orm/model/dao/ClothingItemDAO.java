@@ -9,6 +9,7 @@ import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.QClothingItem_;
 import com.ejwa.orm.model.entity.QSizeQuantity_;
 import easycriteria.JPAQuery;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -35,7 +36,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     public ClothingItemDAO() {
         super(ClothingItem.class);
     }
-    
+
     public ClothingItem findClothingItemMatchingID(Long id) {
         QClothingItem_ clothingItem = new QClothingItem_();
         ClothingItem ci = new JPAQuery(getEntityManager()).select(ClothingItem.class)
@@ -53,8 +54,8 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
                 ).getResultList();
         return ci_list;
     }
-    
-    public List<ClothingItem> findProductsBySearchLabel(String searchText) {
+
+    public List<ClothingItem> findClothingItemsBySearchLabel(String searchText) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
                 .where(
@@ -64,36 +65,58 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
                 .getResultList();
         return ci_list;
     }
-    
-     public List<ClothingItem> findProductsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice) {
-         QClothingItem_ clothingItem = new QClothingItem_();
-         QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
-         
-        List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
-                .where(
-                        clothingItem.colour.in(colour)
-                                .and(clothingItem.price.between(minPrice, maxPrice))
-                ).join(clothingItem, JoinType.INNER, sizeQuantity)
-                .where(sizeQuantity.size.in(size))
-                .getResultList();
-        return ci_list;
-    }
 
-    public void removeAllProduct() {
+    // THis method does not work
+    public List<ClothingItem> findClothingItemsWithFilters(String size, String colour, double minPrice, double maxPrice) {
         QClothingItem_ clothingItem = new QClothingItem_();
-        List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class).getResultList();
-        for (ClothingItem ci : ci_list) {
-            remove(ci);
+        QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
+        try {
+            List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
+                    .where(
+                            clothingItem.colour.like(colour)
+                                    .and(clothingItem.price.between(minPrice, maxPrice))
+                    ).join(clothingItem, JoinType.LEFT, clothingItem)
+                    .where(sizeQuantity.size.like(size))
+                    /*.join(clothingItem, JoinType.INNER, sizeQuantity) 
+                    .where(clothingItem.sizeList.contains(sizeQuantity.size))*/
+
+                    .getResultList();
+            return ci_list;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            List l = new ArrayList();
+            return null;
         }
+
     }
 
-    public void remove(ClothingItem entity){
-        ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getClothingItem_id());
-        entityManager.remove(entityToRemove);
+    public void removeAllClothingItems() {
+        try {
+            QClothingItem_ clothingItem = new QClothingItem_();
+            List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class).getResultList();
+            for (ClothingItem ci : ci_list) {
+                remove(ci);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     
+    public void remove(ClothingItem entity) {
+        try {
+            ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getClothingItem_id());
+            entityManager.remove(entityToRemove);
+
+        } catch (Exception e) {
+        }
+
+    }
+
     public double findMaxProductPrice() {
-        
+
         QClothingItem_ clothingItem = new QClothingItem_();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
