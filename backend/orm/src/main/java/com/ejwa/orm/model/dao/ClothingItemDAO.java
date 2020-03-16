@@ -5,7 +5,6 @@ import com.ejwa.orm.model.entity.QClothingItem_;
 import com.ejwa.orm.model.entity.QSizeQuantity_;
 import easycriteria.JPAQuery;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,7 +48,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return ci_list;
     }
     
-    public List<ClothingItem> findProductsBySearchLabel(String searchText) {
+    public List<ClothingItem> findClothingItemsBySearchLabel(String searchText) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
                 .where(
@@ -60,7 +59,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return ci_list;
     }
     
-     public List<ClothingItem> findProductsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice) {
+     public List<ClothingItem> findClothingItemsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice) {
          QClothingItem_ clothingItem = new QClothingItem_();
          QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
          
@@ -74,7 +73,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return ci_list;
     }
 
-    public void removeAllProduct() {
+    public void removeAllClothingItems() {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class).getResultList();
         for (ClothingItem ci : ci_list) {
@@ -83,7 +82,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     }
 
     
-    public double findMaxProductPrice() {
+    public double findMaxClothingItemPrice() {
         
         QClothingItem_ clothingItem = new QClothingItem_();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -97,7 +96,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return p;
     }
 
-    public double findMinProductPrice() {
+    public double findMinClothingItemPrice() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Double> q = cb.createQuery(Double.class);

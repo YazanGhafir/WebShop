@@ -26,6 +26,6 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<ClothingItem> productList;
+    private List<ClothingItem> ClothingItemList;
 
 }

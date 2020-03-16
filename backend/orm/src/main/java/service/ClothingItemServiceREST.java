@@ -6,9 +6,7 @@
 package service;
 
 import com.ejwa.orm.model.dao.ClothingItemDAO;
-import com.ejwa.orm.model.dao.ProductDAO;
 import com.ejwa.orm.model.entity.ClothingItem;
-import com.ejwa.orm.model.entity.Product;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.validation.constraints.NotNull;
@@ -85,7 +83,7 @@ public class ClothingItemServiceREST {
     @Path("search/{searchTerm}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClothingItem> search(@PathParam("searchTerm") String searchTerm){
-        return clothingItemDAO.findProductsBySearchLabel(searchTerm);
+        return clothingItemDAO.findClothingItemsBySearchLabel(searchTerm);
     }
     
     
@@ -93,16 +91,15 @@ public class ClothingItemServiceREST {
     @Path("max")
     @Produces(MediaType.TEXT_PLAIN)
     public String findMaxPrice(){
-        return String.valueOf(clothingItemDAO.findMaxProductPrice());
+        return String.valueOf(clothingItemDAO.findMaxClothingItemPrice());
     }
     
     @GET
     @Path("min")
     @Produces(MediaType.TEXT_PLAIN)
     public String findMinPrice(){
-        return String.valueOf(clothingItemDAO.findMinProductPrice());
+        return String.valueOf(clothingItemDAO.findMinClothingItemPrice());
     }
-//findProductsWithFilters
 
     @GET
     @Path("{sizes}/{colours}/{minPrice}/{maxPrice}")
@@ -110,7 +107,7 @@ public class ClothingItemServiceREST {
     public List<ClothingItem> findWithFilters(@PathParam("sizes") List<String> sizes,
             @PathParam("colours") List<String> colours, @PathParam("minPrice") double minPrice,
             @PathParam("maxPrice") double maxPrice){
-        return clothingItemDAO.findProductsWithFilters(sizes, colours, minPrice, maxPrice);
+        return clothingItemDAO.findClothingItemsWithFilters(sizes, colours, minPrice, maxPrice);
     }
     
 }

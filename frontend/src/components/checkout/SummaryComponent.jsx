@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { MDBCol, MDBRow, MDBCard, MDBCardBody } from "mdbreact";
+import { MDBCol, MDBRow } from "mdbreact";
 
-export default class Summary_component extends Component {
+export default class SummaryComponent extends Component {
     render() {
         return (
             <div>

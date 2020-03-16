@@ -6,12 +6,9 @@
 package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 /**
  *

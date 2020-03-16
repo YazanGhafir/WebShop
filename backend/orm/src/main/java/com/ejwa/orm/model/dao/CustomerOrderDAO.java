@@ -4,7 +4,6 @@ import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.QCustomerOrder_;
 import easycriteria.JPAQuery;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

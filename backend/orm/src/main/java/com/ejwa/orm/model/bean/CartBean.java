@@ -5,13 +5,21 @@
  */
 package com.ejwa.orm.model.bean;
 
-import com.ejwa.orm.model.entity.Product;
+import com.ejwa.orm.model.dao.ClothingItemDAO;
+import com.ejwa.orm.model.dao.CustomerOrderDAO;
+import com.ejwa.orm.model.entity.ClothingItem;
+import com.ejwa.orm.model.entity.CustomerOrder;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  *
@@ -22,28 +30,46 @@ import lombok.Data;
 @Named
 public class CartBean implements Serializable {
 
-    private ArrayList<Product> products;
+    @EJB
+    private ClothingItemDAO clothingItemDAO;
 
-    public void addProduct(Product product){
-        products.add(product);
-    }
-    
-    public boolean removeProduct(Product product){
-        return products.remove(product);
-    }
-    
-    public ArrayList<Product> getProducts(){
-        return products;
+    @EJB
+    private CustomerOrderDAO customerOrderDAO;
+
+    @Getter
+    private List<ClothingItem> items;
+
+    @Getter
+    private String customerInfo;
+
+
+    public void addItem(Long id) {
+        items.add(clothingItemDAO.findClothingItemMatchingID(id));
     }
 
-    public String getMessage(){
-        return "Hej";
+    public boolean removeItem(Long id) {
+        return items.remove(clothingItemDAO.findClothingItemMatchingID(id));
     }
-    
+
     @PostConstruct
     public void init() {
-        this.products = new ArrayList<Product>();
-        products.add(new Product("Adidas T-Shirt", 5.0, "image"));
+        this.items = new ArrayList<ClothingItem>();
+        items.add(new ClothingItem("Adidas T-Shirt", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black"));
+    }
+
+    public String createOrder() {
+        LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);;
+        CustomerOrder order = new CustomerOrder(test_date);
+        order.setClothesList(items);
+        customerOrderDAO.create(order);
+        return "Order Created";
+    }
+
+    public void addCustomerInfoAfterLogin(String customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+    
+    public void removeCustomerInfoAfterLogout() {
+        this.customerInfo = "A Great Person :D";
     }
 }
-

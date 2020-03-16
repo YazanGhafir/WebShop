@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol } from "mdbreact";
+import { MDBCard, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText } from "mdbreact";
 import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import '../../css/shared.css';
@@ -38,8 +38,7 @@ export default class Product extends Component {
                     <MDBCardBody>
                         <MDBCardTitle>{this.props.name}</MDBCardTitle>
                         <MDBCardText>
-                            Some quick example text to build on the card title and make
-                            up the bulk of the card&apos;s content.
+                            {this.props.description}
                         </MDBCardText>
                         <MDBCardText className="text-right text-primary">
                             {this.props.price}
