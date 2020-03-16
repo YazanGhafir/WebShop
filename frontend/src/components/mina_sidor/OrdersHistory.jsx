@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import History_card from './History_card';
 import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import MyInfo from './MyInfo';
 import { MDBRow, MDBCard, MDBCardBody, MDBContainer, MDBCol } from "mdbreact";
 
@@ -72,7 +70,8 @@ export default class OrdersHistory extends Component {
                             <MDBRow className="mx-5">
                                 <MyInfo></MyInfo>
                             </MDBRow>
-                            <MDBRow className="mx-5">
+                            <MDBRow className="mx-5" style={{display: 'inline-block'}}>
+                                <h2 className="my-4"> Previous orders:</h2>
                                 <Accordion>
                                     {this.state.orders.map((ord, idx) => {
                                         return <History_card
