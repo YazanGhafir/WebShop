@@ -2,7 +2,7 @@ package service;
 
 
 import com.ejwa.orm.model.bean.CartBean;
-import com.ejwa.orm.model.entity.ClothingItem;
+import com.ejwa.orm.model.bean.CartItem;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
@@ -20,18 +20,18 @@ public class CartServiceREST {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ClothingItem> getCart() {
+    public List<CartItem> getCart() {
         return cartBean.getItems();
     }
     
-    @POST
-    @Path("{id}")
-    public void addClothingItemToCart(Long id) {
-        cartBean.addItem(id);
+     @POST
+    @Path("{id}/{size}")
+    public void addClothingItemToCart(Long id, String size) {
+        cartBean.addItem(id, size);
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("{id}/{size}")
     public void removeClothingItemFromCart(Long id) {
         cartBean.removeItem(id);
     }

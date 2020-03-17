@@ -7,6 +7,7 @@ package com.ejwa.orm.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +52,11 @@ public class ClothingItem implements Serializable {
     @ManyToOne
     private Category category;
     
-    @ManyToMany
-    private List<CustomerOrder> customerOrders;
+    @OneToMany(
+        mappedBy = "clothingItem",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<CustomerOrderClothingItem> customerOrders;
+  
 }

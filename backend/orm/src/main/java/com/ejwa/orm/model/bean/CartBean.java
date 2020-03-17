@@ -37,30 +37,40 @@ public class CartBean implements Serializable {
     private CustomerOrderDAO customerOrderDAO;
 
     @Getter
-    private List<ClothingItem> items;
+    private List<CartItem> items;
 
     @Getter
     private String customerInfo;
 
-
-    public void addItem(Long id) {
-        items.add(clothingItemDAO.findClothingItemMatchingID(id));
+    public void addItem(Long id, String size) {
+        ClothingItem ci = clothingItemDAO.findClothingItemMatchingID(id);
+        boolean found = false;
+        items.forEach(i -> {
+            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+                int oldQuantity = i.getQuantity();
+                i.setQuantity(oldQuantity++);
+            } else if (!found) {
+                items.add(new CartItem(ci, size, 1));
+            }
+        });
     }
 
     public boolean removeItem(Long id) {
+        
         return items.remove(clothingItemDAO.findClothingItemMatchingID(id));
     }
 
     @PostConstruct
     public void init() {
-        this.items = new ArrayList<ClothingItem>();
-        items.add(new ClothingItem("Adidas T-Shirt", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black"));
+        this.items = new ArrayList<CartItem>();
+        ClothingItem ci = new ClothingItem("Adidas T-Shirt", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black");
+        items.add(new CartItem(ci, "L", 1));
     }
 
     public String createOrder() {
         LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);;
         CustomerOrder order = new CustomerOrder(test_date);
-        order.setClothesList(items);
+        //order.setClothesList(items);
         customerOrderDAO.create(order);
         return "Order Created";
     }
@@ -68,8 +78,9 @@ public class CartBean implements Serializable {
     public void addCustomerInfoAfterLogin(String customerInfo) {
         this.customerInfo = customerInfo;
     }
-    
+
     public void removeCustomerInfoAfterLogout() {
         this.customerInfo = "A Great Person :D";
     }
+    
 }
