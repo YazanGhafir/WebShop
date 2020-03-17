@@ -8,8 +8,9 @@ import ProductDetail from './product-detail/product-detail';
 import ProductImage from './product-detail/Product-Image';
 import Row from 'react-bootstrap/Row';
 import Product from '../main_page/Product';
+import { useParams, withRouter } from 'react-router-dom';
 
-export default class DetailsViewOfProduct extends Component {
+class DetailsViewOfProduct extends Component {
 
   constructor(props) {
     super(props);
@@ -23,54 +24,51 @@ export default class DetailsViewOfProduct extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/orm/webshop/clothingItem" + this.props.product_id) // I think this is the right address to get the product ID in url also
+    
+    
+    
+    fetch("http://localhost:8080/orm/webshop/clothingItem/" + this.props.match.params.id) // I think this is the right address to get the product ID in url also. This also doesnt work = (  + this.state.product_id )
       .then(res => res.json())
       .then((data) => {
         this.setState({ product: data })
       }).catch(console.log);
-    var data = require('./data.json');
-    let product = data.CatalogEntryView[0];
-    this.setState({ availabilityCode: product.purchasingChannelCode });
-    this.setState({ features: product.ItemDescription[0].features });
+    //var data = require('./data.json');
+    //let product = data.CatalogEntryView[0];
+    //this.setState({ availabilityCode: product.purchasingChannelCode });
+    //this.setState({ features: product.ItemDescription[0].features });
+    
 
   }
 
-  render(props) {
-
+  render() {
+    
     return (
+      
 
-      <div class="container">
-        <div class="col-sm">
-        <img
-                className="d-block w-100"
-                src={Product.ProductImage} // Not 100% sure this works | {this.props.product_id}
-                alt="Could not load picture"
-                height="450px"
-              />
+      <div className="container">
+        <div className="row mx-5 my-5">
+          <div className="col-xs-12 col-sm-6">
+            <div className="product-name">
+              <h4>{Product.name}</h4>
+              { console.log(this.props.match.params.id)}
+
+            </div>
+            <img
+              className="d-block w-100"
+              src={this.state.product.image} // Not 100% sure this works | Might be that the fetch doesnt work. Only old pic is displayed.
+              alt="Could not load picture"
+              height="450px"
+            />
+          </div>
+            <div className="col-xs-12 col-sm-6">
+              Info here
+
+              {this.state.product.price}
+            </div>
         </div>
-        <div class="col-sm">
-        Very much info
-
-        </div>
-
       </div>
-
-      /*
-      <div className="row mx-5 my-5">
-        <div className="col-xs-12 col-sm-6">
-          <ProductName name={this.state.product.name} />
-          <ProductImage img={this.state.product.img} />
-        </div>
-        <div className="col-xs-12 col-sm-6">
-          <ProductPrice price={this.state.product.price} />
-          <ProductQuantity minQuantity={1} maxQuantity={10} />
-          <ProductBuyActions availabilityCode={this.state.availabilityCode} />
-          <ProductDetail features={this.state.features} />
-          <ProductSecondaryActions Pid={this.state.product.product_id} />
-        </div>
-      </div> 
-      */
     )
   }
 }
 
+export default withRouter(DetailsViewOfProduct);

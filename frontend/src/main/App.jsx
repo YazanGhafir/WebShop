@@ -40,7 +40,7 @@ class App extends Component {
               <Col sm={12} lg={10}>
                 <Switch>
                   <Route exact path="/" component={ProductList} />
-                  <Route path="/details" component={Details} />
+                  <Route path="/details/:id" component={Details} />
                   <Route path="/cart" component={ShoppingCart} />
                   <Route path="/login" component={LoginContainer} />
                   <Route path="/checkout" component={Checkout} />
