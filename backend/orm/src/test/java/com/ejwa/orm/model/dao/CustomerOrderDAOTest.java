@@ -28,11 +28,11 @@ public class CustomerOrderDAOTest {
     private Long test_id_1;
     private Long test_id_2;
 
-    private LocalDateTime test_date1 = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);
+    private LocalDateTime test_date1 = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 6, 6, 6);
     ;
-    private LocalDateTime test_date2 = LocalDateTime.of(2014, Month.OCTOBER, 11, 16, 15, 15);
+    private LocalDateTime test_date2 = LocalDateTime.of(2014, Month.OCTOBER, 11, 6, 6, 6);
     ;
-    private LocalDateTime test_date3 = LocalDateTime.of(2014, Month.AUGUST, 11, 16, 15, 15);
+    private LocalDateTime test_date3 = LocalDateTime.of(2014, Month.AUGUST, 11, 6, 6, 6);
     ;
 
     private CustomerOrder test_customerOrder1 = new CustomerOrder();
