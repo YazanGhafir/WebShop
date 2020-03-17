@@ -9,6 +9,7 @@ import com.ejwa.orm.model.dao.ClothingItemDAO;
 import com.ejwa.orm.model.dao.CustomerOrderDAO;
 import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.CustomerOrder;
+import com.ejwa.orm.model.entity.CustomerOrderClothingItem;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -70,7 +71,15 @@ public class CartBean implements Serializable {
     public String createOrder() {
         LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);;
         CustomerOrder order = new CustomerOrder(test_date);
-        //order.setClothesList(items);
+        List<CustomerOrderClothingItem> clothesList = new ArrayList<CustomerOrderClothingItem>();
+        items.forEach(i -> {
+            CustomerOrderClothingItem c = new CustomerOrderClothingItem();
+            c.setClothingItem(i.getItem());
+            c.setQuantity(i.getQuantity());
+            c.setSize(i.getSize());
+            clothesList.add(c);
+        });
+        order.setClothesList(clothesList);
         customerOrderDAO.create(order);
         return "Order Created";
     }
