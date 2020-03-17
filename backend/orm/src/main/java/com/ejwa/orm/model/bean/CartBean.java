@@ -42,6 +42,9 @@ public class CartBean implements Serializable {
 
     @Getter
     private String customerInfo;
+    
+    @Getter 
+    private boolean inloggningsstatus = false;
 
     public void addItem(Long id, String size) {
         ClothingItem ci = clothingItemDAO.findClothingItemMatchingID(id);

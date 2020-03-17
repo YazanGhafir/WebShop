@@ -3,6 +3,7 @@ package service;
 import com.ejwa.orm.model.dao.CustomerOrderDAO;
 import com.ejwa.orm.model.entity.CustomerOrder;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -50,7 +51,7 @@ public class CustomerOrderServiceREST {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<CustomerOrder> findAll() {
-        customerOrderDAO.create(new CustomerOrder(LocalDateTime.MAX));
+        customerOrderDAO.create(new CustomerOrder(LocalDateTime.of(2014, Month.SEPTEMBER, 11, 6, 6, 6)));
         return customerOrderDAO.findAll();
     }
 
