@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class ClothingItem implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @NonNull
