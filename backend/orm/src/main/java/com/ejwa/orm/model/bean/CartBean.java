@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import lombok.Data;
@@ -27,8 +28,7 @@ import lombok.Getter;
  * @author madel
  */
 @Data
-@SessionScoped
-@Named
+@Singleton
 public class CartBean implements Serializable {
 
     @EJB
@@ -57,7 +57,6 @@ public class CartBean implements Serializable {
     }
 
     public boolean removeItem(Long id) {
-        
         return items.remove(clothingItemDAO.findClothingItemMatchingID(id));
     }
 

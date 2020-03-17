@@ -21,21 +21,11 @@ import lombok.Setter;
  */
 
 @Data
-@SessionScoped
-@Named
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItem implements Serializable {
-    
-    @Getter
-    @Setter
-    private ClothingItem item;
 
-    @Getter
-    @Setter
+    private ClothingItem item;
     private String size;
-    
-    @Getter
-    @Setter
     private int quantity;
 }
