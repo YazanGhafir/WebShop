@@ -15,7 +15,7 @@ export default class DetailsViewOfProduct extends Component {
     super(props);
     this.state = {
       product:
-        { 'product_id': '1', 'name': 'product3', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', 'price': '86$' },
+        { 'product_id': '1', 'name': 'product4', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', 'price': '86$' },
       availabilityCode: '',
       features: [],
       img: props.ProductImage
@@ -23,7 +23,7 @@ export default class DetailsViewOfProduct extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/orm/webshop/clothingItem" + this.props.product_id) // I think this is the right address but whats to get the product ID in url also
+    fetch("http://localhost:8080/orm/webshop/clothingItem" + this.props.product_id) // I think this is the right address to get the product ID in url also
       .then(res => res.json())
       .then((data) => {
         this.setState({ product: data })
@@ -38,24 +38,24 @@ export default class DetailsViewOfProduct extends Component {
   render(props) {
 
     return (
-/*
+
       <div class="container">
         <div class="col-sm">
         <img
                 className="d-block w-100"
-                src=""
+                src={Product.ProductImage} // Not 100% sure this works | {this.props.product_id}
                 alt="Could not load picture"
                 height="450px"
               />
         </div>
         <div class="col-sm">
-        {this.props.ProductName}
+        Very much info
 
         </div>
 
       </div>
-*/
-      
+
+      /*
       <div className="row mx-5 my-5">
         <div className="col-xs-12 col-sm-6">
           <ProductName name={this.state.product.name} />
@@ -68,7 +68,8 @@ export default class DetailsViewOfProduct extends Component {
           <ProductDetail features={this.state.features} />
           <ProductSecondaryActions Pid={this.state.product.product_id} />
         </div>
-      </div>
+      </div> 
+      */
     )
   }
 }
