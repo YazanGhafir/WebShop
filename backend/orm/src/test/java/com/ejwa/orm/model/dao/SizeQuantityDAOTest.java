@@ -44,10 +44,8 @@ public class SizeQuantityDAOTest {
 
     @Before
     public void init() {
-        test_id_1 = new Random().nextLong();
-        test_id_2 = new Random().nextLong();
-        sq1 = new SizeQuantity(test_id_1, "S", 5, ci1);
-        sq2 = new SizeQuantity(test_id_2, "M", 6, ci2);
+        sq1 = new SizeQuantity("S", 5, ci1);
+        sq2 = new SizeQuantity("M", 6, ci2);
        
         
         sizeQuantityDAO.create(sq1);
@@ -66,8 +64,8 @@ public class SizeQuantityDAOTest {
         
         sizeQuantityDAO.remove(sq1);
         sizeQuantityDAO.remove(sq2);
-        clothingItemDAO.remove(clothingItemDAO.find(ci1.getClothingItem_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(ci2.getClothingItem_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(ci1.getId()));
+        clothingItemDAO.remove(clothingItemDAO.find(ci2.getId()));
     }
 /*
     @Test

@@ -48,7 +48,7 @@ public class SizeQuantityDAO extends AbstractDAO<SizeQuantity, SizeQuantityId> {
     public List<SizeQuantity> findSizeQuantityForId(Long id) {
         QSizeQuantity_ sq = new QSizeQuantity_();
         List<SizeQuantity> sl = new JPAQuery(getEntityManager()).select(SizeQuantity.class)
-                .where(sq.clothingItem.clothingItem_id.eq(id))
+                .where(sq.clothingItem.id.eq(id))
                 .getResultList();
         return sl;
     } 

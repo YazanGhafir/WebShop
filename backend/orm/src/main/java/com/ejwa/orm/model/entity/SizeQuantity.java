@@ -29,18 +29,12 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @IdClass(SizeQuantityId.class)
 public class SizeQuantity implements Serializable {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long payment_id;
-    
-    @NonNull
+    @Id
     private String size;
-    
-    @NonNull
+
     private Integer quantity;
     
     @Id
-    @JoinColumn(name = "clothingItem_id")
     @ManyToOne
     private ClothingItem clothingItem;
 
