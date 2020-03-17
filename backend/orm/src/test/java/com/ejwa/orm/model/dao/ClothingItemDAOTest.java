@@ -7,6 +7,7 @@ package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
@@ -29,9 +30,9 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ClothingItemDAOTest {
 
-    private Long test_id_1;
-    private Long test_id_2;
-    private Long test_id_3;
+    private long test_id_1;
+    private long test_id_2;
+    private long test_id_3;
 
     private ClothingItem item1 = new ClothingItem("Adidas T-Shirt", 490.90, "This is a tshirt", "img", "Black");
     private ClothingItem item2 = new ClothingItem("Adidas T-Shirt", 480.90, "This is a tshirt", "img", "White");
@@ -61,9 +62,9 @@ public class ClothingItemDAOTest {
         test_id_2 = new Random().nextLong();
         test_id_3 = new Random().nextLong();
 
-        item1.setClothingItem_id(test_id_1);
-        item2.setClothingItem_id(test_id_2);
-        item3.setClothingItem_id(test_id_3);
+        item1.setId(test_id_1);
+        item2.setId(test_id_2);
+        item3.setId(test_id_3);
         
         clothingItemDAO.create(item1);
         clothingItemDAO.create(item2);
@@ -90,9 +91,9 @@ public class ClothingItemDAOTest {
         /*clothingItemDAO.remove(item1);
         clothingItemDAO.remove(item2);
         clothingItemDAO.remove(item3);*/
-        clothingItemDAO.remove(clothingItemDAO.find(item1.getClothingItem_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item2.getClothingItem_id()));
-        clothingItemDAO.remove(clothingItemDAO.find(item3.getClothingItem_id()));
+        clothingItemDAO.remove(clothingItemDAO.find(item1.getId()));
+        clothingItemDAO.remove(clothingItemDAO.find(item2.getId()));
+        clothingItemDAO.remove(clothingItemDAO.find(item3.getId()));
     }
 
     @Test
@@ -149,20 +150,9 @@ public class ClothingItemDAOTest {
     
     @Test
     public void checkFindClothingItemsWithFilters() {
-        List<ClothingItem> ci_list = new ArrayList();
-        List<String> size_list = new ArrayList();
-        List<String> color_list = new ArrayList();
-        
-        ci_list.add(item1);
-        //ci_list.add(item2);
-        size_list.add("L");
-        //size_list.add("S");
-        color_list.add("Black");
-        //color_list.add("White");
-        
-        // CANT GET THIS TO >NOT< THROW EJB EXCEPTION OR no results /Philip
-        //Assert.assertEquals(ci_list, clothingItemDAO.findClothingItemsWithFilters("L", "Black", 400.0, 1000.0));
-        Assert.assertTrue(true);
+        //System.out.println(clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L","M"),Arrays.asList("Black","White"), 0, 10000));
+        Assert.assertEquals(Arrays.asList(item1,item2), clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L","M"),Arrays.asList("Black","White"), 0, 10000));
+        //Assert.assertTrue(true);
     } 
     
     @Test

@@ -33,7 +33,8 @@ public class ClothingItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long clothingItem_id;
+    private long id;
+
     @NonNull
     private String label;
     @NonNull

@@ -41,7 +41,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         QClothingItem_ clothingItem = new QClothingItem_();
         ClothingItem ci = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                 .where(
-                        clothingItem.clothingItem_id.eq(id)
+                        clothingItem.id.eq(id)
                 ).getSingleResult();
         return ci;
     }
@@ -67,16 +67,15 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     }
 
     // THis method does not work
-    public List<ClothingItem> findClothingItemsWithFilters(String size, String colour, double minPrice, double maxPrice) {
+    public List<ClothingItem> findClothingItemsWithFilters(List<String> size, List<String> colour, double minPrice, double maxPrice) {
         QClothingItem_ clothingItem = new QClothingItem_();
         QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
         try {
             List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
-                    .where(
-                            clothingItem.colour.like(colour)
-                                    .and(clothingItem.price.between(minPrice, maxPrice))
-                    ).join(clothingItem, JoinType.LEFT, clothingItem)
-                    .where(sizeQuantity.size.like(size))
+                    .join(clothingItem.sizeList, JoinType.INNER, sizeQuantity)
+                    .distinct()
+                    .where(clothingItem.colour.in(colour).and(clothingItem.price.between(minPrice, maxPrice)
+                    .and(sizeQuantity.size.in(size))))
                     /*.join(clothingItem, JoinType.INNER, sizeQuantity) 
                     .where(clothingItem.sizeList.contains(sizeQuantity.size))*/
 
@@ -107,7 +106,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
     
     public void remove(ClothingItem entity) {
         try {
-            ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getClothingItem_id());
+            ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getId());
             entityManager.remove(entityToRemove);
 
         } catch (Exception e) {
