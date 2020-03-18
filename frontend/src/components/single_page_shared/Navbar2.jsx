@@ -3,19 +3,47 @@ import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 import Navb from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col';
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { MDBAnimation } from "mdbreact";
-import { MDBBtn, MDBBtnGroup, MDBIcon } from "mdbreact";
+import {MDBBtnGroup, MDBIcon } from "mdbreact";
 import Button from 'react-bootstrap/Button';
 
 export default class Navbar2 extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { 'loggingstatus' : 'false' };
+      }
+    
+
+    componentDidMount() {
+        //this.fetchloggingstatus();
+    }
+
+    fetchloggingstatus(){
+        fetch("http://localhost:8080/orm/webshop/category") //invalid url
+        .then(res => res.json())
+        .then((data) => {
+        this.setState({ loggingstatus : data })
+        }).catch(console.log);
+    }
+    
+    checkloggingstatus() {
+        console.log(this.state);
+        //this.fetchloggingstatus();
+        if (this.state.loggingstatus == 'false') {
+            window.location.replace('/login');
+        } else if (this.state.loggingstatus == 'true') {
+            window.location.replace('/minasidor');
+        } else {
+            alert('Critical Logging problem, We will fix that and comeback as soon as possible');
+            // send to admin summary of the problem (invalid logging status)
+        }
+    }
+
     render() {
         return (
-
             <Navb bg="light">
-             
                     <Col sm={2}>
-
                         <ul className="navbar-nav align-items-left">
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
@@ -27,14 +55,12 @@ export default class Navbar2 extends Component {
                                     MAN
                                 </Link>
                             </li>
-
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
                                     BARN
                                 </Link>
                             </li>
                         </ul>
-
                     </Col>
 
                     <Col  sm={{ span: 3, offset: 3 }}>
@@ -51,17 +77,16 @@ export default class Navbar2 extends Component {
                     <Col sm={{ span: 3, offset: 2 }}>
                             <MDBBtnGroup className="mr-2">
                                 <Link to="/cart">
-                                <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>{' '}   
+                                <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>
                                 </Link>
-                                <Link to="/login" >
-                                    <Button variant="outline-dark"><MDBIcon far icon="user" /></Button>{' '}
-                                </Link>
+                                <div>
+                                    <Button variant="outline-dark"><MDBIcon far icon="user" onClick={() => {this.checkloggingstatus()}}/></Button>
+                                </div>
                                 <Link to="/Contact_us" >
-                                    <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>{' '}
+                                    <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>
                                 </Link>
                             </MDBBtnGroup>
                     </Col>
-
             </Navb>
 
 

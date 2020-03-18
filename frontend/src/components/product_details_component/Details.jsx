@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ProductPrice from './product-detail/product-price';
 import ProductName from './product-detail/product-name';
-import ProductOffers from './product-detail/product-offers';
 import ProductQuantity from './product-detail/product-quantity';
 import ProductBuyActions from './product-detail/product-buy-actions';
 import ProductSecondaryActions from './product-detail/product-secondary-actions';
@@ -33,8 +32,8 @@ export default class Details extends Component {
   componentWillMount() {
     var data = require('./data.json');
     let product = data.CatalogEntryView[0];
-    this.state.availabilityCode = product.purchasingChannelCode;
-    this.state.features = product.ItemDescription[0].features;
+    this.setState({availabilityCode:product.purchasingChannelCode});
+    this.setState({features:product.ItemDescription[0].features});
   }
 
 

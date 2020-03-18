@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ejwa.orm.model.dao;
 
 import com.ejwa.orm.model.entity.ClothingItem;
@@ -11,7 +6,6 @@ import com.ejwa.orm.model.entity.QSizeQuantity_;
 import easycriteria.JPAQuery;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -59,7 +53,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
                 ).getResultList();
         return ci_list;
     }
-
+    
     public List<ClothingItem> findClothingItemsBySearchLabel(String searchText) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class)
@@ -81,9 +75,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
                     .distinct()
                     .where(clothingItem.colour.in(colour).and(clothingItem.price.between(minPrice, maxPrice)
                     .and(sizeQuantity.size.in(size))))
-                    /*.join(clothingItem, JoinType.INNER, sizeQuantity) 
-                    .where(clothingItem.sizeList.contains(sizeQuantity.size))*/
-
                     .getResultList();
             return ci_list;
 
@@ -123,7 +114,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         return p;
     }
 
-    public double findMinProductPrice() {
+    public double findMinClothingItemPrice() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Double> q = cb.createQuery(Double.class);

@@ -4,7 +4,6 @@ import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.QCustomerOrder_;
 import easycriteria.JPAQuery;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,11 +21,7 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder, Long> {
         super(CustomerOrder.class);
     }
     
-     public void remove(CustomerOrder entity) {
-        CustomerOrder entityToRemove = entityManager.find(CustomerOrder.class, entity.getCustomerorder_id());
-        entityManager.remove(entityToRemove);
-    }
-
+   
     public CustomerOrder findCustomerOrderMatchingID(Long id) {
         QCustomerOrder_ qo_ = new QCustomerOrder_();
         CustomerOrder qo = new JPAQuery(getEntityManager()).select(CustomerOrder.class)

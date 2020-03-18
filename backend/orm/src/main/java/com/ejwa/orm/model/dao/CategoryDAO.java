@@ -20,7 +20,6 @@ public class CategoryDAO extends AbstractDAO<Category, Long> {
         super(Category.class);
     }
 
-
     public Category findCategoryMatchingID(Long id) {
         QCategory_ cat = new QCategory_();
         Category p = new JPAQuery(getEntityManager()).select(Category.class)

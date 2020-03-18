@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Product from "./Product"
 import CarouselPage from "./Carousel";
 import FiltersRow from "./FiltersRow";
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 export default class ProductList extends Component {
@@ -27,10 +26,11 @@ export default class ProductList extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/orm/webshop/product")
+        fetch("http://localhost:8080/orm/webshop/clothingItem")
             .then(res => res.json())
             .then((data) => {
-                this.setState({ products: data })
+                this.setState({ products: data });
+                console.log(data)
             }).catch(console.log);
     }
 
@@ -48,7 +48,7 @@ export default class ProductList extends Component {
                     </Row>
                     
                     <Row>
-                        {this.state.products.map((p, idx) => { return <Product name={p.name} img={p.img} price={p.price} product_id={p.product_id} key={idx} /> })}
+                        {this.state.products.map((p, idx) => { return <Product name={p.label} description={p.description} img={p.image} price={p.price} product_id={p.clothingItem_id} key={idx} /> })}
                     </Row>
 
             </React.Fragment>

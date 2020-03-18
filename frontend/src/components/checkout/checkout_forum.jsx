@@ -1,6 +1,5 @@
 import React from "react";
-import { MDBRow, MDBCol, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBTabPane, MDBTabContent, MDBInput } from "mdbreact";
-import { Link } from 'react-router-dom';
+import { MDBRow, MDBCol, MDBBtn, MDBNav, MDBNavItem, MDBTabContent, MDBInput } from "mdbreact";
 
 class FormsPage extends React.Component {
     state = {    

@@ -53,6 +53,11 @@ public class ClothingItem implements Serializable {
     @ManyToOne
     private Category category;
     
-    @ManyToMany
-    private List<CustomerOrder> customerOrders;
+    @OneToMany(
+        mappedBy = "clothingItem",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<CustomerOrderClothingItem> customerOrders;
+  
 }

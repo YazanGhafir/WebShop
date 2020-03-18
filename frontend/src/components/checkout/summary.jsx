@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { MDBCol, MDBRow, MDBCard, MDBCardBody } from "mdbreact";
-import Summary_component from './Summary_component';
+import { MDBCard, MDBCardBody } from "mdbreact";
+import SummaryComponent from './SummaryComponent';
 
 export default class Summary extends Component {
 
@@ -28,7 +28,7 @@ export default class Summary extends Component {
                 <MDBCard>
                     <MDBCardBody>
                         <h4 className="mb-4 mt-1 h5 text-center font-weight-bold">Summary</h4>
-                        {this.state.products.map((p, idx) => { return <Summary_component name={p.name} img={p.img} price={p.price} product_id={p.product_id} key={idx} /> })}
+                        {this.state.products.map((p, idx) => { return <SummaryComponent name={p.name} img={p.img} price={p.price} product_id={p.product_id} key={idx} /> })}
                     </MDBCardBody>
                 </MDBCard>
             </div>

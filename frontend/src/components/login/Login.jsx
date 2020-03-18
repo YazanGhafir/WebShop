@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-//import { Row, FormGroup, FormControl, ControlLabel, Button, HelpBlock } from 'react-bootstrap';
-import { Row, FormGroup, FormControl, Button } from 'react-bootstrap';
 import './login.css';
 import { isEmail, isEmpty, isLength, isContainWhiteSpace } from './validator';
-import { MDBRow, MDBCard, MDBCardBody, MDBTooltip, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBBtn, MDBContainer } from "mdbreact";
+import { MDBInput, MDBBtn } from "mdbreact";
 
 class Login extends Component {
 
@@ -80,36 +78,33 @@ class Login extends Component {
 
         return (
             <div>
+                <form className="px-4">
+                    <p className="h4 text-center py-4">Login</p>
+                    <div className="grey-text">
+                        <MDBInput
+                            label="Your email"
+                            icon="envelope"
+                            group
+                            type="email"
+                            validate
+                            required
+                        />
+                        <MDBInput
+                            label="Password"
+                            icon="user"
+                            group
+                            type="password"
+                            validate
+                            required
+                        />
+                    </div>
+                    <div className="text-center py-4 mt-3">
+                        <MDBBtn color="cyan" type="submit">
+                            Login
+                        </MDBBtn>
+                    </div>
+                </form>
 
-
-                <MDBContainer>
-                    <MDBRow className="mx-5 my-5" center>
-                        <MDBCard className="w-100 mx-5 my-5">
-                            <MDBCardBody>
-                                <MDBTable >
-                                    <div className="Login">
-                                        <h1 class="mb-4">Login</h1>
-                                        <form onSubmit={this.login}>
-                                            <FormGroup controlId="email" validationState={formSubmitted ? (errors.email ? 'error' : 'success') : null}>
-                                                Email
-                                                <FormControl type="text" name="email" placeholder="Enter your email" onChange={this.handleInputChange} />
-                                                {errors.email
-                                                }
-                                            </FormGroup>
-                                            <FormGroup controlId="password" validationState={formSubmitted ? (errors.password ? 'error' : 'success') : null}>
-                                                Password
-                                                <FormControl type="password" name="password" placeholder="Enter your password" onChange={this.handleInputChange} />
-                                                {errors.password
-                                                }
-                                            </FormGroup>
-                                            <Button type="submit" bsStyle="primary">Sign-In</Button>
-                                        </form>
-                                    </div>
-                                </MDBTable>
-                            </MDBCardBody>
-                        </MDBCard>
-                    </MDBRow>
-                </MDBContainer>
             </div>
         )
     }

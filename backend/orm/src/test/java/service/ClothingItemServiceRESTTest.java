@@ -64,7 +64,7 @@ public class ClothingItemServiceRESTTest {
     @Test
     @RunAsClient
     public void checkThatBlaBla(@ArquillianResteasyResource("webshop/clothingItem") WebTarget webTarget) {
-        /*
+        /* Intentionally commented out, to be progessed at a later moment. If UNcommented, the other tests will fail since this one persists entitys.
         init(webTarget);
 
         final Builder builder = webTarget.register(ResteasyJacksonProvider.class)
