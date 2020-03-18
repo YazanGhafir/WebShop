@@ -37,27 +37,32 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         super(ClothingItem.class);
     }
 
-    public ClothingItem findClothingItemMatchingID(Long id) {
+    public ClothingItem findClothingItemMatchingID(long id) {
         QClothingItem_ clothingItem = new QClothingItem_();
-        ClothingItem ci = new JPAQuery(getEntityManager()).select(ClothingItem.class)
+        try{
+        ClothingItem ci = new JPAQuery(entityManager).select(ClothingItem.class)
                 .where(
                         clothingItem.id.eq(id)
                 ).getSingleResult();
         return ci;
+        }
+        catch(Exception e) {
+            return null;
+        }
     }
 
-    public List<ClothingItem> findClothingItemsMatchingLabel(String name) {
+    public List<ClothingItem> findClothingItemsMatchingLabel(String label) {
         QClothingItem_ clothingItem = new QClothingItem_();
         List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                 .where(
-                        clothingItem.label.eq(name)
+                        clothingItem.label.eq(label)
                 ).getResultList();
         return ci_list;
     }
 
     public List<ClothingItem> findClothingItemsBySearchLabel(String searchText) {
         QClothingItem_ clothingItem = new QClothingItem_();
-        List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
+        List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                 .where(
                         clothingItem.description.like("%" + searchText + "%")
                                 .or(clothingItem.label.like("%" + searchText + "%"))
@@ -71,7 +76,7 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
         QClothingItem_ clothingItem = new QClothingItem_();
         QSizeQuantity_ sizeQuantity = new QSizeQuantity_();
         try {
-            List<ClothingItem> ci_list = new JPAQuery(entityManager).select(ClothingItem.class)
+            List<ClothingItem> ci_list = new JPAQuery(getEntityManager()).select(ClothingItem.class)
                     .join(clothingItem.sizeList, JoinType.INNER, sizeQuantity)
                     .distinct()
                     .where(clothingItem.colour.in(colour).and(clothingItem.price.between(minPrice, maxPrice)
@@ -100,16 +105,6 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-    }
-    
-    public void remove(ClothingItem entity) {
-        try {
-            ClothingItem entityToRemove = entityManager.find(ClothingItem.class, entity.getId());
-            entityManager.remove(entityToRemove);
-
-        } catch (Exception e) {
         }
 
     }
