@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import '../../css/ShoppingCart.css';
 import ShoppingCartProduct from "./ShoppingCartProduct";
-import cloneDeep from 'lodash/cloneDeep';
 
 import { Link } from "react-router-dom";
 
