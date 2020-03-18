@@ -1,56 +1,76 @@
 import React, { Component } from "react";
 import '../../css/ShoppingCart.css';
 import ShoppingCartProduct from "./ShoppingCartProduct";
+import cloneDeep from 'lodash/cloneDeep';
 
 import { Link } from "react-router-dom";
 
 export default class ShoppingCart extends Component {
     state = {
-        data: [
+        cart: [
             {
-                src: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg",
-                title: "iPhone",
-                subTitle: "Apple",
-                color: "White",
-                price: 800,
-                size: "M",
-                qty: "2"
+                item: {
+                    clothingItem_id: 59,
+                    colour: "Black",
+                    customerOrders: [],
+                    description: "this is the description",
+                    image: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg",
+                    label: "Adidas T-Shirt",
+                    price: 349.00,
+                    sizeList: [],
+                },
+                quantity: 1,
+                size: "L"
             },
             {
-                src: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg",
-                title: "Headphones",
-                subTitle: "Sony",
-                color: "Red",
-                price: 200,
-                size: "L",
-                qty: "2"
-            },
-            {
-                src: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg",
-                title: "iPad Pro",
-                subTitle: "Apple",
-                color: "Gold",
-                price: 600,
-                size: "S",
-                qty: "1"
-            },
-        ],
+                item:
+                {
+                    clothingItem_id: 50,
+                    colour: "White",
+                    customerOrders: [],
+                    description: "this is the description",
+                    image: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg",
+                    label: "Adidas T-Shirt",
+                    price: 590.99,
+                    sizeList: [],
+                },
+                quantity: 1,
+                size: "L"
+            }
+        ]
     }
 
     componentDidMount() {
         fetch("http://localhost:8080/orm/webshop/cart")
             .then(res => res.json())
-            .then(cdata => {
-                this.setState({ data: cdata });
-            })
-            .catch(console.log);
+            .then(data => {
+                this.setState({ cart: data });
+                console.log(data);
+            });
     }
 
+    handleSelect(e, id) {
+        const value = e.target.value;
+        this.setState({ quantity: value })
+
+        this.setState(prevState => ({
+
+            cart: prevState.cart.map(
+              elem => elem.item.clothingItem_id === id? { ...elem, quantity: value }: elem
+            )
+          
+          }))
+        /*
+        console.log(this.state);
+        console.log(e.target.value);
+        console.log("value from select");
+        */
+    }
 
     render() {
         var sumPrice = 0;
-        this.state.data.map((product) => {
-            return sumPrice += product.price;
+        this.state.cart.map((product) => {
+            return sumPrice += (product.item.price*product.quantity);
         })
         return (
 
@@ -58,9 +78,12 @@ export default class ShoppingCart extends Component {
                 <div className="container" id="shoppingCart">
                     <div className="row" >
                         <div className="col-7" id="cartContent">
-                            <h3 id="CartHeader">Shopping Cart ({this.state.data.length} products)</h3>
-                            {this.state.data.map((product, id) => {
-                                return <ShoppingCartProduct key={"item" + id} img={product.src} title={product.title} subTitle={product.subTitle} price={product.price} size={product.size} color={product.color}></ShoppingCartProduct>
+                            <h3 id="CartHeader">Shopping Cart ({this.state.cart.length} products)</h3>
+                            {this.state.cart.map((product) => {
+                                return <ShoppingCartProduct key={product.item.clothingItem_id} img={product.item.image} 
+                                title={product.item.label} subTitle={product.item.description} price={product.item.price} 
+                                size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.clothingItem_id} 
+                                handleSelect={this.handleSelect.bind(this)}></ShoppingCartProduct>
                             })}
                         </div>
                         <div className="col-4" id="cartContent">

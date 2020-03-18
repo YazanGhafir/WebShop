@@ -66,7 +66,8 @@ public class CartBean implements Serializable {
     @PostConstruct
     public void init() {
         this.items = new ArrayList<CartItem>();
-        ClothingItem ci = new ClothingItem("Adidas T-Shirt", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black");
+        ClothingItem ci = new ClothingItem("Adidas T-Shirt", 580.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black");
+        clothingItemDAO.create(ci);
         items.add(new CartItem(ci, "L", 1));
     }
 
