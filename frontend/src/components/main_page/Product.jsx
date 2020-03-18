@@ -44,7 +44,7 @@ export default class Product extends Component {
                             {this.props.price}
                         </MDBCardText>
                         
-                        <Link to='/Details' className="btn btn-primary" onClick={() => { this.toProductDetails(this.props.product_id) }}>                       
+                        <Link to={`/Details/${this.props.product_id}`} className="btn btn-primary" onClick={() => { this.toProductDetails(this.props.product_id) }}>                       
                             View
                         </Link>
                     </MDBCardBody>

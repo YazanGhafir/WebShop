@@ -1,0 +1,36 @@
+.productImage{
+    margin-left: 40px
+}
+
+
+.productDetails{
+    margin-top: 40px;
+}
+
+.productDescription{
+    margin-left: 120px;
+}
+
+.label{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.priceText{
+    font-size: x-large;
+    font-weight: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sizeDropdown{
+    margin-top: 100px;
+}
+
+.addToCartButton{
+    align-content: center;
+    background-color: #00bcd4 ;
+    color: #ffffff;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 0px;
+}
