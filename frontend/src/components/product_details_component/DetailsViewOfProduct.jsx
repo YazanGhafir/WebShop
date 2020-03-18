@@ -28,8 +28,8 @@ class DetailsViewOfProduct extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/orm/webshop/clothingItem/" + this.props.match.params.id) // I think this is the right address to get the product ID in url also. This also doesnt work = (  + this.state.product_id )
-      .then(res => res.json())
+    fetch("http://localhost:8080/orm/webshop/clothingItem/" + this.props.match.params.id) 
+     .then(res => res.json())
       .then((data) => {
         this.setState({ product: data });
         console.log(data);
@@ -37,7 +37,7 @@ class DetailsViewOfProduct extends Component {
   }
 
   calc(nr) {
-    var num = nr, rounded = nr.rounded
+    var num = nr;
     return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
   }
 
