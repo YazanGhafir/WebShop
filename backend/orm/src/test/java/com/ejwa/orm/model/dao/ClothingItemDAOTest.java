@@ -66,9 +66,8 @@ public class ClothingItemDAOTest {
     @Inject
     private UserTransaction utx;
 
-
     @Before
-    public void checkThatFindClothingItemMatchingIDMatchesCorrectly() throws Exception {
+    public void init() throws Exception {
         item1 = new ClothingItem("Adidas T-Shirt", 490.90, "This is a tshirt", "img", "Black");
         item2 = new ClothingItem("Adidas T-Shirt", 480.90, "This is a tshirt", "img", "White");
         item3 = new ClothingItem("Adidas Pants", 390.90, "hejhopp", "img", "Red");
@@ -76,11 +75,19 @@ public class ClothingItemDAOTest {
         sizeItem1 = new SizeQuantity("L", 5, item1);
         sizeItem2 = new SizeQuantity("S", 4, item2);
         sizeItem3 = new SizeQuantity("M", 6, item3);
+        
+        test_id_1 = 1L;
+        test_id_2 = 2L;
+        test_id_3 = 3L;
 
         utx.begin();
         clothingItemDAO.create(item1);
         clothingItemDAO.create(item2);
         clothingItemDAO.create(item3);
+        
+        item1.setId(test_id_1);
+        item1.setId(test_id_2);
+        item1.setId(test_id_3);
 
         sizeItem1.setClothingItem(item1);
         sizeItem2.setClothingItem(item2);
@@ -90,25 +97,29 @@ public class ClothingItemDAOTest {
         sizeQuantityDAO.create(sizeItem2);
         sizeQuantityDAO.create(sizeItem3);
         utx.commit();
-        //ClothingItem p = clothingItemDAO.findClothingItemMatchingID(test_id_1);
 
-        //Assert.assertEquals(p, item1);
     }
-    
+
     @After
-    public void cleanUp() throws Exception{
+    public void cleanUp() throws Exception {
         utx.begin();
         sizeQuantityDAO.remove(sizeQuantityDAO.merge(sizeItem1));
         sizeQuantityDAO.remove(sizeQuantityDAO.merge(sizeItem2));
         sizeQuantityDAO.remove(sizeQuantityDAO.merge(sizeItem3));
-        clothingItemDAO.remove(item1);
-        clothingItemDAO.remove(item2);
-        clothingItemDAO.remove(item3);
+        clothingItemDAO.remove(clothingItemDAO.merge(item1));
+        clothingItemDAO.remove(clothingItemDAO.merge(item2));
+        clothingItemDAO.remove(clothingItemDAO.merge(item3));
         utx.commit();
     }
 
     @Test
-    public void checkThatFindlothingItemsMatchingNameMatchesCorrectly() {
+    public void checkThatFindClothingItemMatchingIDMatchesCorrectly() {
+        ClothingItem p = clothingItemDAO.findClothingItemMatchingID(item1.getId());
+        Assert.assertEquals(item1, p);
+    }
+
+    @Test
+    public void checkThatFindClothingItemsMatchingNameMatchesCorrectly() {
         List<ClothingItem> p_list = clothingItemDAO.findClothingItemsMatchingLabel("Adidas T-Shirt");
         Assert.assertEquals(2, p_list.size());
     }
@@ -138,16 +149,16 @@ public class ClothingItemDAOTest {
 
     @Test
     public void checkFindClothingItemsWithFilters() {
-        //System.out.println(clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L","M"),Arrays.asList("Black","White"), 0, 10000));
-        Assert.assertEquals(Arrays.asList(clothingItemDAO.find(item1.getId())), clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L"), Arrays.asList("Black"), 0, 10000));
-        //Assert.assertTrue(true);
+
+        Assert.assertEquals(Arrays.asList(item1), clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L"), Arrays.asList("Black"), 0, 10000));
+
     }
 
     @Test
-    @Ignore
-    public void checkRemoveAllClothingItems() throws Exception {
-        
-        Assert.assertEquals(new ArrayList(), clothingItemDAO.findAll());
-    }
-
+    @Ignore //Doesnt seem to work. Spent to many hours on this.
+    public void checkRemoveAllClothingItems() {
+        clothingItemDAO.removeAllClothingItems();
+        List<ClothingItem> ci = new ArrayList<>();
+        Assert.assertEquals(ci, clothingItemDAO.findAll()); 
+    }// This gives persistenceException: DELETE on table 'CLOTHINGITEM' caused a violation of foreign key constraint 'SZQNTTYCLTHNGTEMID' for key (3).  The statement has been rolled back.
 }
