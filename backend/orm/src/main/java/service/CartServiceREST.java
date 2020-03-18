@@ -5,7 +5,6 @@ import com.ejwa.orm.model.bean.CartBean;
 import com.ejwa.orm.model.bean.CartItem;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,11 +30,17 @@ public class CartServiceREST {
     public void addClothingItemToCart(@PathParam("id")Long id, @PathParam("size")String size) {
         cartBean.addItem(id, size);
     }
+    
+    @POST
+    @Path("{id}/{quantity}/{size}")
+    public void updateQuantityForItemInCart(@PathParam("id")Long id, @PathParam("quantity")int quantity, @PathParam("size") String size) {
+        cartBean.updateQuantity(id, quantity, size);
+    }
 
     @DELETE
-    @Path("{id}")
-    public void removeClothingItemFromCart(@PathParam("id")Long id) {
-        cartBean.removeItem(id);
+    @Path("{id}/{size}")
+    public void removeClothingItemFromCart(@PathParam("id")Long id, @PathParam("size") String size) {
+        cartBean.removeItem(id, size);
     }
     
     @GET

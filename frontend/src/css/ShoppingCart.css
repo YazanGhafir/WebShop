@@ -5,6 +5,7 @@
 #cartImage{
     width: 100px;
     height: 80px;
+    margin-top: 15px;
 }
 
 
@@ -48,4 +49,10 @@
 #cartSummary{
     background-color: #ffffff;
     padding: 0px 20px 0px 20px;
+}
+
+#quantityButton{
+    background-color: #ffffff !important ;
+    color: #000000;
+    border-color: #000000;
 }
