@@ -48,7 +48,7 @@ public class CustomerDAOTest {
     public void init() {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
-        test_id_2 = new Random().nextLong();
+        test_id_3 = new Random().nextLong();
 
         test_c1.setCustomer_id(test_id_1);
         test_c2.setCustomer_id(test_id_2);
