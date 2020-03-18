@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -44,12 +46,16 @@ public class ProductDAOTest {
 
     @EJB
     private ProductDAO productDAO;
+    
+    @Inject
+    private UserTransaction utx;
 
     @Before
-    public void init() {
+    public void init()throws Exception {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
 
+        utx.begin();
         test_p1.setProduct_id(test_id_1);
         test_p2.setProduct_id(test_id_2);
 
@@ -59,16 +65,26 @@ public class ProductDAOTest {
         productDAO.create(test_p4);
         productDAO.create(test_p5);
         productDAO.create(test_p6);
+        utx.commit();
     }
 
     @After
-    public void roll_back_init() {
-        productDAO.remove(productDAO.find(test_p1.getProduct_id()));
+    public void roll_back_init()throws Exception {
+        utx.begin();
+        productDAO.remove(productDAO.merge(test_p1));
+        productDAO.remove(productDAO.merge(test_p2));
+        productDAO.remove(productDAO.merge(test_p3));
+        productDAO.remove(productDAO.merge(test_p4));
+        productDAO.remove(productDAO.merge(test_p5));
+        productDAO.remove(productDAO.merge(test_p6));
+        utx.commit();
+        /*
         productDAO.remove(productDAO.find(test_p2.getProduct_id()));
         productDAO.remove(productDAO.find(test_p3.getProduct_id()));
         productDAO.remove(productDAO.find(test_p4.getProduct_id()));
         productDAO.remove(productDAO.find(test_p5.getProduct_id()));
         productDAO.remove(productDAO.find(test_p6.getProduct_id()));
+        */
     }
 
     /*

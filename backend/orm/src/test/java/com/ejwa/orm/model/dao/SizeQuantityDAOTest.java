@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -28,10 +30,16 @@ public class SizeQuantityDAOTest {
     private SizeQuantity sq1;
     private SizeQuantity sq2;
 
+    @Inject
+    private UserTransaction utx;
+
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(CategoryDAO.class, Product.class, SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class, Category.class, Customer.class, ClothingItem.class, CustomerOrder.class, Payment.class)
+                .addClasses(ClothingItemDAO.class, CategoryDAO.class, Product.class,
+                            SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class,
+                            Category.class, Customer.class, ClothingItem.class,
+                            CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -47,29 +55,29 @@ public class SizeQuantityDAOTest {
         sq1 = new SizeQuantity("S", 5, ci1);
         sq2 = new SizeQuantity("M", 6, ci2);
        
-        
-        sizeQuantityDAO.create(sq1);
-        sizeQuantityDAO.create(sq2);
         clothingItemDAO.create(ci1);
         clothingItemDAO.create(ci2);
-        
+
         sq1.setClothingItem(ci1);
         sq1.setClothingItem(ci2);
-       
 
+        sizeQuantityDAO.create(sq1);
+        sizeQuantityDAO.create(sq2);
     }
 
     @After
-    public void roll_back_init() {
+    public void roll_back_init() throws Exception {
         
-        sizeQuantityDAO.remove(sq1);
-        sizeQuantityDAO.remove(sq2);
+        utx.begin();
+        sizeQuantityDAO.remove(sizeQuantityDAO.merge(sq1));
+        sizeQuantityDAO.remove(sizeQuantityDAO.merge(sq2));
         clothingItemDAO.remove(clothingItemDAO.find(ci1.getId()));
         clothingItemDAO.remove(clothingItemDAO.find(ci2.getId()));
+        utx.commit();
     }
-/*
+
     @Test
-    public void anyTest(){
+    public void mustHaveATestToCompile(){
         Assert.assertTrue(true);
-    }*/
+    }
 }

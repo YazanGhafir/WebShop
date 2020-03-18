@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.transaction.UserTransaction;
 import org.graalvm.compiler.debug.Assertions;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -30,9 +32,9 @@ public class CategoryDAOTest {
     private Long test_id_2;
     private Long test_id_3;
 
-    private Category test_cat1 = new Category("Tshirts");
-    private Category test_cat2 = new Category("Shorts");
-    private Category test_cat3 = new Category("Jackets");
+    private static Category test_cat1 = new Category("Tshirts");
+    private static Category test_cat2 = new Category("Shorts");
+    private static Category test_cat3 = new Category("Jackets");
 
     //private Category RESTtest = new Category("REST_test_Jackets");
     @Deployment
@@ -45,13 +47,17 @@ public class CategoryDAOTest {
 
     @EJB
     private CategoryDAO categoryDAO;
+    
+    @Inject
+    private UserTransaction utx;
 
     @Before
-    public void init() {
+    public void init() throws Exception {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
         test_id_3 = new Random().nextLong();
 
+        utx.begin();
         test_cat1.setCategory_id(test_id_1);
         test_cat2.setCategory_id(test_id_2);
         test_cat3.setCategory_id(test_id_3);
@@ -59,14 +65,19 @@ public class CategoryDAOTest {
         categoryDAO.create(test_cat1);
         categoryDAO.create(test_cat2);
         categoryDAO.create(test_cat3);
+        utx.commit();
 
     }
 
     @After
-    public void roll_back_init() {
-        categoryDAO.remove(test_cat1);
-        categoryDAO.remove(test_cat2);
-        categoryDAO.remove(test_cat3);
+    public void roll_back_init() throws Exception {
+        utx.begin();
+        categoryDAO.remove(categoryDAO.merge(test_cat1));
+        categoryDAO.remove(categoryDAO.merge(test_cat2));
+        categoryDAO.remove(categoryDAO.merge(test_cat3));
+        utx.commit();
+        //categoryDAO.remove(test_cat2);
+        //categoryDAO.remove(test_cat3);
 
         //categoryDAO.remove(categoryDAO.find(test_cat2.getCategory_id()));
         //categoryDAO.remove(categoryDAO.find(test_cat3.getCategory_id()));
