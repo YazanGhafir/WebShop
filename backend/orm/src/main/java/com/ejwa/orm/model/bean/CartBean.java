@@ -43,7 +43,7 @@ public class CartBean implements Serializable {
     @PostConstruct
     public void init() {
         this.products = new ArrayList<Product>();
-        products.add(new Product("Adidas T-Shirt", 5.0, "image"));
+        products.add(new Product("Adidas T-ShirtCARTBEAN", 5.0, "image"));
     }
 }
 

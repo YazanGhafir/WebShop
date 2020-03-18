@@ -9,16 +9,12 @@ import com.ejwa.orm.model.entity.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.transaction.TransactionManager;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -68,7 +64,7 @@ public class ClothingItemDAOTest {
 
     @Before
     public void init() throws Exception {
-        item1 = new ClothingItem("Adidas T-Shirt", 490.90, "This is a tshirt", "img", "Black");
+        item1 = new ClothingItem("Nike T-Shirt", 490.90, "This is a nike-tshirt", "img", "Black");
         item2 = new ClothingItem("Adidas T-Shirt", 480.90, "This is a tshirt", "img", "White");
         item3 = new ClothingItem("Adidas Pants", 390.90, "hejhopp", "img", "Red");
 
@@ -121,7 +117,7 @@ public class ClothingItemDAOTest {
     @Test
     public void checkThatFindClothingItemsMatchingNameMatchesCorrectly() {
         List<ClothingItem> p_list = clothingItemDAO.findClothingItemsMatchingLabel("Adidas T-Shirt");
-        Assert.assertEquals(2, p_list.size());
+        Assert.assertEquals(1, p_list.size());
     }
 
     @Test
@@ -153,6 +149,7 @@ public class ClothingItemDAOTest {
         Assert.assertEquals(Arrays.asList(item1), clothingItemDAO.findClothingItemsWithFilters(Arrays.asList("L"), Arrays.asList("Black"), 0, 10000));
 
     }
+
 
     @Test
     @Ignore //Doesnt seem to work. Spent to many hours on this.

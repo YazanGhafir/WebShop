@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class SizeQuantityDAOTest {
 
-    private ClothingItem  ci1 = new ClothingItem("Adidas T-Shirt", 490.90, "This is a tshirt", "img", "Black");
+    private ClothingItem  ci1 = new ClothingItem("Adidas T-Shirt1337", 490.90, "This is a tshirt", "img", "Black");
     private ClothingItem  ci2 = new ClothingItem("Adidas T-Shirt", 480.90, "This is a tshirt", "img", "White");
     
     private Long test_id_1;
