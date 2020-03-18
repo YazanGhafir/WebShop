@@ -51,27 +51,31 @@ export default class ShoppingCart extends Component {
 
     handleSelect(e, id) {
         const value = e.target.value;
-        this.setState({ quantity: value })
-
         this.setState(prevState => ({
-
             cart: prevState.cart.map(
-              elem => elem.item.clothingItem_id === id? { ...elem, quantity: value }: elem
+                elem => elem.item.clothingItem_id === id ? { ...elem, quantity: value } : elem
             )
-          
-          }))
-        /*
-        console.log(this.state);
-        console.log(e.target.value);
-        console.log("value from select");
-        */
+
+        }))
+    }
+
+    handleRemove(e, id) {
+        console.log("remove clicked")
+        console.log(id);
+        this.setState({
+            cart: this.state.cart.filter(function (elem) {
+                return elem.item.clothingItem_id !== id
+            })
+        });
     }
 
     render() {
         var sumPrice = 0;
         this.state.cart.map((product) => {
-            return sumPrice += (product.item.price*product.quantity);
+            return sumPrice += (product.item.price * product.quantity);
         })
+
+        console.log(this.state)
         return (
 
             <div>
@@ -80,10 +84,10 @@ export default class ShoppingCart extends Component {
                         <div className="col-7" id="cartContent">
                             <h3 id="CartHeader">Shopping Cart ({this.state.cart.length} products)</h3>
                             {this.state.cart.map((product) => {
-                                return <ShoppingCartProduct key={product.item.clothingItem_id} img={product.item.image} 
-                                title={product.item.label} subTitle={product.item.description} price={product.item.price} 
-                                size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.clothingItem_id} 
-                                handleSelect={this.handleSelect.bind(this)}></ShoppingCartProduct>
+                                return <ShoppingCartProduct key={product.item.clothingItem_id} img={product.item.image}
+                                    title={product.item.label} subTitle={product.item.description} price={product.item.price}
+                                    size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.clothingItem_id}
+                                    handleSelect={this.handleSelect.bind(this)} handleRemove={this.handleRemove.bind(this)}></ShoppingCartProduct>
                             })}
                         </div>
                         <div className="col-4" id="cartContent">
