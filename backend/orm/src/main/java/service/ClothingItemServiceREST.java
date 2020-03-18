@@ -48,7 +48,7 @@ public class ClothingItemServiceREST {
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") @NotNull Long id) {
+    public void remove(@PathParam("id") Long id) {
         clothingItemDAO.remove(clothingItemDAO.findClothingItemMatchingID(id));
     }
 
