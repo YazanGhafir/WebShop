@@ -40,34 +40,36 @@ export default class ShoppingCart extends Component {
         ]
     }
 
-    componentDidMount() {
+    getCartFromDB = () => {
         fetch("http://localhost:8080/orm/webshop/cart")
-            .then(res => res.json())
-            .then(data => {
-                this.setState({ cart: data });
-                console.log(data);
-            });
-    }
-
-    handleSelect(e, id) {
-        const value = e.target.value;
-        this.setState(prevState => ({
-            cart: prevState.cart.map(
-                elem => elem.item.clothingItem_id === id ? { ...elem, quantity: value } : elem
-            )
-
-        }))
-    }
-
-    handleRemove(e, id) {
-        console.log("remove clicked")
-        console.log(id);
-        this.setState({
-            cart: this.state.cart.filter(function (elem) {
-                return elem.item.clothingItem_id !== id
-            })
+        .then(res => res.json())
+        .then(data => {
+            this.setState({ cart: data });
+            console.log(data);
         });
     }
+
+    componentDidMount() {
+       this.getCartFromDB();
+    }
+
+    handleSelect(e, id, size) {
+        fetch('http://localhost:8080/orm/webshop/cart/' + id + '/' + e.target.value + '/' + size, {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+        })
+        .then(this.getCartFromDB);
+    }
+
+    handleRemove(e, id, size) {
+        console.log("remove clicked");
+        fetch('http://localhost:8080/orm/webshop/cart/' + id + '/' + size, {
+            method: 'DELETE'})
+        .then(this.getCartFromDB);
+    }
+
 
     render() {
         var sumPrice = 0;

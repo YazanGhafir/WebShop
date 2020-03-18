@@ -30,13 +30,13 @@ export default class ShoppingCartProduct extends Component {
                         <p id="productText">{this.props.subTitle}</p>
                         <p id="productText">Colour:  {this.props.color}</p>
                         <p id="productText">Size:  {this.props.size}</p>
-                        <button className="cartButton btn" onClick={(e) => this.props.handleRemove(e, this.props.id)}>Remove</button>
+                        <button className="cartButton btn" onClick={(e) => this.props.handleRemove(e, this.props.id, this.props.size)}>Remove</button>
                     </div>
                     <div className="column-2" id="cartproduct">
                         <div className="row">
                             <Form>
                                 <Form.Group controlId="exampleForm.SelectCustom">
-                                    <Form.Control as="select" onChange={(e) => this.props.handleSelect(e, this.props.id)} defaultValue={this.props.quantity}>
+                                    <Form.Control as="select" onChange={(e) => this.props.handleSelect(e, this.props.id, this.props.size)} defaultValue={this.props.quantity}>
                                         {options.map( option => {
                                             return <option key={option}>{option}</option>
                                         }

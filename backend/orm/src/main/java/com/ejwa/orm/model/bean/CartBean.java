@@ -58,9 +58,21 @@ public class CartBean implements Serializable {
             }
         });
     }
+    
+    public void updateQuantity(long id, int quantity, String size){
+        items.forEach(i -> {
+            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+                i.setQuantity(quantity);
+            }
+        });
+    }
 
-    public boolean removeItem(Long id) {
-        return items.remove(clothingItemDAO.findClothingItemMatchingID(id));
+    public void removeItem(Long id, String size) {
+        items.forEach(i -> {
+            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+               items.remove(i);
+            }
+        });
     }
 
     @PostConstruct
