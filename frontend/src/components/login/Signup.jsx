@@ -29,7 +29,7 @@ export default class Signup extends Component {
         else if (document.getElementById('loginfname').value.length < 3 || document.getElementById('loginlname').value.length < 3) {
             alert("please, write valid first and last name.");
         }
-        else if (document.getElementById('loginemail').value != document.getElementById('loginemailagain').value){
+        else if (document.getElementById('loginemail').value !== document.getElementById('loginemailagain').value){
             alert("please type the same email in the two feilds");    
         }
         else if (

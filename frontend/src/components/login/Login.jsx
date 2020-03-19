@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import './login.css';
-import { isEmail, isEmpty, isLength, isContainWhiteSpace } from './validator';
 import { MDBInput, MDBBtn } from "mdbreact";
 
 class Login extends Component {
@@ -48,7 +47,6 @@ class Login extends Component {
         fetch(both)
             .then(function(response) {
                 if(response.status === 200) {
-                    console.log("STATUSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS = ", response.status);
                     window.location.replace('/minasidor');
                 } else {
                     alert("username or password is invalid");
