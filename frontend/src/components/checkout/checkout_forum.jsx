@@ -2,7 +2,7 @@ import React from "react";
 import { MDBRow, MDBCol, MDBBtn, MDBNav, MDBNavItem, MDBTabContent, MDBInput } from "mdbreact";
 
 class FormsPage extends React.Component {
-    state = {    
+    state = {
         fname: "Mark",
         lname: "Otto",
         email: "",
@@ -40,12 +40,11 @@ class FormsPage extends React.Component {
             document.getElementById('cc-number').checkValidity() &&
             document.getElementById('cc-exp').checkValidity() &&
             document.getElementById('cc-cvv').checkValidity() &&
-            document.getElementById('agreement').checkValidity() 
-            
+            document.getElementById('agreement').checkValidity()
+
         ) {
             this.placeOrder();
             JSON.stringify(this.state);
-            window.open('/order_succeed');
         } else {
             alert("You need to fix all the wrongs first :)");
         }
@@ -53,9 +52,15 @@ class FormsPage extends React.Component {
 
 
     placeOrder() {
-        fetch("http://localhost:8080/orm/webshop/o")
-            .then(console.log)
-            .catch(console.log);
+        const url = 'http://localhost:8080/orm/webshop/cart/placeorder/';
+        fetch(url)
+            .then(function (response) {
+                if (response.status === 200) {
+                    window.location.replace('/order_succeed');
+                } else {
+                    alert("username or password is invalid");
+                }
+            });
     }
 
     render() {
@@ -66,7 +71,7 @@ class FormsPage extends React.Component {
             <div>
                 <MDBNav pills color="primary" className="nav-justified ">
                     <MDBNavItem>
-                            <h4><strong>Billing and Payment</strong></h4>
+                        <h4><strong>Billing and Payment</strong></h4>
                     </MDBNavItem>
                 </MDBNav>
                 <hr className="mb-4" />
@@ -103,7 +108,7 @@ class FormsPage extends React.Component {
                                     id='materialFormRegisterlname'
                                     label='Last name'
                                     outline
-                                    required 
+                                    required
                                 >
                                     <div className='valid-feedback ml-3 pl-3'>Looks good!</div>
                                 </MDBInput>
@@ -185,80 +190,80 @@ class FormsPage extends React.Component {
                         <hr className="mb-4" />
 
 
-                    <div className="d-block my-3 ">
-                        <div className="mb-2 ml-4">
-                            <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap4" onClick={this.onClick(1)} checked={this.state.radio===1 ? true : false} required />
-                            <label className="form-check-label" htmlFor="radioWithGap4">Credit card</label>
-                        </div>
-                        <div className="mb-2 ml-4">
-                            <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap5" onClick={this.onClick(2)} checked={this.state.radio===2 ? true : false} required />
-                            <label className="form-check-label" htmlFor="radioWithGap5">Debit card</label>
-                        </div>
-                        <div className="mb-2 ml-4">
-                            <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap6" onClick={this.onClick(3)} checked={this.state.radio===3 ? true : false} required />
-                            <label className="form-check-label" htmlFor="radioWithGap6">Paypal</label>
-                        </div>
-                        <MDBRow>
-                            <MDBCol md="6" className="mb-3">
-                                <label htmlFor="cc-name">Name on card</label>
-                                <input type="text" className="form-control" id="cc-name" required />
-                                <small className="text-muted">Full name as displayed on card</small>
-                                <div className="invalid-feedback">
-                                    Name on card is required
-                          </div>
-                            </MDBCol>
-                            <MDBCol md="6" className="mb-3">
-                                <label htmlFor="cc-number">Credit card number</label>
-                                <input type="text" className="form-control" id="cc-number" required />
-                                <div className="invalid-feedback">
-                                    Credit card number is required
-                          </div>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow>
-                            <MDBCol md="3" className="mb-3">
-                                <label htmlFor="cc-exp">Expiration</label>
-                                <input type="text" className="form-control" id="cc-exp" required />
-                                <div className="invalid-feedback">
-                                    Expiration date is required
-                          </div>
-                            </MDBCol>
-                            <MDBCol md="3" className="mb-3">
-                                <label htmlFor="cc-cvv">CVV</label>
-                                <input type="text" className="form-control" id="cc-cvv" required />
-                                <div className="invalid-feedback">
-                                    Security code is required
-                                </div>
-                            </MDBCol>
-                        </MDBRow>
-                        <hr className="mb-4" />
-
-                    </div>
-
-
-                    <MDBCol md='4' className='mb-3'>
-                        <div className='custom-control custom-checkbox pl-3'>
-                            <input
-                                className='custom-control-input'
-                                type='checkbox'
-                                value=''
-                                id='agreement'
-                                required
-                            />
-                            <label className='custom-control-label' htmlFor='agreement' >
-                                Agree to terms and conditions
-                            </label>
-                            <div className='invalid-feedback' >
-                                You must agree before submitting.</div>
+                        <div className="d-block my-3 ">
+                            <div className="mb-2 ml-4">
+                                <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap4" onClick={this.onClick(1)} checked={this.state.radio === 1 ? true : false} required />
+                                <label className="form-check-label" htmlFor="radioWithGap4">Credit card</label>
                             </div>
-                    </MDBCol>
+                            <div className="mb-2 ml-4">
+                                <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap5" onClick={this.onClick(2)} checked={this.state.radio === 2 ? true : false} required />
+                                <label className="form-check-label" htmlFor="radioWithGap5">Debit card</label>
+                            </div>
+                            <div className="mb-2 ml-4">
+                                <input name="group2" type="radio" className="form-check-input with-gap" id="radioWithGap6" onClick={this.onClick(3)} checked={this.state.radio === 3 ? true : false} required />
+                                <label className="form-check-label" htmlFor="radioWithGap6">Paypal</label>
+                            </div>
+                            <MDBRow>
+                                <MDBCol md="6" className="mb-3">
+                                    <label htmlFor="cc-name">Name on card</label>
+                                    <input type="text" className="form-control" id="cc-name" required />
+                                    <small className="text-muted">Full name as displayed on card</small>
+                                    <div className="invalid-feedback">
+                                        Name on card is required
+                          </div>
+                                </MDBCol>
+                                <MDBCol md="6" className="mb-3">
+                                    <label htmlFor="cc-number">Credit card number</label>
+                                    <input type="text" className="form-control" id="cc-number" required />
+                                    <div className="invalid-feedback">
+                                        Credit card number is required
+                          </div>
+                                </MDBCol>
+                            </MDBRow>
+                            <MDBRow>
+                                <MDBCol md="3" className="mb-3">
+                                    <label htmlFor="cc-exp">Expiration</label>
+                                    <input type="text" className="form-control" id="cc-exp" required />
+                                    <div className="invalid-feedback">
+                                        Expiration date is required
+                          </div>
+                                </MDBCol>
+                                <MDBCol md="3" className="mb-3">
+                                    <label htmlFor="cc-cvv">CVV</label>
+                                    <input type="text" className="form-control" id="cc-cvv" required />
+                                    <div className="invalid-feedback">
+                                        Security code is required
+                                </div>
+                                </MDBCol>
+                            </MDBRow>
+                            <hr className="mb-4" />
+
+                        </div>
 
 
-                    <MDBBtn color="cyan" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
-                        Place order
+                        <MDBCol md='4' className='mb-3'>
+                            <div className='custom-control custom-checkbox pl-3'>
+                                <input
+                                    className='custom-control-input'
+                                    type='checkbox'
+                                    value=''
+                                    id='agreement'
+                                    required
+                                />
+                                <label className='custom-control-label' htmlFor='agreement' >
+                                    Agree to terms and conditions
+                            </label>
+                                <div className='invalid-feedback' >
+                                    You must agree before submitting.</div>
+                            </div>
+                        </MDBCol>
+
+
+                        <MDBBtn color="cyan" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
+                            Place order
                     </MDBBtn>
 
-                </form>
+                    </form>
 
                 </MDBTabContent>
             </div>
@@ -283,10 +288,10 @@ export default FormsPage;
 
 
 /**
- * 
+ *
  * disabled={!this.state.formControls.name.valid}
- * 
- * 
+ *
+ *
 
 import React from "react";
 import { MDBInput, MDBBtn, MDBCol } from "mdbreact";

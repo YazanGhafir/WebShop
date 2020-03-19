@@ -60,6 +60,8 @@ export default class OrdersHistory extends Component {
             .then((data) => {
                 this.setState({ orders: data })
             }).catch(console.log);
+
+            console.log(this.state);
     }
 
 

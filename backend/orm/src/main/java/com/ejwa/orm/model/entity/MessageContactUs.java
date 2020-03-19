@@ -16,15 +16,14 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Payment implements Serializable {
+public class MessageContactUs implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long payment_id;
+    private Long message_id;
     
-    @NonNull private String paymentType;
-   
-    @JoinColumn(name="customerorder_id")
-    @OneToOne private CustomerOrder customerOrder;
-
+    @NonNull private String name;
+    @NonNull private String email;
+    @NonNull private String subject;
+    @NonNull private String message;
 
 }

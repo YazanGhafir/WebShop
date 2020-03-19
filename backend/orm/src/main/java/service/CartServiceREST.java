@@ -3,8 +3,10 @@ package service;
 import com.ejwa.orm.model.bean.CartBean;
 import com.ejwa.orm.model.bean.CartItem;
 import com.ejwa.orm.model.dao.CustomerDAO;
+import com.ejwa.orm.model.dao.MessageDAO;
 import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.CustomerOrder;
+import com.ejwa.orm.model.entity.MessageContactUs;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +39,9 @@ public class CartServiceREST {
 
     @EJB
     private CustomerDAO customerDAO;
+    
+    @EJB
+    private MessageDAO messageDAO;
 
     @Inject
     private SecurityContext securityContext;
@@ -183,5 +188,16 @@ public class CartServiceREST {
                 .build();
         }
     }
+    
+    
+    @GET
+    @Path("cMessage/{name}/{email}/{subject}/{message}")
+    public Response createMessage(@PathParam("name") String name, @PathParam("email") String email, @PathParam("subject") String subject, @PathParam("message") String message) {
+        messageDAO.create(new MessageContactUs(name, email, subject, message));
+        return Response
+                    .status(Response.Status.OK)
+                    .build();
+    }
+    
     
 }
