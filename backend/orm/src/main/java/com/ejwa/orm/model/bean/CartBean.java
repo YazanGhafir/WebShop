@@ -42,24 +42,26 @@ public class CartBean implements Serializable {
 
     @Getter
     private String customerInfo;
-    
-    @Getter 
+
+    @Getter
     private boolean inloggningsstatus = false;
 
     public void addItem(Long id, String size) {
         ClothingItem ci = clothingItemDAO.findClothingItemMatchingID(id);
         boolean found = false;
-        items.forEach(i -> {
-            if (i.getItem().getId() == id && i.getSize().equals(size)) {
-                int oldQuantity = i.getQuantity();
-                i.setQuantity(oldQuantity++);
-            } else if (!found) {
-                items.add(new CartItem(ci, size, 1));
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getItem().getId() == id && items.get(i).getSize().equals(size)) {
+                int oldQuantity = items.get(i).getQuantity();
+                items.get(i).setQuantity(oldQuantity++);
+                found = true;
             }
-        });
+        }
+        if (!found) {
+            items.add(new CartItem(ci, size, 1));
+        }
     }
-    
-    public void updateQuantity(long id, int quantity, String size){
+
+    public void updateQuantity(long id, int quantity, String size) {
         items.forEach(i -> {
             if (i.getItem().getId() == (id) && i.getSize().equals(size)) {
                 i.setQuantity(quantity);
@@ -70,7 +72,7 @@ public class CartBean implements Serializable {
     public void removeItem(Long id, String size) {
         items.forEach(i -> {
             if (i.getItem().getId() == (id) && i.getSize().equals(size)) {
-               items.remove(i);
+                items.remove(i);
             }
         });
     }
@@ -106,5 +108,5 @@ public class CartBean implements Serializable {
     public void removeCustomerInfoAfterLogout() {
         this.customerInfo = "A Great Person :D";
     }
-    
+
 }
