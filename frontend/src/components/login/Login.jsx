@@ -24,6 +24,8 @@ class Login extends Component {
     };
 
     onFormSubmit = e => {
+        
+
         if (document.getElementById('loginpassword1').value.length < 8) {
             alert("your password must containe at least 8 characters.");
         }      
@@ -41,15 +43,15 @@ class Login extends Component {
     loginToServer(){
         const cCred = this.state.email + '/' + this.state.password;
         const url = 'http://localhost:8080/orm/webshop/cart/auth/';
-        const both = url.toString + cCred.toString;
-        console.log(both.toString());
+        const both = url + cCred;
         
-        fetch(both.toString())
+        fetch(both)
             .then(function(response) {
                 if(response.status === 200) {
+                    console.log("STATUSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS = ", response.status);
                     window.location.replace('/minasidor');
                 } else {
-                    alert("There is a problem with your login, please try again later!");
+                    alert("username or password is invalid");
                 }
             });
     }
