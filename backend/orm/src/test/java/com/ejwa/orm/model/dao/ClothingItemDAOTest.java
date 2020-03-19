@@ -31,11 +31,6 @@ import org.junit.runner.RunWith;
 @Transactional
 @RunWith(Arquillian.class)
 public class ClothingItemDAOTest {
-
-    private long test_id_1;
-    private long test_id_2;
-    private long test_id_3;
-
     private static ClothingItem item1;
     private static ClothingItem item2;
     private static ClothingItem item3;
