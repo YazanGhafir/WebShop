@@ -48,7 +48,7 @@ public class CartBean implements Serializable {
         ClothingItem ci = clothingItemDAO.findClothingItemMatchingID(id);
         boolean found = false;
         items.forEach(i -> {
-            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+            if (i.getItem().getId() == id && i.getSize().equals(size)) {
                 int oldQuantity = i.getQuantity();
                 i.setQuantity(oldQuantity++);
             } else if (!found) {
@@ -59,7 +59,7 @@ public class CartBean implements Serializable {
     
     public void updateQuantity(long id, int quantity, String size){
         items.forEach(i -> {
-            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+            if (i.getItem().getId() == (id) && i.getSize().equals(size)) {
                 i.setQuantity(quantity);
             }
         });
@@ -68,8 +68,8 @@ public class CartBean implements Serializable {
     public void removeItem(Long id, String size) {
         List<CartItem> newList = new ArrayList<CartItem>();
         items.forEach(i -> {
-            if (!(i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size))) {
-               newList.add(i);
+            if (i.getItem().getId() == (id) && i.getSize().equals(size)) {
+               items.remove(i);
             }
         });
         items = newList;
