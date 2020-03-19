@@ -47,12 +47,12 @@ export default class Signup extends Component {
 
     
     registerAccount() {
-        const cInfo = this.state.email + '/' + this.state.password + '/NA/NA/NA/' + this.state.firstName + '/' + this.state.lastName; 
+        const cInfo = this.state.email + '/' + this.state.password + '/NA/NA/' + this.state.firstName + '/' + this.state.lastName; 
         const url = "http://localhost:8080/orm/webshop/cart/rca/";
-        const both = url.toString + cInfo.toString;
-        console.log(both.toString());
+        const both = url + cInfo;
+        console.log(both);
 
-        fetch(both.toString())
+        fetch(both)
             .then(function(response) {
                 if(response.status === 200) {
                     alert("your account as been successfully registered, welcome :). You will now be directed to Mina Sidor");
