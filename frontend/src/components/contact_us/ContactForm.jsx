@@ -28,8 +28,6 @@ onFormSubmit = e => {
     ) {
 
         this.sendMessage();
-        JSON.stringify(this.state);
-        window.location.replace('/MessageSent');
     } else {
         alert("You need to fix all the wrongs first :) ");
     }
@@ -37,10 +35,18 @@ onFormSubmit = e => {
 
 
 sendMessage() {
-    console.log(this.state)
-    fetch("http://localhost:8080/orm/webshop/contactus")
-        .then(console.log)
-        .catch(console.log);
+  const mInfo = this.state.name + '/' + this.state.email + '/' + this.state.subject + '/' + this.state.message;
+  const url = 'http://localhost:8080/orm/webshop/cart/cMessage/';
+  const both = url + mInfo;
+  
+  fetch(both)
+      .then(function(response) {
+          if(response.status === 200) {
+              window.location.replace('/MessageSent');
+          } else {
+              alert("something went wrong, please try again later");
+          }
+      })
 }
 
 render() {
