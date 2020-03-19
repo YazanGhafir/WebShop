@@ -5,4 +5,5 @@ backend/orm/.classpath
 backend/orm/.factorypath
 backend/orm/.project
 backend/orm/.settings/
+backend/orm/bin*
 backend/orm/nb-configuration.xml
