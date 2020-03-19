@@ -85,9 +85,9 @@ export default class ShoppingCart extends Component {
                         <div className="col-7" id="cartContent">
                             <h3 id="CartHeader">Shopping Cart ({this.state.cart.length} products)</h3>
                             {this.state.cart.map((product) => {
-                                return <ShoppingCartProduct key={product.item.clothingItem_id} img={product.item.image}
+                                return <ShoppingCartProduct key={product.item.id} img={product.item.image}
                                     title={product.item.label} subTitle={product.item.description} price={product.item.price}
-                                    size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.clothingItem_id}
+                                    size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.id}
                                     handleSelect={this.handleSelect.bind(this)} handleRemove={this.handleRemove.bind(this)}></ShoppingCartProduct>
                             })}
                         </div>
