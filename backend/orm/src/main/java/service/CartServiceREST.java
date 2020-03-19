@@ -123,10 +123,11 @@ public class CartServiceREST {
     @GET
     @Path("auth/{email}/{password}")
     public Response authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
+        System.out.println("Here Checkpoint TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
         UsernamePasswordCredential credential = new UsernamePasswordCredential(email.toLowerCase(), new Password(DigestUtils.sha256Hex(password)));
         AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse, AuthenticationParameters.withParams().credential(credential));
-        if (as == AuthenticationStatus.SUCCESS) {
-            Customer c = customerDAO.authenticateCustomer(email, password);
+        if (as == AuthenticationStatus.SUCCESS && customerDAO.is_registered_Customer(email.toLowerCase(), DigestUtils.sha256Hex(password))) {
+            Customer c = customerDAO.authenticateCustomer(email.toLowerCase(), DigestUtils.sha256Hex(password));
             cartBean.setInloggningsstatus(true);
             cartBean.addCustomerInfoAfterLogin(c.getFirstName() + "-" + c.getLastName() + "-" + c.getEmail());
             return Response
@@ -179,6 +180,4 @@ public class CartServiceREST {
         }
     }
     
-    
-
 }
