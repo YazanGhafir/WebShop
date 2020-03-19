@@ -18,8 +18,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import lombok.Data;
 import lombok.Getter;
 
@@ -68,11 +66,13 @@ public class CartBean implements Serializable {
     }
 
     public void removeItem(Long id, String size) {
+        List<CartItem> newList = new ArrayList<CartItem>();
         items.forEach(i -> {
-            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
-               items.remove(i);
+            if (!(i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size))) {
+               newList.add(i);
             }
         });
+        items = newList;
     }
 
     @PostConstruct
