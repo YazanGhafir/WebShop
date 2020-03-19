@@ -16,12 +16,8 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
-<<<<<<< HEAD
     "react-scripts": "^3.4.0",
-=======
-    "react-scripts": "3.3.0",
     "react-select": "^3.0.8",
->>>>>>> d44117ded2bcfff23be1800f10e20632fd7a0acd
     "styled-components": "^5.0.1"
   },
   "scripts": {
