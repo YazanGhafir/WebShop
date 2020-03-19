@@ -49,7 +49,7 @@ public class CartBean implements Serializable {
     
     private String customerInfo;
     
-    private String customerEmail;
+    private String customerEmail = "";
     
     private boolean inloggningsstatus = false;
     
@@ -101,12 +101,13 @@ public class CartBean implements Serializable {
     }
     
     public String createOrder() {
-        LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);;
+        LocalDateTime test_date = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);
         CustomerOrder order = new CustomerOrder(test_date);
+        if (customerEmail != "" && customerDAO.is_registered_email(customerEmail)) {
+            Customer customer = customerDAO.findCustomerMatchingEmail(customerEmail); 
+            order.setCustomer(customer);
+        } 
         List<CustomerOrderClothingItem> clothesList = new ArrayList<CustomerOrderClothingItem>();
-        Customer customer = customerDAO.findCustomerMatchingEmail(customerEmail);
-        //order.setCustomer(customer);
-        customerOrderDAO.create(order);
         items.forEach(i -> {
             CustomerOrderClothingItem c = new CustomerOrderClothingItem();
             c.setClothingItem(i.getItem());
@@ -116,9 +117,8 @@ public class CartBean implements Serializable {
             customerOrderClothingItemDAO.create(c);
             clothesList.add(c);
         });
-        CustomerOrder order1 = customerOrderDAO.find(order.getCustomerorder_id());
-        order1.setClothesList(clothesList);
-        customerOrderDAO.edit(order1);
+        order.setClothesList(clothesList);
+        customerOrderDAO.create(order);
         return "Order Created";
     }
     

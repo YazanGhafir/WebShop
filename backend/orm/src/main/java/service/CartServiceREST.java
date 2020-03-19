@@ -107,13 +107,15 @@ public class CartServiceREST {
             UsernamePasswordCredential credential = new UsernamePasswordCredential(email.toLowerCase(), new Password(DigestUtils.sha256Hex(password)));
             AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse, AuthenticationParameters.withParams().credential(credential));
             cartBean.setInloggningsstatus(true);
-            cartBean.addCustomerInfoAfterLogin(firstName + "-" + lastName + "-" + email);
+            cartBean.addCustomerInfoAfterLogin(firstName + "-" + lastName + "-" + email.toLowerCase());
+            cartBean.setCustomerEmail(email.toLowerCase());
             return Response
                     .status(Response.Status.OK)
                     .build();
         }
         cartBean.setInloggningsstatus(false);
         cartBean.addCustomerInfoAfterLogin("NAN");
+        cartBean.setCustomerEmail("");
         return Response
                 .status(Response.Status.NOT_ACCEPTABLE)
                 .build();
@@ -123,19 +125,20 @@ public class CartServiceREST {
     @GET
     @Path("auth/{email}/{password}")
     public Response authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
-        System.out.println("Here Checkpoint TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
         UsernamePasswordCredential credential = new UsernamePasswordCredential(email.toLowerCase(), new Password(DigestUtils.sha256Hex(password)));
         AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse, AuthenticationParameters.withParams().credential(credential));
         if (as == AuthenticationStatus.SUCCESS && customerDAO.is_registered_Customer(email.toLowerCase(), DigestUtils.sha256Hex(password))) {
             Customer c = customerDAO.authenticateCustomer(email.toLowerCase(), DigestUtils.sha256Hex(password));
             cartBean.setInloggningsstatus(true);
             cartBean.addCustomerInfoAfterLogin(c.getFirstName() + "-" + c.getLastName() + "-" + c.getEmail());
+            cartBean.setCustomerEmail(c.getEmail());
             return Response
                     .status(Response.Status.OK)
                     .build();
         }
         cartBean.setInloggningsstatus(false);
         cartBean.addCustomerInfoAfterLogin("NAN");
+        cartBean.setCustomerEmail("");
         return Response
                 .status(Response.Status.NOT_ACCEPTABLE)
                 .build();
@@ -148,6 +151,7 @@ public class CartServiceREST {
             httpServletRequest.logout();
             cartBean.setInloggningsstatus(false);
             cartBean.addCustomerInfoAfterLogin("NAN");
+            cartBean.setCustomerEmail("");
             return Response
                     .status(Response.Status.OK)
                     .build();
