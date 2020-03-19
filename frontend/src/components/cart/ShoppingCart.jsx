@@ -9,28 +9,13 @@ export default class ShoppingCart extends Component {
         cart: [
             {
                 item: {
-                    clothingItem_id: 59,
+                    id: 59,
                     colour: "Black",
                     customerOrders: [],
                     description: "this is the description",
                     image: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg",
                     label: "Adidas T-Shirt",
                     price: 349.00,
-                    sizeList: [],
-                },
-                quantity: 1,
-                size: "L"
-            },
-            {
-                item:
-                {
-                    clothingItem_id: 50,
-                    colour: "White",
-                    customerOrders: [],
-                    description: "this is the description",
-                    image: "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg",
-                    label: "Adidas T-Shirt",
-                    price: 590.99,
                     sizeList: [],
                 },
                 quantity: 1,
@@ -98,7 +83,7 @@ export default class ShoppingCart extends Component {
                             })}
                         </div>
                         <div className="col-4" id="cartContent">
-                            <h3>Total</h3>
+                            <h3>Summary</h3>
                             <div className="row" id="cartSummary">
                                 <p>Subtotal </p>
                                 <p className="cartTextAlign text-right">{this.calc(sumPrice)} kr</p>
@@ -106,6 +91,10 @@ export default class ShoppingCart extends Component {
                             <div className="row" id="cartSummary">
                                 <p>Frakt</p>
                                 <p className="cartTextAlign text-right">Free</p>
+                            </div>
+                            <div className="row total" id="cartSummary">
+                                <p style={{marginTop:"10px"}}>Total (including taxes)</p>
+                                <p className="summaryTextAlign text-right">{this.calc(sumPrice)} kr</p>
                             </div>
                             <Link to="/checkout">
                                 <button className="cartButton btn">Proceed to checkout</button>

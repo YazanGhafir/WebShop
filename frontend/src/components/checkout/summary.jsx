@@ -1,38 +1,50 @@
-import React, { Component } from 'react'
-import { MDBCard, MDBCardBody } from "mdbreact";
-import SummaryComponent from './SummaryComponent';
+import React, { Component } from 'react';
+import '../../css/ShoppingCart.css';
+
 
 export default class Summary extends Component {
 
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      products:[{ 'name': 'productDefault', 'img': 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg', price: '86$' }],
-      availabilityCode: '',
-      features: []
-    };
+  state = {
+    sumPrice: 0,
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/orm/webshop/sc")
+    fetch("http://localhost:8080/orm/webshop/cart")
       .then(res => res.json())
-      .then((data) => {
-        this.setState({ products: data })
-      }).catch(console.log);
+      .then(data => {
+        let sum = 0;
+        data.map((product) => {
+          return sum += (product.item.price * product.quantity);
+        })
+        this.setState({ sumPrice: this.calc(sum) });
+        console.log(data);
+      });
   }
 
-    render() {
-        return (
-            <div>
-                <MDBCard>
-                    <MDBCardBody>
-                        <h4 className="mb-4 mt-1 h5 text-center font-weight-bold">Summary</h4>
-                        {this.state.products.map((p, idx) => { return <SummaryComponent name={p.name} img={p.img} price={p.price} product_id={p.product_id} key={idx} /> })}
-                    </MDBCardBody>
-                </MDBCard>
-            </div>
-        )
-    }
+  calc(nr) {
+    var num = nr;
+    return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+  }
+
+  render() {
+    return (
+      <div className="col-11" id="orderSummary">
+        <h3>Summary</h3>
+        <div className="row" id="cartSummary">
+          <p>Subtotal </p>
+          <p className="cartTextAlign text-right">{this.state.sumPrice} kr</p>
+        </div>
+        <div className="row" id="cartSummary">
+          <p>Frakt</p>
+          <p className="cartTextAlign text-right">Free</p>
+        </div>
+        <div className="row total" id="cartSummary">
+          <p style={{ marginTop: "10px" }}>Total (including taxes)</p>
+          <p className="summaryTextAlign text-right">{this.state.sumPrice} kr</p>
+        </div>
+      </div>
+    )
+  }
 }
 

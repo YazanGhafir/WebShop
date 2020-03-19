@@ -99,7 +99,7 @@ public class CartBean implements Serializable {
         List<CustomerOrderClothingItem> clothesList = new ArrayList<CustomerOrderClothingItem>();
         items.forEach(i -> {
             CustomerOrderClothingItem c = new CustomerOrderClothingItem();
-            c.setClothingItem(i.getItem());
+            c.setClothingItem(clothingItemDAO.find(i.getItem().getId()));
             c.setQuantity(i.getQuantity());
             c.setSize(i.getSize());
             clothesList.add(c);
