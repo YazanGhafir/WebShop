@@ -9,35 +9,19 @@ import Button from 'react-bootstrap/Button';
 
 export default class Navbar2 extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { 'loggingstatus' : 'false' };
-      }
-    
 
-    componentDidMount() {
-        //this.fetchloggingstatus();
-    }
 
-    fetchloggingstatus(){
-        fetch("http://localhost:8080/orm/webshop/category") //invalid url
-        .then(res => res.json())
-        .then((data) => {
-        this.setState({ loggingstatus : data })
-        }).catch(console.log);
-    }
-    
-    checkloggingstatus() {
-        console.log(this.state);
-        //this.fetchloggingstatus();
-        if (this.state.loggingstatus == 'false') {
-            window.location.replace('/login');
-        } else if (this.state.loggingstatus == 'true') {
-            window.location.replace('/minasidor');
-        } else {
-            alert('Critical Logging problem, We will fix that and comeback as soon as possible');
-            // send to admin summary of the problem (invalid logging status)
-        }
+    checkloggingstatus(){
+        const url = 'http://localhost:8080/orm/webshop/cart/loginstatus/';
+        
+        fetch(url.toString())
+            .then(function(response) {
+                if(response.status === 200) {
+                    window.location.replace('/minasidor');
+                } else {
+                    window.location.replace('/login');
+                }
+            });
     }
 
     render() {
@@ -80,7 +64,7 @@ export default class Navbar2 extends Component {
                                 <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>
                                 </Link>
                                 <div>
-                                    <Button variant="outline-dark"><MDBIcon far icon="user" onClick={() => {this.checkloggingstatus()}}/></Button>
+                                    <Button variant="outline-dark" onClick={() => {this.checkloggingstatus()}}><MDBIcon far icon="user" /></Button>
                                 </div>
                                 <Link to="/Contact_us" >
                                     <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>

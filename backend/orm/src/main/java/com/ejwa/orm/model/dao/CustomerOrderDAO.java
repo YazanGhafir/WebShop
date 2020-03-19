@@ -1,5 +1,6 @@
 package com.ejwa.orm.model.dao;
 
+import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.QCustomerOrder_;
 import easycriteria.JPAQuery;
@@ -54,6 +55,15 @@ public class CustomerOrderDAO extends AbstractDAO<CustomerOrder, Long> {
         List<CustomerOrder> q_List = new JPAQuery(getEntityManager()).select(CustomerOrder.class)
                 .where(
                         qo_.date.greaterThanOrEqualTo(date)
+                ).getResultList();
+        return q_List;
+    }
+
+    public List<CustomerOrder> findCustomerOrdersMatchingCustomer(String customerEmail) {
+        QCustomerOrder_ qo_ = new QCustomerOrder_();
+        List<CustomerOrder> q_List = new JPAQuery(getEntityManager()).select(CustomerOrder.class)
+                .where(
+                        qo_.customer.email.eq(customerEmail)
                 ).getResultList();
         return q_List;
     }

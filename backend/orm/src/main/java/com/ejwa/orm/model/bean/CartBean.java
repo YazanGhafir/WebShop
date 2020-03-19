@@ -40,10 +40,10 @@ public class CartBean implements Serializable {
     @Getter
     private List<CartItem> items;
 
-    @Getter
     private String customerInfo;
     
-    @Getter 
+    private String customerEmail;
+    
     private boolean inloggningsstatus = false;
 
     public void addItem(Long id, String size) {
@@ -107,4 +107,7 @@ public class CartBean implements Serializable {
         this.customerInfo = "A Great Person :D";
     }
     
+    public List<CustomerOrder> getHistory(){
+        return this.customerOrderDAO.findCustomerOrdersMatchingCustomer(customerEmail);
+    }    
 }
