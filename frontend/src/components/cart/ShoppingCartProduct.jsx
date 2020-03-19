@@ -11,15 +11,10 @@ export default class ShoppingCartProduct extends Component {
         console.log(event.target);
     }
 
-    toProductDetails(pid) {
-        var url = "http://localhost:8080/orm/webshop/s/v/" + pid
-        fetch(url, {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({})
-        });
+    calc(nr) {
+        var num = nr;
+        return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
     }
-
 
 
     render() {
@@ -28,7 +23,7 @@ export default class ShoppingCartProduct extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Link to={`/details/${this.props.product_id}`} onClick={() => { this.toProductDetails(this.props.id) }}>
+                    <Link to={`/details/${this.props.id}`}>
                         <div className="column-4">
                             <img src={this.props.img} className="rounded float-left" alt="Responsive image" id="cartImage">
                             </img>
@@ -36,11 +31,11 @@ export default class ShoppingCartProduct extends Component {
                         </div>
                     </Link>
                     <div className="column-8" id="productDescription">
-                        <Link to={`/details/${this.props.product_id}`} style={{ textDecoration: 'none', color: '#000000' }} id="productLink" onClick={() => { this.toProductDetails(this.props.id) }}>
+                        <Link to={`/details/${this.props.id}`} style={{ textDecoration: 'none', color: '#000000' }} id="productLink" onClick={() => { this.toProductDetails(this.props.id) }}>
                             <h6>{this.props.title}</h6>
                             <p id="productText">{this.props.subTitle}</p>
                         </Link>
-                        <p id="productText">Colour:  {this.props.color}</p>
+                        <p id="productText">Colour:  {this.props.colour}</p>
                         <p id="productText">Size:  {this.props.size}</p>
                         <button className="cartButton btn" onClick={(e) => this.props.handleRemove(e, this.props.id, this.props.size)}>Remove</button>
                     </div>
@@ -58,7 +53,7 @@ export default class ShoppingCartProduct extends Component {
                             </Form>
                         </div>
                         <div className="row">
-                            <p className="font-weight-bold">{this.props.price * this.props.quantity}</p>
+                            <p className="font-weight-bold">{this.calc(this.props.price * this.props.quantity)}</p>
                         </div>
                     </div>
                 </div>

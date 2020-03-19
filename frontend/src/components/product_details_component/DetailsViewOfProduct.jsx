@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import '../../css/Details.css';
-import Form from "react-bootstrap/Form";
 import Select from 'react-select';
 
 
@@ -12,7 +11,7 @@ class DetailsViewOfProduct extends Component {
     this.state = {
       selectedSize: "",
       product: {
-        clothingItem_id: 601,
+        id: 601,
         colour: "olive",
         customerOrders: [],
         description: "Rubber",
@@ -28,6 +27,7 @@ class DetailsViewOfProduct extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match.id);
     fetch("http://localhost:8080/orm/webshop/clothingItem/" + this.props.match.params.id) 
      .then(res => res.json())
       .then((data) => {
@@ -40,19 +40,23 @@ class DetailsViewOfProduct extends Component {
     var num = nr;
     return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
   }
-
-  handleSelect(e) {
-    this.setState({ selectedSize: e.target.value })
+  
+  handleSelect = (selectedSize) => {
+    console.log(selectedSize);
+    this.setState({ selectedSize });
   }
 
   handleAddToCart() {
-    fetch('http://localhost:8080/orm/webshop/cart/' + this.state.product.clothingItem_id + '/' + this.state.selectedSize, {
+    console.log('http://localhost:8080/orm/webshop/cart/' + this.state.product.id + '/' + this.state.selectedSize.value);
+    console.log(this.state.selectedSize);
+    fetch('http://localhost:8080/orm/webshop/cart/' + this.state.product.id + '/' + this.state.selectedSize.value, {
       method: 'POST',
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       },
     })
   }
+
 
 
 
@@ -63,6 +67,8 @@ class DetailsViewOfProduct extends Component {
       { value: 'M', label: 'M' },
       { value: 'L', label: 'L' },
       { value: 'XL', label: 'XL' }];
+
+      const { selectedOption } = this.state;
 
     return (
       <div>
@@ -76,7 +82,7 @@ class DetailsViewOfProduct extends Component {
               <p className="priceText">{this.calc(this.state.product.price) + " kr"}</p>
               <p>{this.state.product.description}</p>
               <div className="sizeDropdown">
-                <Select options={options} placeholder={'Select a size'} />
+                <Select options={options} value={selectedOption} placeholder={'Select a size'} onChange={this.handleSelect} />
               </div>
               <button className="addToCartButton btn" onClick={this.handleAddToCart.bind(this)}>Add to cart</button>
             </div>

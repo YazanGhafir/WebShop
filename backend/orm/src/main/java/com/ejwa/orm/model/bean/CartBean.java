@@ -54,7 +54,7 @@ public class CartBean implements Serializable {
             if (items.get(i).getItem().getId() == (id) && items.get(i).getSize().equals(size)) {
                 int oldQuantity = items.get(i).getQuantity();
                 CartItem newItem = items.get(i);
-                newItem.setQuantity(oldQuantity++);
+                newItem.setQuantity(oldQuantity + 1);
                 newList.add(newItem);
                 found = true;
             } else {
