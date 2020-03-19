@@ -100,9 +100,20 @@ public class ClothingItemDAO extends AbstractDAO<ClothingItem, Long> {
 
     }
 
-    public double findMaxProductPrice() {
+    public double findMinProductPrice() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-        QClothingItem_ clothingItem = new QClothingItem_();
+        CriteriaQuery<Double> q = cb.createQuery(Double.class);
+        Root<ClothingItem> r = q.from(ClothingItem.class);
+        q.select(cb.min(r.get("price")));
+
+        Double p = entityManager.createQuery(q).getSingleResult();
+
+        return p;
+        
+    }
+    public double findMaxClothingItemPrice() {
+
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Double> q = cb.createQuery(Double.class);

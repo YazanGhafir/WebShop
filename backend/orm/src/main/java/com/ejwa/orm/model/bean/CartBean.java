@@ -50,7 +50,7 @@ public class CartBean implements Serializable {
         ClothingItem ci = clothingItemDAO.findClothingItemMatchingID(id);
         boolean found = false;
         items.forEach(i -> {
-            if (i.getItem().getClothingItem_id().equals(id) && i.getSize().equals(size)) {
+            if (i.getItem().getId() == id && i.getSize().equals(size)) {
                 int oldQuantity = i.getQuantity();
                 i.setQuantity(oldQuantity++);
             } else if (!found) {
@@ -66,7 +66,7 @@ public class CartBean implements Serializable {
     @PostConstruct
     public void init() {
         this.items = new ArrayList<CartItem>();
-        ClothingItem ci = new ClothingItem("Adidas T-Shirt", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black");
+        ClothingItem ci = new ClothingItem("Adidas T-ShirtCartBean", 5.0, "this is the description", "https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg", "Black");
         items.add(new CartItem(ci, "L", 1));
     }
 

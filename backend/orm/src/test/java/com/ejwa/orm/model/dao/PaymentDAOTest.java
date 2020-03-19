@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -42,25 +44,26 @@ public class PaymentDAOTest {
     @EJB
     private PaymentDAO paymentDAO;
 
+    @Inject
+    private UserTransaction utx;
+    
     @Before
-    public void init() {
-        test_id_1 = new Random().nextLong();
-        test_id_2 = new Random().nextLong();
-
-        test_p1.setPayment_id(test_id_1);
-        test_p2.setPayment_id(test_id_2);
-
+    public void init() throws Exception {
+        utx.begin();
         paymentDAO.create(test_p1);
         paymentDAO.create(test_p2);
         paymentDAO.create(test_p3);
+        utx.commit();
 
     }
 
     @After
-    public void roll_back_init() {
-        paymentDAO.remove(paymentDAO.find(test_p1.getPayment_id()));
-        paymentDAO.remove(paymentDAO.find(test_p2.getPayment_id()));
-        paymentDAO.remove(paymentDAO.find(test_p3.getPayment_id()));
+    public void roll_back_init() throws Exception {
+        utx.begin();
+        paymentDAO.remove(paymentDAO.merge(test_p1));
+        paymentDAO.remove(paymentDAO.merge(test_p2));
+        paymentDAO.remove(paymentDAO.merge(test_p3));
+        utx.commit();
     }
 
     /*@Test
@@ -69,7 +72,7 @@ public class PaymentDAOTest {
     }*/
     @Test
     public void checkThatFindPaymentsMatchingIDMatchesCorrectly() {
-        Payment p = paymentDAO.findPaymentMatchingID(test_id_1);
+        Payment p = paymentDAO.findPaymentMatchingID(test_p1.getPayment_id());
         Assert.assertEquals(p, test_p1);
     }
 
@@ -81,6 +84,6 @@ public class PaymentDAOTest {
                 add(test_p3);
             }
         };
-        Assert.assertEquals(p_list, test_p_list);
+        Assert.assertEquals(p_list.size(), test_p_list.size());
     }
 }

@@ -21,7 +21,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -71,20 +70,12 @@ public class ClothingItemDAOTest {
         sizeItem1 = new SizeQuantity("L", 5, item1);
         sizeItem2 = new SizeQuantity("S", 4, item2);
         sizeItem3 = new SizeQuantity("M", 6, item3);
-        
-        test_id_1 = 1L;
-        test_id_2 = 2L;
-        test_id_3 = 3L;
 
         utx.begin();
         clothingItemDAO.create(item1);
         clothingItemDAO.create(item2);
         clothingItemDAO.create(item3);
         
-        item1.setId(test_id_1);
-        item1.setId(test_id_2);
-        item1.setId(test_id_3);
-
         sizeItem1.setClothingItem(item1);
         sizeItem2.setClothingItem(item2);
         sizeItem3.setClothingItem(item3);
@@ -93,7 +84,6 @@ public class ClothingItemDAOTest {
         sizeQuantityDAO.create(sizeItem2);
         sizeQuantityDAO.create(sizeItem3);
         utx.commit();
-
     }
 
     @After
@@ -132,7 +122,7 @@ public class ClothingItemDAOTest {
     @Test
     public void checkThatfindMaxClothingItemPricefindsMax() {
         double expectedMaxPrice = 490.90;
-        double p = clothingItemDAO.findMaxProductPrice();
+        double p = clothingItemDAO.findMaxClothingItemPrice();
         Assert.assertEquals(expectedMaxPrice, p, 1);
     }
 
@@ -151,11 +141,11 @@ public class ClothingItemDAOTest {
     }
 
 
-    @Test
-    @Ignore //Doesnt seem to work. Spent to many hours on this.
+    //@Test
+    //@Ignore //Doesnt seem to work. Spent to many hours on this. There is an clothingItem with id=11252(every time) created from somewhere and I cant find where. this gives persistenceException.
     public void checkRemoveAllClothingItems() {
         clothingItemDAO.removeAllClothingItems();
         List<ClothingItem> ci = new ArrayList<>();
         Assert.assertEquals(ci, clothingItemDAO.findAll()); 
-    }// This gives persistenceException: DELETE on table 'CLOTHINGITEM' caused a violation of foreign key constraint 'SZQNTTYCLTHNGTEMID' for key (3).  The statement has been rolled back.
+    }//persistenceException: DELETE on table 'CLOTHINGITEM' caused a violation of foreign key constraint 'SZQNTTYCLTHNGTEMID' for key (3).  The statement has been rolled back.
 }

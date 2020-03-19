@@ -12,7 +12,6 @@ import com.ejwa.orm.model.entity.ClothingItem;
 import com.ejwa.orm.model.entity.Customer;
 import com.ejwa.orm.model.entity.CustomerOrder;
 import com.ejwa.orm.model.entity.Payment;
-import com.ejwa.orm.model.entity.Product;
 import com.ejwa.orm.model.entity.SizeQuantity;
 import com.ejwa.orm.model.entity.SizeQuantityId;
 import com.ejwa.wsconig.JAXRSConfiguration;
@@ -50,7 +49,7 @@ public class ClothingItemServiceRESTTest {
     @Deployment(testable = false)
     public static WebArchive create() {
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(ClothingItemServiceREST.class, JAXRSConfiguration.class, ClothingItemDAO.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class, Category.class, Customer.class, CustomerOrder.class, Payment.class, Product.class)
+                .addClasses(ClothingItemServiceREST.class, JAXRSConfiguration.class, ClothingItemDAO.class, ClothingItem.class, SizeQuantity.class, SizeQuantityId.class, SizeQuantityDAO.class, Category.class, Customer.class, CustomerOrder.class, Payment.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -62,8 +61,8 @@ public class ClothingItemServiceRESTTest {
     }
 
     @Test
-    @RunAsClient
-    public void checkThatBlaBla(@ArquillianResteasyResource("webshop/clothingItem") WebTarget webTarget) {
+    //@RunAsClient ------ @ArquillianResteasyResource("webshop/clothingItem") WebTarget webTarget
+    public void checkThatBlaBla() {
         /* Intentionally commented out, to be progessed at a later moment. If UNcommented, the other tests will fail since this one persists entitys.
         init(webTarget);
 
