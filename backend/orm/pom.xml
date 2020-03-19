@@ -215,7 +215,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                <skipTests>false</skipTests> <!-- set to false if you want to do the tests. -->
+                <!-- <skipTests>true</skipTests>-->
                 </configuration>
             </plugin>
         </plugins>
