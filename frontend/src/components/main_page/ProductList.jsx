@@ -48,7 +48,7 @@ export default class ProductList extends Component {
                     </Row>
                     
                     <Row>
-                        {this.state.products.map((p, idx) => { return <Product name={p.label} description={p.description} img={p.image} price={p.price} product_id={p.clothingItem_id} key={idx} /> })}
+                        {this.state.products.map((p, idx) => { return <Product name={p.label} description={p.description} img={p.image} price={p.price} id={p.id} key={idx} /> })}
                     </Row>
 
             </React.Fragment>
