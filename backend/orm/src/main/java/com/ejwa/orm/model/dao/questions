@@ -4,3 +4,7 @@
 
 4- hur att samla namnen på saker i olika språk i ett fil.
 
+[CustomerOrder(customerorder_id=-6467102584175394609, date=2014-10-11T16:15:15, payment=null, customer=null, clothesList={IndirectList: not instantiated}),
+ CustomerOrder(customerorder_id=471867790514760271, date=2014-09-11T16:15:15, payment=null, customer=null, clothesList={IndirectList: not instantiated})]> but was:<
+[CustomerOrder(customerorder_id=471867790514760271, date=2014-09-11T16:15:15, payment=null, customer=null, clothesList={[]}),
+ CustomerOrder(customerorder_id=-6467102584175394609, date=2014-10-11T16:15:15, payment=null, customer=null, clothesList={[]})]>

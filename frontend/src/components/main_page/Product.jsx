@@ -11,28 +11,14 @@ export default class Product extends Component {
 
     }
 
-    addToCart(props) {
-
-    }
-
-    toProductDetails(pid) {
-        var url = "http://localhost:8080/orm/webshop/s/v/" + pid
-        fetch(url, {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({})
-        });
-    }
-
-
     render() {
-        console.log(this.props.product_id)
+        console.log(this.props.id)
         return (
 
             <Col xs={12} sm={6} md={4} >
                 
                 <MDBCard className="mt-5">
-                    <Link to='/Details'>
+                    <Link to={`/details/${this.props.id}`}>
                         <MDBCardImage className="d-block w-100" src={this.props.img} height="300px" />
                     </Link>
                     <MDBCardBody>
@@ -44,7 +30,7 @@ export default class Product extends Component {
                             {this.props.price}
                         </MDBCardText>
                         
-                        <Link to='/Details' className="btn btn-primary" onClick={() => { this.toProductDetails(this.props.product_id) }}>                       
+                        <Link to={`/details/${this.props.id}`} className="btn btn-primary">                       
                             View
                         </Link>
                     </MDBCardBody>

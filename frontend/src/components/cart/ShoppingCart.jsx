@@ -41,15 +41,15 @@ export default class ShoppingCart extends Component {
 
     getCartFromDB = () => {
         fetch("http://localhost:8080/orm/webshop/cart")
-        .then(res => res.json())
-        .then(data => {
-            this.setState({ cart: data });
-            console.log(data);
-        });
+            .then(res => res.json())
+            .then(data => {
+                this.setState({ cart: data });
+                console.log(data);
+            });
     }
 
     componentDidMount() {
-       this.getCartFromDB();
+        this.getCartFromDB();
     }
 
     handleSelect(e, id, size) {
@@ -59,14 +59,20 @@ export default class ShoppingCart extends Component {
                 "Content-type": "application/json; charset=UTF-8"
             },
         })
-        .then(this.getCartFromDB);
+            .then(this.getCartFromDB);
     }
 
     handleRemove(e, id, size) {
         console.log("remove clicked");
         fetch('http://localhost:8080/orm/webshop/cart/' + id + '/' + size, {
-            method: 'DELETE'})
-        .then(this.getCartFromDB);
+            method: 'DELETE'
+        })
+            .then(this.getCartFromDB);
+    }
+
+    calc(nr) {
+        var num = nr;
+        return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
     }
 
 
@@ -85,9 +91,9 @@ export default class ShoppingCart extends Component {
                         <div className="col-7" id="cartContent">
                             <h3 id="CartHeader">Shopping Cart ({this.state.cart.length} products)</h3>
                             {this.state.cart.map((product) => {
-                                return <ShoppingCartProduct key={product.item.clothingItem_id} img={product.item.image}
+                                return <ShoppingCartProduct key={product.item.id} img={product.item.image}
                                     title={product.item.label} subTitle={product.item.description} price={product.item.price}
-                                    size={product.size} color={product.item.color} quantity={product.quantity} id={product.item.clothingItem_id}
+                                    size={product.size} colour={product.item.colour} quantity={product.quantity} id={product.item.id}
                                     handleSelect={this.handleSelect.bind(this)} handleRemove={this.handleRemove.bind(this)}></ShoppingCartProduct>
                             })}
                         </div>
@@ -95,7 +101,7 @@ export default class ShoppingCart extends Component {
                             <h3>Total</h3>
                             <div className="row" id="cartSummary">
                                 <p>Subtotal </p>
-                                <p className="cartTextAlign text-right">{sumPrice} kr</p>
+                                <p className="cartTextAlign text-right">{this.calc(sumPrice)} kr</p>
                             </div>
                             <div className="row" id="cartSummary">
                                 <p>Frakt</p>

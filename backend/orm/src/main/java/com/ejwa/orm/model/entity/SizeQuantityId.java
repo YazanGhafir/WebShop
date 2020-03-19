@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SizeQuantityId implements Serializable{
-    
     private String size;
-    private Long clothingItem;
-        
+    private long clothingItem;   
 }

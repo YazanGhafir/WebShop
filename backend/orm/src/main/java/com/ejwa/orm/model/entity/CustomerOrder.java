@@ -38,11 +38,6 @@ public class CustomerOrder implements Serializable {
     @OneToOne
     private Customer customer;
     
-    /*
-    @JoinTable(name = "customerOrder_clothingItem",
-    joinColumns = @JoinColumn(name = "customerOrder_id_"),
-    inverseJoinColumns = @JoinColumn(name = "clothingItem_id_"))@ManyToMany
-    */
      @OneToMany(
         mappedBy = "customerOrder",
         cascade = CascadeType.ALL,

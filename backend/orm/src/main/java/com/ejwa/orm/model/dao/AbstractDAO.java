@@ -2,6 +2,7 @@ package com.ejwa.orm.model.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -46,10 +47,22 @@ public abstract class AbstractDAO<T,K> {
     }
 
     public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        getEntityManager().remove(entity);
     }
 
     public void refresh(T entity){
         getEntityManager().refresh(entity);
+    }
+
+    public T merge(T entity) {
+        return getEntityManager().merge(entity);
+    }
+ 
+    public void flush() {
+        getEntityManager().flush();
+    }
+
+    public EntityTransaction getTransaction() {
+        return getEntityManager().getTransaction();
     }
 }
