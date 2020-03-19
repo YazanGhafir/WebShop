@@ -52,7 +52,10 @@ export default class Navbar2 extends Component {
                             <Link to='/'>
                                 <img src={logo} alt="store" className="navbar-brand ml-5" />
                             </Link>
-                            <Navb.Brand href='/' >Challando</Navb.Brand>
+                            <Link to='/' >
+                                <Navb.Brand>Challando</Navb.Brand>
+                            </Link>
+                            
                         </MDBAnimation>
                         
                     </Col>
