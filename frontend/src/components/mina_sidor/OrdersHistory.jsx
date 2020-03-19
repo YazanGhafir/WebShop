@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import History_card from './History_card';
 import Accordion from 'react-bootstrap/Accordion';
 import MyInfo from './MyInfo';
-import { MDBRow, MDBCard, MDBCardBody, MDBContainer, MDBCol } from "mdbreact";
+import { MDBRow, MDBCard, MDBCardBody, MDBContainer, MDBBtn } from "mdbreact";
 
 export default class OrdersHistory extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            info:"",
             orders: [
                 {
                     'customerorder_id': '1', 'date': '2020-03-11', 'total_payed': '156$', 'productList': [
@@ -45,7 +46,16 @@ export default class OrdersHistory extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/orm/webshop/sessionbean/history")
+        fetch("http://localhost:8080/orm/webshop/cart/customer")
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                this.setState({ info: data })
+            }).catch(console.log);
+
+  
+
+        fetch("http://localhost:8080/orm/webshop/cart/history")
             .then(res => res.json())
             .then((data) => {
                 this.setState({ orders: data })
@@ -57,6 +67,17 @@ export default class OrdersHistory extends Component {
         var tmp = this.eventK;
         this.eventK = this.eventK + 1;
         return tmp;
+    }
+
+    logout(){
+        fetch('http://localhost:8080/orm/webshop/cart/logout')
+        .then(function(response) {
+            if(response.status === 200) {
+                window.location.replace('/');
+            } else {
+                alert("There is a problem with your logout, please try again later!");
+            }
+        });
     }
 
     render() {
@@ -85,6 +106,9 @@ export default class OrdersHistory extends Component {
                                     })}
                                 </Accordion>
                             </MDBRow>
+                            <MDBBtn color="cyan" size="lg" block onClick={() => { this.logout() }}>
+                                    Log out
+                            </MDBBtn>
                         </MDBContainer>
                     </MDBCardBody>
                 </MDBCard>

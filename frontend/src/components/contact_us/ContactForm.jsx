@@ -29,7 +29,7 @@ onFormSubmit = e => {
 
         this.sendMessage();
         JSON.stringify(this.state);
-        window.open('/MessageSent');
+        window.location.replace('/MessageSent');
     } else {
         alert("You need to fix all the wrongs first :) ");
     }

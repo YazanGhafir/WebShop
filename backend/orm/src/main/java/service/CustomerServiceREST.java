@@ -5,6 +5,8 @@ import com.ejwa.orm.model.entity.Customer;
 
 import com.github.javafaker.Faker;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import javax.security.enterprise.authentication.mechanism.http.AuthenticationPar
 import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.Password;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -26,6 +29,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Path("customer")
 public class CustomerServiceREST {
@@ -36,18 +40,11 @@ public class CustomerServiceREST {
     @Inject
     private SecurityContext securityContext;
   
-
     @Context
     private HttpServletRequest httpServletRequest;
 
     @Context
     private HttpServletResponse httpServletResponse;
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Customer entity) {
-        customerDAO.create(entity);
-    }
 
     @PUT
     @Path("{id}")
@@ -73,12 +70,12 @@ public class CustomerServiceREST {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> findAll() {
         Faker faker = new Faker();
-        customerDAO.create(new Customer(faker.internet().emailAddress(),
-                faker.internet().password(),
+        customerDAO.register_customer_signup(faker.internet().emailAddress(),
+                DigestUtils.sha256Hex(faker.internet().password()),
                 faker.address().streetAddress(),
                 faker.address().streetAddress(),
                 faker.name().firstName(),
-                faker.name().lastName()));
+                faker.name().lastName());
         return customerDAO.findAll();
     }
 
@@ -93,38 +90,57 @@ public class CustomerServiceREST {
     @Path("rc/{email}/{password}")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean register_customer_signup(@PathParam("email") String email, @PathParam("password") String password) {
-        return customerDAO.register_customer_signup(email, password);
+        return customerDAO.register_customer_signup(email.toLowerCase(), DigestUtils.sha256Hex(password));
+    }
+    
+    @POST
+    @Path("rca/{email}/{password}/{shippingAdress}/{homeAdress}/{firstName}/{lastName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean register_customer_signup(@PathParam("email") String email, @PathParam("password") String password,
+                                           @PathParam("shippingAdress") String shippingAdress, @PathParam("homeAdress") String homeAdress,
+                                           @PathParam("firstName") String firstName, @PathParam("lastName") String lastName) {
+        return customerDAO.register_customer_signup(email.toLowerCase(), DigestUtils.sha256Hex(password), shippingAdress, homeAdress, firstName, lastName);
     }
 
     // @RolesAllowed("hhh")
     @GET
     @Path("auth/{email}/{password}")
-    @Produces(MediaType.APPLICATION_JSON)
     public AuthenticationStatus authenticateCustomer(@PathParam("email") String email, @PathParam("password") String password) {
-        UsernamePasswordCredential credential = new UsernamePasswordCredential(email, new Password(password));
-        AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse,AuthenticationParameters.withParams().credential(credential));
+        UsernamePasswordCredential credential = new UsernamePasswordCredential(email.toLowerCase(), new Password(DigestUtils.sha256Hex(password)));
+        AuthenticationStatus as = securityContext.authenticate(httpServletRequest, httpServletResponse, AuthenticationParameters.withParams().credential(credential));
         return as;
         //return customerDAO.authenticateCustomer(email, password);
     }
 
+     @GET
+    @Path("logout")
+    public void logout() {
+        try {
+            httpServletRequest.logout();
+        } catch (ServletException ex) {
+            Logger.getLogger(CustomerServiceREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @GET
-    @Path("isReg/{email}/{password}")
+    @Path("isReg/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean is_registered_Customer(@PathParam("email") String email, @PathParam("password") String password) {
-        return customerDAO.is_registered_Customer(email, password);
+    public boolean is_registered_Customer(@PathParam("email") String email) {
+        return customerDAO.is_registered_email(email.toLowerCase());
     }
 
+    
     @DELETE
     @Path("rem/{email}/{password}")
     public void remove_Customer(@PathParam("email") String email, @PathParam("password") String password) {
-        customerDAO.remove_Customer(email, password);
+        customerDAO.remove_Customer(email.toLowerCase(), DigestUtils.sha256Hex(password));
     }
 
     @GET
     @Path("fiem/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer findByEmail(@PathParam("email") String email) {
-        return customerDAO.findCustomerMatchingEmail(email);
+        return customerDAO.findCustomerMatchingEmail(email.toLowerCase());
     }
 
     @GET

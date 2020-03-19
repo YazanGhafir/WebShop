@@ -38,7 +38,7 @@ public class ClothingItemInitBean {
             clothingItemDao.create(
                     new ClothingItem(
                             new Faker().commerce().productName(),
-                            Double.valueOf(new Faker().commerce().price(0, 100)).doubleValue(),
+                            (10 + 90 * new Random().nextDouble()),
                             new Faker().commerce().material(),
                             "https://images.pexels.com/photos/2673" + i + "/pexels-photo-2673" + i + ".jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                              new Faker().commerce().color()

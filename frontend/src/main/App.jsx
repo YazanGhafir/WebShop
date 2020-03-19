@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/single_page_shared/Navbar';
 import Checkout from '../components/checkout/checkout';
 import ProductList from '../components/main_page/ProductList';
-import Details from '../components/product_details_component/Details';
+import Details from '../components/product_details_component/DetailsViewOfProduct';
 import LoginContainer from '../components/login/LoginContainer';
 import ShoppingCart from '../components/cart/ShoppingCart';
 import Default from '../components/single_page_shared/Default';
@@ -40,7 +40,7 @@ class App extends Component {
               <Col sm={12} lg={10}>
                 <Switch>
                   <Route exact path="/" component={ProductList} />
-                  <Route path="/details" component={Details} />
+                  <Route path="/details/:id" component={Details} />
                   <Route path="/cart" component={ShoppingCart} />
                   <Route path="/login" component={LoginContainer} />
                   <Route path="/checkout" component={Checkout} />

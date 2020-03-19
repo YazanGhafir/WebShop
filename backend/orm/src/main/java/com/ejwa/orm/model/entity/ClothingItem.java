@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
@@ -32,8 +31,9 @@ import lombok.RequiredArgsConstructor;
 public class ClothingItem implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long clothingItem_id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
     @NonNull
     private String label;
     @NonNull

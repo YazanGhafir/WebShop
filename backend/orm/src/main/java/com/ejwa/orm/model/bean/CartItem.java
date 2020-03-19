@@ -7,13 +7,9 @@ package com.ejwa.orm.model.bean;
 
 import com.ejwa.orm.model.entity.ClothingItem;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *

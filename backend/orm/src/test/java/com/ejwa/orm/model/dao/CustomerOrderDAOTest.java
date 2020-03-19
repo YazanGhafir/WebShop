@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -28,12 +30,10 @@ public class CustomerOrderDAOTest {
     private Long test_id_1;
     private Long test_id_2;
 
-    private LocalDateTime test_date1 = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 6, 6, 6);
-    ;
-    private LocalDateTime test_date2 = LocalDateTime.of(2014, Month.OCTOBER, 11, 6, 6, 6);
-    ;
-    private LocalDateTime test_date3 = LocalDateTime.of(2014, Month.AUGUST, 11, 6, 6, 6);
-    ;
+    private LocalDateTime test_date1;
+    private LocalDateTime test_date2;
+    private LocalDateTime test_date3;
+    
 
     private CustomerOrder test_customerOrder1 = new CustomerOrder();
     private CustomerOrder test_customerOrder2 = new CustomerOrder();
@@ -52,10 +52,20 @@ public class CustomerOrderDAOTest {
     @EJB
     private CustomerOrderDAO customerOrderDAO;
 
+    @Inject
+    private UserTransaction utx;
+    
     @Before
-    public void init() {
+    public void init() throws Exception {
         test_id_1 = new Random().nextLong();
         test_id_2 = new Random().nextLong();
+        
+        
+        
+        test_date1 = LocalDateTime.of(2014, Month.SEPTEMBER, 11, 16, 15, 15);
+        test_date2 = LocalDateTime.of(2014, Month.OCTOBER, 11, 16, 15, 15);
+        test_date3 = LocalDateTime.of(2014, Month.AUGUST, 11, 16, 15, 15);
+    
 
         test_customerOrder1.setCustomerorder_id(test_id_1);
         test_customerOrder2.setCustomerorder_id(test_id_2);
@@ -64,23 +74,24 @@ public class CustomerOrderDAOTest {
         test_customerOrder2.setDate(test_date2);
         test_customerOrder3.setDate(test_date3);
 
+        utx.begin();
         customerOrderDAO.create(test_customerOrder1);
         customerOrderDAO.create(test_customerOrder2);
         customerOrderDAO.create(test_customerOrder3);
+        utx.commit();
 
     }
 
     @After
-    public void roll_back_init() {
+    public void roll_back_init() throws Exception {
+        utx.begin();
         customerOrderDAO.remove(customerOrderDAO.find(test_customerOrder1.getCustomerorder_id()));
         customerOrderDAO.remove(customerOrderDAO.find(test_customerOrder2.getCustomerorder_id()));
         customerOrderDAO.remove(customerOrderDAO.find(test_customerOrder3.getCustomerorder_id()));
+        utx.commit();
     }
 
-    /*@Test
-    public void Z_just_for_REST_test() {
-        customerOrderDAO.create(RESTtest);
-    }*/
+    
     @Test
     public void checkThatFindOrdersMatchingIDMatchesCorrectly() {
         CustomerOrder co = customerOrderDAO.findCustomerOrderMatchingID(test_id_1);
@@ -107,7 +118,7 @@ public class CustomerOrderDAOTest {
                 add(test_customerOrder3);
             }
         };
-        Assert.assertEquals(co_list, test_co_list);
+        Assert.assertEquals(co_list.size(), test_co_list.size());
     }
 
     @Test
@@ -119,7 +130,7 @@ public class CustomerOrderDAOTest {
                 add(test_customerOrder2);
             }
         };
-        Assert.assertEquals(co_list, test_co_list);
+        Assert.assertEquals(co_list.size(), test_co_list.size());
     }
 
 }

@@ -8,13 +8,26 @@ import {MDBBtnGroup, MDBIcon } from "mdbreact";
 import Button from 'react-bootstrap/Button';
 
 export default class Navbar2 extends Component {
+
+
+
+    checkloggingstatus(){
+        const url = 'http://localhost:8080/orm/webshop/cart/loginstatus/';
+        
+        fetch(url.toString())
+            .then(function(response) {
+                if(response.status === 200) {
+                    window.location.replace('/minasidor');
+                } else {
+                    window.location.replace('/login');
+                }
+            });
+    }
+
     render() {
         return (
-
             <Navb bg="light">
-             
                     <Col sm={2}>
-
                         <ul className="navbar-nav align-items-left">
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
@@ -26,14 +39,12 @@ export default class Navbar2 extends Component {
                                     MAN
                                 </Link>
                             </li>
-
                             <li className="nav-item ml-auto ">
                                 <Link to='/' className="nav-link">
                                     BARN
                                 </Link>
                             </li>
                         </ul>
-
                     </Col>
 
                     <Col  sm={{ span: 3, offset: 3 }}>
@@ -50,17 +61,16 @@ export default class Navbar2 extends Component {
                     <Col sm={{ span: 3, offset: 2 }}>
                             <MDBBtnGroup className="mr-2">
                                 <Link to="/cart">
-                                <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>{' '}   
+                                <Button variant="outline-dark"><MDBIcon icon="shopping-basket" /></Button>
                                 </Link>
-                                <Link to="/login" >
-                                    <Button variant="outline-dark"><MDBIcon far icon="user" /></Button>{' '}
-                                </Link>
+                                <div>
+                                    <Button variant="outline-dark" onClick={() => {this.checkloggingstatus()}}><MDBIcon far icon="user" /></Button>
+                                </div>
                                 <Link to="/Contact_us" >
-                                    <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>{' '}
+                                    <Button variant="outline-dark"><MDBIcon far icon="envelope" /></Button>
                                 </Link>
                             </MDBBtnGroup>
                     </Col>
-
             </Navb>
 
 

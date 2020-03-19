@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import lombok.Getter;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Stateless
 public class CustomerDAO extends AbstractDAO<Customer, Long> {
@@ -29,6 +30,14 @@ public class CustomerDAO extends AbstractDAO<Customer, Long> {
         return customer_to_register.equals(customer_to_validate_registration);
     }
     
+     public boolean register_customer_signup (String email, String password, String shippingAdress, String homeAdress, String firstName, String lastName){
+        Customer customer_to_register = new Customer(email, password, shippingAdress, homeAdress, firstName, lastName);
+        if(is_registered_Customer(email, password)) return false; //already registered customer
+        create(customer_to_register);
+        Customer customer_to_validate_registration = authenticateCustomer(email, password);
+        return customer_to_register.equals(customer_to_validate_registration);
+    }
+    
 
     public boolean is_registered_Customer(String email, String password){
         QCustomer_ c_ = new QCustomer_();
@@ -37,6 +46,19 @@ public class CustomerDAO extends AbstractDAO<Customer, Long> {
                 .where(
                         c_.email.eq(email).and(
                         c_.password.eq(password))
+                ).getSingleResult();
+        } catch (NoResultException e){
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean is_registered_email(String email){
+        QCustomer_ c_ = new QCustomer_();
+        try {
+        Customer c = new JPAQuery(getEntityManager()).select(Customer.class)
+                .where(
+                        c_.email.eq(email)
                 ).getSingleResult();
         } catch (NoResultException e){
             return false;

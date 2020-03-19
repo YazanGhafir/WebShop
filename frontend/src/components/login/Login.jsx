@@ -9,82 +9,71 @@ class Login extends Component {
         super(props)
 
         this.state = {
-            formData: {}, // Contains login form data
-            errors: {}, // Contains login field errors
-            formSubmitted: false, // Indicates submit status of login form
-            loading: false // Indicates in progress state of login form
+            email:"",
+            password:""
         }
     }
 
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+    submitHandler = event => {
+        event.preventDefault();
+        event.target.className += " was-validated";
+    };
 
-        let { formData } = this.state;
-        formData[name] = value;
+    changeHandler = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
 
-        this.setState({
-            formData: formData
-        });
-    }
-
-    validateLoginForm = (e) => {
-
-        let errors = {};
-        const { formData } = this.state;
-
-        if (isEmpty(formData.email)) {
-            errors.email = "Email can't be blank";
-        } else if (!isEmail(formData.email)) {
-            errors.email = "Please enter a valid email";
-        }
-
-        if (isEmpty(formData.password)) {
-            errors.password = "Password can't be blank";
-        } else if (isContainWhiteSpace(formData.password)) {
-            errors.password = "Password should not contain white spaces";
-        } else if (!isLength(formData.password, { gte: 6, lte: 16, trim: true })) {
-            errors.password = "Password's length must between 6 to 16";
-        }
-
-        if (isEmpty(errors)) {
-            return true;
+    onFormSubmit = e => {
+        if (document.getElementById('loginpassword1').value.length < 8) {
+            alert("your password must containe at least 8 characters.");
+        }      
+        else if (
+            document.getElementById('loginemail1').checkValidity() &&
+            document.getElementById('loginpassword1').checkValidity()
+        ) {
+            this.loginToServer();
         } else {
-            return errors;
+            alert("You need to fix all the wrongs first :) ");
         }
-    }
+    };
 
-    login = (e) => {
-
-        e.preventDefault();
-
-        let errors = this.validateLoginForm();
-
-        if (errors === true) {
-            alert("You are successfully signed in...");
-            window.location.reload()
-        } else {
-            this.setState({
-                errors: errors,
-                formSubmitted: true
+  
+    loginToServer(){
+        const cCred = this.state.email + '/' + this.state.password;
+        const url = 'http://localhost:8080/orm/webshop/cart/auth/';
+        const both = url.toString + cCred.toString;
+        console.log(both.toString());
+        
+        fetch(both.toString())
+            .then(function(response) {
+                if(response.status === 200) {
+                    window.location.replace('/minasidor');
+                } else {
+                    alert("There is a problem with your login, please try again later!");
+                }
             });
-        }
     }
+
+
 
     render() {
 
-        const { errors, formSubmitted } = this.state;
-
         return (
             <div>
-                <form className="px-4">
+                <form className="px-4"             
+                className='needs-validation'
+                onSubmit={this.submitHandler}
+                noValidate
+                >
                     <p className="h4 text-center py-4">Login</p>
                     <div className="grey-text">
                         <MDBInput
                             label="Your email"
                             icon="envelope"
                             group
+                            onChange={this.changeHandler}
+                            id="loginemail1"
+                            name="email"
                             type="email"
                             validate
                             required
@@ -92,6 +81,9 @@ class Login extends Component {
                         <MDBInput
                             label="Password"
                             icon="user"
+                            onChange={this.changeHandler}
+                            id="loginpassword1"
+                            name="password"
                             group
                             type="password"
                             validate
@@ -99,7 +91,7 @@ class Login extends Component {
                         />
                     </div>
                     <div className="text-center py-4 mt-3">
-                        <MDBBtn color="cyan" type="submit">
+                        <MDBBtn color="cyan" type="submit" onClick={() => { this.onFormSubmit() }}>
                             Login
                         </MDBBtn>
                     </div>

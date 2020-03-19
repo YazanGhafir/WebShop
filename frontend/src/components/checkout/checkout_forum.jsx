@@ -254,7 +254,7 @@ class FormsPage extends React.Component {
                     </MDBCol>
 
 
-                    <MDBBtn color="primary" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
+                    <MDBBtn color="cyan" size="lg" block onClick={() => { this.onFormSubmit() }} type="submit" >
                         Place order
                     </MDBBtn>
 
