@@ -28,7 +28,7 @@ export default class ShoppingCartProduct extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Link to="/Details" onClick={() => { this.toProductDetails(this.props.product_id) }}>
+                    <Link to="/Details" onClick={() => { this.toProductDetails(this.props.id) }}>
                         <div className="column-4">
                             <img src={this.props.img} className="rounded float-left" alt="Responsive image" id="cartImage">
                             </img>
@@ -36,7 +36,7 @@ export default class ShoppingCartProduct extends Component {
                         </div>
                     </Link>
                     <div className="column-8" id="productDescription">
-                        <Link to="/Details" style={{ textDecoration: 'none', color: '#000000' }} id="productLink" onClick={() => { this.toProductDetails(this.props.product_id) }}>
+                        <Link to="/Details" style={{ textDecoration: 'none', color: '#000000' }} id="productLink" onClick={() => { this.toProductDetails(this.props.id) }}>
                             <h6>{this.props.title}</h6>
                             <p id="productText">{this.props.subTitle}</p>
                         </Link>
