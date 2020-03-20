@@ -31,7 +31,7 @@ export default class ShoppingCartProduct extends Component {
                         </div>
                     </Link>
                     <div className="column-8" id="productDescription">
-                        <Link to={`/details/${this.props.id}`} style={{ textDecoration: 'none', color: '#000000' }} id="productLink" onClick={() => { this.toProductDetails(this.props.id) }}>
+                        <Link to={`/details/${this.props.id}`} style={{ textDecoration: 'none', color: '#000000' }} id="productLink">
                             <h6>{this.props.title}</h6>
                             <p id="productText">{this.props.subTitle}</p>
                         </Link>

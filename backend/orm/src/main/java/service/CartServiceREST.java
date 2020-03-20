@@ -70,8 +70,8 @@ public class CartServiceREST {
         cartBean.updateQuantity(id, quantity, size);
     }
 
-    @DELETE
-    @Path("{id}/{size}")
+    @POST
+    @Path("/remove/{id}/{size}")
     public void removeClothingItemFromCart(@PathParam("id") Long id, @PathParam("size") String size) {
         cartBean.removeItem(id, size);
     }
