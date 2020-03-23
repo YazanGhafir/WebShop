@@ -11,10 +11,8 @@ export default class MyInfo extends Component {
 	  				
 	  			</div>
 	  			<div className="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
-	  					<h4 className="text-primary">Full Name</h4>
-	  					<h5 className="text-info">Email</h5>
-	  					<h5 className="text-info">Adress</h5>
-                        <h5 className="text-info">city</h5>
+	  					<h4 className="text-primary">{this.props.name}</h4>
+	  					<h5 className="text-info">{this.props.email}</h5>
 				</div>
 			</div>
         )

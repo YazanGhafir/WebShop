@@ -9,7 +9,9 @@ export default class OrdersHistory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            info:"",
+            fname:"",
+            lname:"",
+            email:"",
             orders: [
                 {
                     'customerorder_id': '1', 'date': '2020-03-11', 'total_payed': '156$', 'productList': [
@@ -47,23 +49,12 @@ export default class OrdersHistory extends Component {
 
     componentDidMount() {
         fetch("http://localhost:8080/orm/webshop/cart/customer")
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data)
-                this.setState({ info: data })
-            }).catch(console.log);
-
-  
-
-        fetch("http://localhost:8080/orm/webshop/cart/history")
-            .then(res => res.json())
-            .then((data) => {
-                this.setState({ orders: data })
-            }).catch(console.log);
-
-            console.log(this.state);
+        .then(res => res.json())
+        .then((data) => {
+        this.setState({ fname: data.fname, lname: data.lname, email: data.email })
+        }).catch(console.log);
     }
-
+s
 
     getEventKeyAndIncrease() {
         var tmp = this.eventK;
@@ -91,7 +82,7 @@ export default class OrdersHistory extends Component {
                     <MDBCardBody>
                         <MDBContainer>
                             <MDBRow className="mx-5">
-                                <MyInfo></MyInfo>
+                                <MyInfo name={this.state.fname + ' ' + this.state.lname} email={this.state.email}></MyInfo>
                             </MDBRow>
                             <MDBRow className="mx-5" style={{display: 'inline-block'}}>
                                 <h2 className="my-4"> Previous orders:</h2>

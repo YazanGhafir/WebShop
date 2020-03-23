@@ -70,7 +70,7 @@ public class CartServiceREST {
         cartBean.updateQuantity(id, quantity, size);
     }
 
-    @DELETE
+    @GET
     @Path("{id}/{size}")
     public void removeClothingItemFromCart(@PathParam("id") Long id, @PathParam("size") String size) {
         cartBean.removeItem(id, size);
@@ -90,8 +90,17 @@ public class CartServiceREST {
 
     @GET
     @Path("customer")
-    public String getCustomerInfo() {
-        return cartBean.getCustomerInfo();
+    public Response getCustomerInfo() {
+        String[] cInfo = (cartBean.getCustomerInfo() != "NAN") ? cartBean.getCustomerInfo().split("-") : new String[0];
+        String message = "";
+        if (cInfo.length != 0) {
+            message = "{\"fname\": \""+cInfo[0]+"\", \"lname\": \""+cInfo[1]+"\", \"email\": \""+cInfo[2]+"\"}";
+        }
+        return  Response
+                    .status(Response.Status.OK)
+                    .entity(message)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
     }
     
     @GET
@@ -153,10 +162,12 @@ public class CartServiceREST {
     @Path("logout")
     public Response logout() {
         try {
+            System.out.println("before logout");
             httpServletRequest.logout();
             cartBean.setInloggningsstatus(false);
             cartBean.addCustomerInfoAfterLogin("NAN");
             cartBean.setCustomerEmail("");
+            System.out.println("after logout");
             return Response
                     .status(Response.Status.OK)
                     .build();
@@ -178,6 +189,8 @@ public class CartServiceREST {
     @GET
     @Path("loginstatus")
     public Response loginstatus() {
+        System.out.println("checking status");
+        System.out.println(cartBean.isInloggningsstatus());
         if (cartBean.isInloggningsstatus()) {
             return Response
                     .status(Response.Status.OK)

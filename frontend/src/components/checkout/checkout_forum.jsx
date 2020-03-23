@@ -44,7 +44,6 @@ class FormsPage extends React.Component {
 
         ) {
             this.placeOrder();
-            JSON.stringify(this.state);
         } else {
             alert("You need to fix all the wrongs first :)");
         }
@@ -52,13 +51,13 @@ class FormsPage extends React.Component {
 
 
     placeOrder() {
-        const url = 'http://localhost:8080/orm/webshop/cart/placeorder/';
+        const url = 'http://localhost:8080/orm/webshop/cart/order';
         fetch(url)
             .then(function (response) {
                 if (response.status === 200) {
                     window.location.replace('/order_succeed');
                 } else {
-                    alert("username or password is invalid");
+                    alert("Error in registering your order, please contact us to help you further!");
                 }
             });
     }

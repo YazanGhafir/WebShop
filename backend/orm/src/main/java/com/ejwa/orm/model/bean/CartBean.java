@@ -124,7 +124,6 @@ public class CartBean implements Serializable {
     
     public void addCustomerInfoAfterLogin(String customerInfo) {
         this.customerInfo = customerInfo;
-        this.inloggningsstatus = true;
     }
     
     public void removeCustomerInfoAfterLogout() {

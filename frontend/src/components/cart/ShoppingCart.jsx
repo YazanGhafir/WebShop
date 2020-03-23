@@ -49,9 +49,7 @@ export default class ShoppingCart extends Component {
 
     handleRemove(e, id, size) {
         console.log("remove clicked");
-        fetch('http://localhost:8080/orm/webshop/cart/' + id + '/' + size, {
-            method: 'DELETE'
-        })
+        fetch('http://localhost:8080/orm/webshop/cart/' + id + '/' + size)
             .then(this.getCartFromDB);
     }
 
