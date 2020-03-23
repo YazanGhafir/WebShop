@@ -114,7 +114,7 @@ render() {
                         noValidate>
                   
 
-                    <p className="h4 text-center py-4">Sign up</p>
+                    <p className="h4 text-center py-4">Contact Us</p>
                     <div className="grey-text"></div>
                       <MDBInput
                         id="materialFormRegisterName"
